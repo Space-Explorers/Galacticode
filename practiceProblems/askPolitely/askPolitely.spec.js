@@ -1,5 +1,4 @@
 const { expect } = require('chai')
-// const askPolitely = require('./askPolitely_solution.js')
 
 function askPolitely(sentence) {
 
@@ -27,7 +26,7 @@ describe("askPolitely", function () {
 	});
 
 	it("if the string argument's last character is a '?', the last word should be please", function () {
-		var returnValue = askPolitely("May I borrow your pencil please?");
+		var returnValue = askPolitely("May I borrow your pencil?");
 		let lastWord = ""
 		if (returnValue.slice(-1) === "?") {
 			lastWord = returnValue.slice(-7, -1)
@@ -36,18 +35,15 @@ describe("askPolitely", function () {
 		expect(lastWord).to.equal("please");
 	});
 
-	// it("if the string argument's last character is a " ? ", and the last word is please, return the sentence without modifications", function () {
-	// 	var returnValue = askPolitely("May I borrow your pencil please?");
-	// 	if (returnValue.slice(-1) === "?") {
-	// 		lastWord = returnValue.slice(-7, -1)
+	it("if the string argument's last character is a '?', and the last word is please, return the sentence without modifications", function () {
+		let inputStr = "May I borrow your pencil please?"
+		let returnValue = askPolitely(inputStr);
+		expect(inputStr).to.equal(returnValue);
+	});
 
-	// 	}
-	// 	expect(returnValue).toEqual(false);
-	// });
-
-	// it("if the last character is not a " ? ", do not modify the sentence", function () {
-	// 	var returnValue = askPolitely(357, 7894);
-
-	// 	expect(returnValue).toEqual(false);
-	// });
+	it("if the last character is not a '?', do not modify the sentence", function () {
+		let inputStr = "I have a pencil."
+		let returnValue = askPolitely(inputStr);
+		expect(inputStr).to.equal(returnValue);
+	});
 });
