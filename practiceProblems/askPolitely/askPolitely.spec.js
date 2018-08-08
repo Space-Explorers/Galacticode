@@ -1,0 +1,53 @@
+const { expect } = require('chai')
+// const askPolitely = require('./askPolitely_solution.js')
+
+function askPolitely(sentence) {
+
+	if (sentence.slice(-1) === '?') {
+		if (sentence.slice(-7) === 'please?') {
+			return sentence;
+		} else {
+			return sentence.slice(0, -1) + " please?";
+		}
+	} else {
+		return sentence;
+	}
+}
+
+describe("askPolitely", function () {
+	it("askPolitely is a function", function () {
+		expect(askPolitely).to.be.a("function");
+	});
+
+	it("lastDigit returns a string value", function () {
+		var returnValue = askPolitely("May I borrow your pencil please?"),
+			typeOf = typeof returnValue;
+
+		expect(typeOf).to.be.a("string");
+	});
+
+	it("if the string argument's last character is a '?', the last word should be please", function () {
+		var returnValue = askPolitely("May I borrow your pencil please?");
+		let lastWord = ""
+		if (returnValue.slice(-1) === "?") {
+			lastWord = returnValue.slice(-7, -1)
+		}
+
+		expect(lastWord).to.equal("please");
+	});
+
+	// it("if the string argument's last character is a " ? ", and the last word is please, return the sentence without modifications", function () {
+	// 	var returnValue = askPolitely("May I borrow your pencil please?");
+	// 	if (returnValue.slice(-1) === "?") {
+	// 		lastWord = returnValue.slice(-7, -1)
+
+	// 	}
+	// 	expect(returnValue).toEqual(false);
+	// });
+
+	// it("if the last character is not a " ? ", do not modify the sentence", function () {
+	// 	var returnValue = askPolitely(357, 7894);
+
+	// 	expect(returnValue).toEqual(false);
+	// });
+});
