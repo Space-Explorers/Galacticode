@@ -2,40 +2,10 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import brace from 'brace';
 import AceEditor from 'react-ace';
-import SplitAceEditor from './split';
-
-// import 'brace/mode/java';
-// import 'brace/theme/github';
+import SplitAceEditor from '../src/split';
 
 import 'brace/mode/jsx';
-import 'brace/ext/searchbox';
-
-// function onChange(newValue) {
-//   console.log('change',newValue);
-// }
-
-// // Render editor
-
-// class Editor extends Component {
-
-//   render () {
-//     return (
-//       <AceEditor
-//         mode="java"
-//         theme="github"
-//         onChange={onChange}
-//         name="UNIQUE_ID_OF_DIV"
-//         editorProps={{$blockScrolling: true}}
-//       />,
-//       document.getElementById('example')
-//     )
-//   }
-// }
-
-// export default Editor
-
-
-
+import 'brace/ext/searchbox'
 
 const languages = [
   'javascript',

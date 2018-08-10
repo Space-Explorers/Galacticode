@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import isEqual from 'lodash.isequal'
 import get from 'lodash.get'
 
-import { editorOptions, editorEvents,debounce } from './editorOptions'
+import { editorOptions, editorEvents,debounce } from './editorOptions.js'
 const { Range } = ace.acequire('ace/range');
 
 import 'brace/ext/split'
