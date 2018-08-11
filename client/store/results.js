@@ -13,9 +13,14 @@ const gotResults = results => ({
 
 // THUNK CREATORS
 
-export const getResults = (userCode, problemId, userId) => async dispatch => {
+export const getResults = (code, problemId, userId) => async dispatch => {
   try {
-    const {data} = await axios.get('/api/docker/')
+    const {data} = await axios.get('/api/docker/', {
+      code,
+      problemId,
+      userId
+    })
+    dispatch(gotResults(data))
   } catch (err) {
     console.error(err)
   }
@@ -23,8 +28,11 @@ export const getResults = (userCode, problemId, userId) => async dispatch => {
 
 // REDUCER
 
-export default function(state = {}, action) {
+export default function(state = '', action) {
   switch (action.type) {
+    case GOT_RESULTS: {
+      return action.results
+    }
     default:
       return state
   }
