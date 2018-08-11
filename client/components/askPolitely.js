@@ -1,13 +1,20 @@
 import React, {Component} from 'react'
-import {}
+import {getResults} from 'store'
 import {connect} from 'react-redux'
 
 
 class AskPolitely extends Component{
   constructor (){
     super ()
-    this.state = {}
+    this.state = {value: "console.log('hello')"}
   }
+
+  handleSubmit = () => {
+    this.props.fetchResults(this.state.value, 1, this.props.user.id)
+
+  }
+
+
   render(){
     return(
       <div>
@@ -25,7 +32,7 @@ class AskPolitely extends Component{
           - OUTPUT: "My name is Grace Hopper.";
         </p>
 
-        <button type ='submit'>SUBMIT</button>
+        <button type ='submit' onClick = {this.handleSubmit}>SUBMIT</button>
       </div>
 
     )
@@ -33,10 +40,13 @@ class AskPolitely extends Component{
 
 
 }
+const mapState = state => ({
+  user: state.user
+})
 
 const mapDispatch = dispatch => ({
   fetchResults: (code, problemId, userId) => dispatch(getResults(code, problemId, userId))
 })
 
 
-export default connect()(AskPolitely)
+export default connect(mapState, mapDispatch)(AskPolitely)
