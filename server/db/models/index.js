@@ -15,7 +15,7 @@ const Problem = require('./problem')
  */
 
 User.belongsToMany(Problem, { through: 'SolvedProblems' })
-Problem.hasMany(User, { through: 'SolvedProblems' })
+Problem.belongsToMany(User, { through: 'SolvedProblems' })
 
 module.exports = {
   User,
