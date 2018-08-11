@@ -10,11 +10,11 @@ import 'brace/snippets/javascript'
 import 'brace/theme/monokai'
 import 'brace/ext/language_tools'
 
-const defaultValue = `
-  function onLoad(editor) {
-  console.log("i've loaded")
-  }
-`
+// const defaultValue = `
+//   function onLoad(editor) {
+//   console.log("i've loaded")
+//   }
+// `
 
 class Editor extends Component {
   constructor () {
@@ -22,7 +22,7 @@ class Editor extends Component {
     this.state = {
       mode: 'javascript',
       theme: 'monokai',
-      value: defaultValue,
+      // value: defaultValue,
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
       fontSize: 14,
@@ -33,15 +33,15 @@ class Editor extends Component {
       tabSize: 2
 
     }
-    this.onChange = this.onChange.bind(this)
+    // this.onChange = this.onChange.bind(this)
   }
 
-  onChange(newValue) {
-    this.setState({
-      value: newValue
-    })
-    console.log(this.state.value)
-  }
+  // onChange(newValue) {
+  //   this.setState({
+  //     value: newValue
+  //   })
+  //   console.log(this.state.value)
+  // }
 
   onSelectionChange(newValue, event) {
     // console.log('select-change', newValue);
@@ -59,14 +59,14 @@ class Editor extends Component {
         mode={this.state.mode}
         theme={this.state.theme}
         name="input"
-        onChange={this.onChange}
+        onChange={this.props.onChange}
         onSelectionChange={this.onSelectionChange}
         onCursorChange={this.onCursorChange}
         fontSize={this.state.fontSize}
         showPrintMargin={this.state.showPrintMargin}
         showGutter={this.state.showGutter}
         highlightActiveLine={this.state.highlightActiveLine}
-        value={this.state.value}
+        value={this.props.value}
         enableBasicAutocompletion={this.state.enableBasicAutocompletion}
         enableLiveAutocompletion={this.state.enableLiveAutocompletion}
         showLineNumbers={this.state.showLineNumbers}
