@@ -15,11 +15,13 @@ const gotResults = results => ({
 
 export const getResults = (code, problemId, userId) => async dispatch => {
   try {
-    const {data} = await axios.get('/api/docker/', {
+    console.log('THUNK', code)
+    const {data} = await axios.post('/api/docker', {
       code,
       problemId,
       userId
     })
+    console.log('THUNK DATA', data)
     dispatch(gotResults(data))
   } catch (err) {
     console.error(err)
