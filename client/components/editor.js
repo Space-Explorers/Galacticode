@@ -16,7 +16,7 @@ const defaultValue = `
   }
 `
 
-class App extends Component {
+class Editor extends Component {
   constructor () {
     super()
     this.state = {
@@ -76,4 +76,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Editor
