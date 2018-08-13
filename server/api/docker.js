@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const axios = require('axios')
 const fs = require('fs')
-const path = require('path')
 const glob = require('glob')
 
 module.exports = router
@@ -10,8 +9,7 @@ router.post('/', async (req, res, next) => {
   try {
     const [specsFile] = glob.sync(req.body.problemId + '/*.spec.js', {
       cwd: 'practiceProblems',
-      realpath: true,
-      dot: true
+      realpath: true
     })
     const specs = fs.readFileSync(specsFile, (err, data) => {
       if (err) throw err
