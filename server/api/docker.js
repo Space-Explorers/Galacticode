@@ -16,7 +16,8 @@ router.post('/', async (req, res, next) => {
       console.log('read file success!')
       return data
     })
-    const {data} = await axios.post(
+    const { data } = await axios.post(
+      // 'http://localhost:8081/',
       'https://space-explorers-api.herokuapp.com/',
       {
         code: req.body.code,
@@ -24,7 +25,13 @@ router.post('/', async (req, res, next) => {
       }
     )
     // if passed all tests, update user database
-    res.json(data)
+
+    const responseInfo = JSON.parse(Buffer.from(data))
+    const results = {
+      stats: responseInfo.stats,
+      tests: responseInfo.suites.suites[0].tests
+    }
+    res.json(results)
   } catch (err) {
     next(err)
   }
