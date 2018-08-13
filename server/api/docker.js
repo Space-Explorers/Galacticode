@@ -2,40 +2,31 @@ const router = require('express').Router()
 const axios = require('axios')
 const fs = require('fs')
 const path = require('path')
+const glob = require('glob')
 
 module.exports = router
 
 router.post('/', async (req, res, next) => {
   try {
-    // console.log('REQ>BODY', req.body)
-    const specs = fs.readFileSync(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        'practiceProblems',
-        `${req.body.problemId}`,
-        'askPolitely.spec.js'
-      ),
-      // `../../practiceProblems/${+req.body.problemId}/askPolitely.spec.js`,
-      (err, data) => {
-        if (err) throw err
-        console.log('read file success!')
-        return data
+    const [specsFile] = glob.sync(req.body.problemId + '/*.spec.js', {
+      cwd: 'practiceProblems',
+      realpath: true,
+      dot: true
+    })
+    const specs = fs.readFileSync(specsFile, (err, data) => {
+      if (err) throw err
+      console.log('read file success!')
+      return data
+    })
+    const {data} = await axios.post(
+      'https://space-explorers-api.herokuapp.com/',
+      {
+        code: req.body.code,
+        specs
       }
     )
-    // const stringifiedCode = JSON.stringify(req.body.code)
-    // const payload = {
-    //   code: stringifiedCode,
-    //   specs
-    // }
-    const {data} = await axios.post('http://localhost:8081/', {
-      code: req.body.code,
-      specs
-    })
-    const parsed = JSON.parse(data)
     // if passed all tests, update user database
-    res.json(parsed)
+    res.json(data)
   } catch (err) {
     next(err)
   }
