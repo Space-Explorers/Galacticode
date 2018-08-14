@@ -77,16 +77,7 @@ class AskPolitely extends Component {
               {
                 this.props.results &&
                 <div>
-                  <table>
-                    {
-                      this.props.results.tests.map(test => (
-                        <tr>
-
-                        </tr>
-                      ))
-                    }
-                  </table>
-                  <p>{this.props.results.stats.tests}</p>
+                  <p>Tests Passed: {this.props.results.stats.tests}</p>
                 </div>
               }
             </div>
