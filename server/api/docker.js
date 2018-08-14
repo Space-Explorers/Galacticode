@@ -7,21 +7,22 @@ module.exports = router
 
 router.post('/', async (req, res, next) => {
   try {
-    // const [specsFile] = glob.sync(req.body.problemId + '/*.spec.js', {
-    //   cwd: 'practiceProblems',
-    //   realpath: true
-    // })
-    // const specs = fs.readFileSync(specsFile, (err, specData) => {
-    //   if (err) throw err
-    //   console.log('read file success!')
-    //   return specData
-    // })
+    console.log(req)
+    const [specsFile] = glob.sync(req.body.problemId + '/*.spec.js', {
+      cwd: 'practiceProblems',
+      realpath: true
+    })
+    const specs = fs.readFileSync(specsFile, (err, specData) => {
+      if (err) throw err
+      console.log('read file success!')
+      return specData
+    })
     const { data } = await axios.post(
       // 'http://localhost:8081/',
       'https://space-explorers-api.herokuapp.com/',
       {
         code: req.body.code,
-        specs: req.body.specs
+        specs
       }
     )
     // if passed all tests, update user database
