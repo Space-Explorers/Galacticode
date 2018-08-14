@@ -55,7 +55,13 @@ class AskPolitely extends Component {
                 name is Grace Hopper.";
               </p>
               <div className="results">
-                {this.props.results && <p>{this.props.results}</p>}
+                {this.props.results && (
+                  <div>
+                    <p>Tests Run: {this.props.results.stats.tests}</p>
+                    <p>Tests Passed: {this.props.results.stats.passes}</p>
+                    <p>Tests Failed: {this.props.results.stats.failures}</p>
+                  </div>
+                )}
               </div>
             </div>
             <div className="editor">

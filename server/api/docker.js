@@ -11,12 +11,13 @@ router.post('/', async (req, res, next) => {
       cwd: 'practiceProblems',
       realpath: true
     })
-    const specs = fs.readFileSync(specsFile, (err, data) => {
+    const specs = fs.readFileSync(specsFile, (err, specData) => {
       if (err) throw err
       console.log('read file success!')
-      return data
+      return specData
     })
-    const {data} = await axios.post(
+    const { data } = await axios.post(
+      // 'http://localhost:8081/',
       'https://space-explorers-api.herokuapp.com/',
       {
         code: req.body.code,
@@ -24,7 +25,13 @@ router.post('/', async (req, res, next) => {
       }
     )
     // if passed all tests, update user database
-    res.json(data)
+
+    const responseInfo = JSON.parse(Buffer.from(data))
+    const results = {
+      stats: responseInfo.stats,
+      tests: responseInfo.suites.suites[0].tests
+    }
+    res.json(results)
   } catch (err) {
     next(err)
   }

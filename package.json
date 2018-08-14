@@ -47,6 +47,7 @@
     "history": "^4.6.3",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
+    "mochawesome": "^3.0.3",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
