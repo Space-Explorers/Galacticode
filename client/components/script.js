@@ -3,19 +3,20 @@ import * as THREE from 'three'
 
 export default function init() {
   // Create an empty scene
-  var scene = new THREE.Scene()
+  const scene = new THREE.Scene()
 
   // Create a basic perspective camera
-  var camera = new THREE.PerspectiveCamera(
-    40,
+  const camera = new THREE.PerspectiveCamera(
+    100,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   )
   camera.position.z = 4
+  // camera.position.y = 1
 
   // Create a renderer with Antialiasing
-  var renderer = new THREE.WebGLRenderer({antialias: true})
+  const renderer = new THREE.WebGLRenderer({antialias: true})
 
   // Configure renderer clear color
   renderer.setClearColor('#000000')
@@ -31,20 +32,28 @@ export default function init() {
   // ------------------------------------------------
 
   // Create a Cube Mesh with basic material
-  var geometry = new THREE.SphereBufferGeometry(1, 10, 10)
-  // var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
-  var material = new THREE.MeshNormalMaterial({color: '#499785'})
-  var sphere = new THREE.Mesh(geometry, material)
+  const geometry = new THREE.SphereBufferGeometry(1, 10, 10)
+  const material = new THREE.MeshPhongMaterial({color: 0xffffff})
+  // const material = new THREE.MeshLambertMaterial({color: '#499785'})
+  const sphere = new THREE.Mesh(geometry, material)
 
-  // Add cube to Scene
+  const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6)
+  hemiLight.color.setHSL(0.6, 1, 0.6)
+  hemiLight.groundColor.setHSL(0.095, 1, 0.75)
+  hemiLight.position.set(0, 50, 0)
+  scene.add(hemiLight)
+  const hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 10)
+  scene.add(hemiLightHelper)
+
+  // Add sphere to Scene
   scene.add(sphere)
 
   // Render Loop
-  var render = function() {
+  const render = function() {
     requestAnimationFrame(render)
 
-    sphere.rotation.x += 0.01
-    sphere.rotation.y += 0.01
+    sphere.rotation.x += 0.001
+    sphere.rotation.y += 0.001
 
     // Render the scene
     renderer.render(scene, camera)
