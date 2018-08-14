@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Problem = db.define('problem', {
+const Challenge = db.define('challenge', {
 	name: {
 		type: Sequelize.STRING,
 		unique: true,
@@ -15,4 +15,4 @@ const Problem = db.define('problem', {
 	},
 })
 
-module.exports = Problem
+module.exports = Challenge
