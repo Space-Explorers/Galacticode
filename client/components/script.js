@@ -33,17 +33,12 @@ export default function init() {
 
   // Create a Cube Mesh with basic material
   const geometry = new THREE.SphereBufferGeometry(1, 10, 10)
-  const material = new THREE.MeshPhongMaterial({color: 0xffffff})
-  // const material = new THREE.MeshLambertMaterial({color: '#499785'})
+  // const material = new THREE.MeshPhongMaterial({color: 0xffffff})
+  const material = new THREE.MeshLambertMaterial({color: '#499785'})
   const sphere = new THREE.Mesh(geometry, material)
 
-  const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6)
-  hemiLight.color.setHSL(0.6, 1, 0.6)
-  hemiLight.groundColor.setHSL(0.095, 1, 0.75)
-  hemiLight.position.set(0, 50, 0)
-  scene.add(hemiLight)
-  const hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 10)
-  scene.add(hemiLightHelper)
+  const light = new THREE.AmbientLight(0x404040) // soft white light
+  scene.add(light)
 
   // Add sphere to Scene
   scene.add(sphere)
