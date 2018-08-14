@@ -7,13 +7,15 @@ export default function init() {
 
   // Create a basic perspective camera
   const camera = new THREE.PerspectiveCamera(
-    100,
+    75,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   )
-  camera.position.z = 4
-  // camera.position.y = 1
+  camera.position.x = 0
+  camera.position.y = 1
+  camera.position.z = 2
+  camera.lookAt(scene.position)
 
   // Create a renderer with Antialiasing
   const renderer = new THREE.WebGLRenderer({antialias: true})
@@ -37,7 +39,20 @@ export default function init() {
   const material = new THREE.MeshLambertMaterial({color: '#499785'})
   const sphere = new THREE.Mesh(geometry, material)
 
-  const light = new THREE.AmbientLight(0x404040) // soft white light
+   //create particles
+  //  const particles
+
+   //lighting
+   const ambientLight = new THREE.AmbientLight()
+   scene.add(ambientLight)
+
+  const light = new THREE.DirectionalLight()
+  light.position.set(200, 100, 200)
+  light.castShadow = true
+  light.shadow.camera.left = -100
+  light.shadow.camera.right = 100
+  light.shadow.camera.top = 100
+  light.shadow.camera.bottom = -100
   scene.add(light)
 
   // Add sphere to Scene
