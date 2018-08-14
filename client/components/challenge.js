@@ -3,7 +3,7 @@ import {getResults} from '../store'
 import {connect} from 'react-redux'
 import Editor from './editor'
 
-class AskPolitely extends Component {
+class Challenge extends Component {
   constructor() {
     super()
     this.state = {value: ''}
@@ -16,9 +16,12 @@ class AskPolitely extends Component {
     this.props.fetchInitialData()
   }
 
-  handleSubmit = () => {
-    this.props.fetchResults(this.state.value, 1, this.props.user.id)
-    console.log('value:', typeof this.state.value)
+  handleSubmit() {
+    this.props.fetchResults(
+      this.state.value,
+      this.props.match.params.challengeId,
+      this.props.user.id
+    )
   }
 
   onChange(newValue) {
@@ -29,19 +32,28 @@ class AskPolitely extends Component {
   }
 
   render() {
+    const {name, prompt, examples, results} = this.props
     return (
       <div>
-        <h1>Ask Politely</h1>
+        <h1>{name}</h1>
         <div>
           <div>
-            <p>{this.props.prompt}</p>
-            <p>{this.props.examples}</p>
+            <p>{prompt}</p>
+            <h3>Examples: </h3>
+            <p>
+              {examples.map(example => (
+                <div key={example.id}>
+                  <p>INPUT: {example.input}</p>
+                  <p>OUTPUT: {example.output}</p>
+                </div>
+              ))}
+            </p>
             <div id="results">
-              {this.props.results && (
+              {results && (
                 <div>
-                  <p>Tests Run: {this.props.results.stats.tests}</p>
-                  <p>Tests Passed: {this.props.results.stats.passes}</p>
-                  <p>Tests Failed: {this.props.results.stats.failures}</p>
+                  <p>Tests Run: {results.stats.tests}</p>
+                  <p>Tests Passed: {results.stats.passes}</p>
+                  <p>Tests Failed: {results.stats.failures}</p>
                 </div>
               )}
             </div>
@@ -62,14 +74,15 @@ class AskPolitely extends Component {
 const mapState = state => ({
   user: state.user,
   results: state.results,
+  name: state.challenge.name,
   prompt: state.challenge.prompt,
   examples: state.challenge.examples
 })
 
 const mapDispatch = dispatch => ({
-  fetchResults: (code, problemId, userId) =>
-    dispatch(getResults(code, problemId, userId)),
-  fetchInitialData: () => dispatch(getChallenge())
+  fetchResults: (code, challengeId, userId) =>
+    dispatch(getResults(code, challengeId, userId)),
+  fetchInitialData: () => dispatch(getChallengeData())
 })
 
-export default connect(mapState, mapDispatch)(AskPolitely)
+export default connect(mapState, mapDispatch)(Challenge)
