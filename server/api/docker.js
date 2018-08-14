@@ -1,31 +1,25 @@
 const router = require('express').Router()
 const axios = require('axios')
-const fs = require('fs')
-const glob = require('glob')
+const { Challenge } = require('../db/models')
 
 module.exports = router
 
 router.post('/', async (req, res, next) => {
   try {
-    const [specsFile] = glob.sync(req.body.problemId + '/*.spec.js', {
-      cwd: 'practiceProblems',
-      realpath: true
+
+    const specsFromDB = await Challenge.findById(req.body.problemId, {
+      attributes: ['specs']
     })
-    const specs = fs.readFileSync(specsFile, (err, specData) => {
-      if (err) throw err
-      console.log('read file success!')
-      return specData
-    })
+    console.log('SPECS', specsFromDB.specs)
     const { data } = await axios.post(
       // 'http://localhost:8081/',
       'https://space-explorers-api.herokuapp.com/',
       {
         code: req.body.code,
-        specs
+        specs: specsFromDB.specs
       }
     )
     // if passed all tests, update user database
-
     const responseInfo = JSON.parse(Buffer.from(data))
     const results = {
       stats: responseInfo.stats,
