@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+// import {LoginModal} from './index'
+// import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const NavigationBar = ({handleClick, isLoggedIn}) => (
   <div>
     <h1>SPACE EXPLORERS: CODE HOME</h1>
     <nav>
@@ -28,6 +30,49 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   </div>
 )
 
+// class NavigationBar extends Component {
+//   constructor (props) {
+//     super(props)
+//   }
+
+//   render () {
+//     return (
+//       <Navbar light expand="sm">
+//         <NavbarBrand href="/">
+//           <img
+//             src="https://cdn.shopify.com/s/files/1/0878/5254/products/doctor-who-adipose-pop-alt_large.jpg?v=1528820139"
+//             height="42"
+//             width="42"
+//           />
+//         </NavbarBrand>
+//         <Collapse isOpen={true} navbar>
+//           {this.props.isLoggedIn ? (
+//             <Nav className="ml-auto" navbar>
+//               <NavItem>
+//                 <NavLink href="/home">Home</NavLink>
+//               </NavItem>
+//               <NavItem>
+//                 <div onClick={this.props.handleClick}>
+//                   <NavLink href="#">Logout</NavLink>
+//                 </div>
+//               </NavItem>
+//             </Nav>
+//           ) : (
+//             <Nav className="ml-auto" navbar>
+//               <NavItem>
+//                 <LoginModal display="Login" />
+//               </NavItem>
+//               <NavItem>
+//                 <LoginModal display="Signup" />
+//               </NavItem>
+//             </Nav>
+//           )}
+//         </Collapse>
+//       </Navbar>
+//     )
+//   }
+// }
+
 /**
  * CONTAINER
  */
@@ -45,12 +90,12 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(NavigationBar)
 
 /**
  * PROP TYPES
  */
-Navbar.propTypes = {
+NavigationBar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
