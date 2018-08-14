@@ -40,14 +40,16 @@ class Challenge extends Component {
           <div>
             <p>{prompt}</p>
             <h3>Examples: </h3>
-            <p>
-              {examples.map(example => (
-                <div key={example.id}>
-                  <p>INPUT: {example.input}</p>
-                  <p>OUTPUT: {example.output}</p>
-                </div>
-              ))}
-            </p>
+            {examples && (
+              <div>
+                {examples.map(example => (
+                  <div key={example.id}>
+                    <p>INPUT: {example.input}</p>
+                    <p>OUTPUT: {example.output}</p>
+                  </div>
+                ))}
+              </div>
+            )}
             <div id="results">
               {results && (
                 <div>
