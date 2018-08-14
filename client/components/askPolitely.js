@@ -77,7 +77,9 @@ class AskPolitely extends Component {
               {
                 this.props.results &&
                 <div>
-                  <p>Tests Passed: {this.props.results.stats.tests}</p>
+                  <p>Tests Run: {this.props.results.stats.tests}</p>
+                  <p>Tests Passed: {this.props.results.stats.passes}</p>
+                  <p>Tests Failed: {this.props.results.stats.failures}</p>
                 </div>
               }
             </div>

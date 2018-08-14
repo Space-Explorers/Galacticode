@@ -11,10 +11,10 @@ router.post('/', async (req, res, next) => {
       cwd: 'practiceProblems',
       realpath: true
     })
-    const specs = fs.readFileSync(specsFile, (err, data) => {
+    const specs = fs.readFileSync(specsFile, (err, specData) => {
       if (err) throw err
       console.log('read file success!')
-      return data
+      return specData
     })
     const { data } = await axios.post(
       // 'http://localhost:8081/',
