@@ -19,3 +19,28 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#main-container {
+  display: flex;
+  flex-direction: column
+}
+
+#prompt {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+#prompt a {
+  display: inline-block;
+}
+
+table, td {
+  border: 1px solid black;
+}
+
+
+#inputResults {
+  display: flex;
+  justify-content: space-between
+}
+
