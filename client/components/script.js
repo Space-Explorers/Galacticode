@@ -35,8 +35,14 @@ export default function init() {
 
   // Create a Cube Mesh with basic material
   const geometry = new THREE.SphereBufferGeometry(1, 10, 10)
-  // const material = new THREE.MeshPhongMaterial({color: 0xffffff})
-  const material = new THREE.MeshLambertMaterial({color: '#499785'})
+  const material = new THREE.MeshPhongMaterial({
+    color      :  new THREE.Color("rgb(38,175,191)"),
+    emissive   :  new THREE.Color("rgb(63,63,191)"),
+    specular   :  new THREE.Color("rgb(9,112,112)"),
+    shading    :  THREE.FlatShading,
+    transparent: 1,
+    opacity    : 1
+  })
   const sphere = new THREE.Mesh(geometry, material)
 
    //create particles
@@ -62,15 +68,18 @@ export default function init() {
   scene.add(sphere)
 
   // Render Loop
-  const render = function() {
-    requestAnimationFrame(render)
-
-    sphere.rotation.x += 0.001
-    sphere.rotation.y += 0.001
-
-    // Render the scene
+  function render(){
     renderer.render(scene, camera)
   }
 
-  render()
+  function animate(){
+    requestAnimationFrame(animate)
+    render()
+    sphere.rotation.x += 0.001
+    sphere.rotation.y += 0.001
+  }
+
+  animate()
 }
+
+
