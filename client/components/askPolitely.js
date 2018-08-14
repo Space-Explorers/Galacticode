@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {getResults} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { getResults } from '../store'
+import { connect } from 'react-redux'
 import Editor from './editor'
 
 class AskPolitely extends Component {
   constructor() {
     super()
-    this.state = {value: ''}
+    this.state = { value: '' }
 
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -46,7 +46,16 @@ class AskPolitely extends Component {
               - INPUT: askPolitely("My name is Grace Hopper."); - OUTPUT: "My
               name is Grace Hopper.";
             </p>
-            <div>{this.props.results && <p>{this.props.results}</p>}</div>
+            <div id="results">
+              {
+                this.props.results &&
+                <div>
+                  <p>Tests Run: {this.props.results.stats.tests}</p>
+                  <p>Tests Passed: {this.props.results.stats.passes}</p>
+                  <p>Tests Failed: {this.props.results.stats.failures}</p>
+                </div>
+              }
+            </div>
           </div>
           <div>
             <Editor onChange={this.onChange} value={this.state.value} />
