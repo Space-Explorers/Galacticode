@@ -68,7 +68,8 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   fetchResults: (code, problemId, userId) =>
-    dispatch(getResults(code, problemId, userId))
+    dispatch(getResults(code, problemId, userId)),
+  fetchInitialData: () => dispatch(getPrompt())
 })
 
 export default connect(mapState, mapDispatch)(AskPolitely)
