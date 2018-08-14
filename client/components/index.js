@@ -6,4 +6,6 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
-export {Editor} from './editor'
+export {default as Editor} from './editor'
+export {default as LandingPage} from './landingPage'
+export {default as LoginModal} from './loginModal'
