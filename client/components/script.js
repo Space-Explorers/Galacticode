@@ -21,7 +21,7 @@ export default function init() {
   const renderer = new THREE.WebGLRenderer({antialias: true})
 
   // Configure renderer clear color
-  renderer.setClearColor('#000000')
+  renderer.setClearColor(0x0E2255)
 
   // Configure renderer size
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -54,6 +54,9 @@ export default function init() {
   light.shadow.camera.top = 100
   light.shadow.camera.bottom = -100
   scene.add(light)
+
+  const helper = new THREE.CameraHelper(light.shadow.camera)
+  scene.add(helper)
 
   // Add sphere to Scene
   scene.add(sphere)
