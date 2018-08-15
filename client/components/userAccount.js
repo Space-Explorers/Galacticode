@@ -1,15 +1,16 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-
-const UserAccount = (props) => {
+const UserAccount = props => {
   const {user} = props
-  if (user.id){
-    return(
+  if (user.id) {
+    return (
       <div>
-        <h1>User: {user.email}</h1>
-        <h2>Progress: </h2>
-        <h2>Current Planet: Gallifrey</h2>
+        <Link to="/tutorial">Tutorial</Link>
+        <h2>User: {user.email}</h2>
+        <h3>Progress: </h3>
+        <h3>Current Planet: Gallifrey</h3>
       </div>
     )
   }
@@ -20,6 +21,5 @@ const mapState = state => {
     user: state.user
   }
 }
-
 
 export default connect(mapState)(UserAccount)

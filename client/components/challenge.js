@@ -34,7 +34,7 @@ class Challenge extends Component {
   render() {
     const {name, prompt, examples, results} = this.props
     return (
-      <div className="editor-wrapper">
+      <div className="main-wrapper">
         <h1>{name}</h1>
         <div className="content-wrapper">
           <div className="prompt">

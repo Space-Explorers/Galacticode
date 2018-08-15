@@ -10,10 +10,45 @@ label {
   display: block;
 }
 
+/* START NAVBAR */
+
+#navbar {
+  display: flex;
+  flex-direction: row;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
 }
+
+nav li {
+  display: block;
+  transition-duration: 0.5s;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 101;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  display: block;
+  /* margin: 5; */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* END NAVBAR */
 
 form div {
   margin: 1em;
@@ -27,7 +62,7 @@ canvas {
   z-index: 1;
 }
 
-.editor-wrapper {
+.main-wrapper {
   position: absolute;
   top: 0;
   left: 0;
