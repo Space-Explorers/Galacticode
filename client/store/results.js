@@ -16,7 +16,7 @@ const gotResults = results => ({
 export const getResults = (code, problemId, userId) => async dispatch => {
   try {
     console.log('THUNK', code)
-    const {data} = await axios.post('/api/docker', {
+    const { data } = await axios.post('/api/docker', {
       code,
       problemId,
       userId
@@ -30,7 +30,7 @@ export const getResults = (code, problemId, userId) => async dispatch => {
 
 // REDUCER
 
-export default function(state = '', action) {
+export default function (state = '', action) {
   switch (action.type) {
     case GOT_RESULTS: {
       return action.results

@@ -10,7 +10,6 @@ router.post('/', async (req, res, next) => {
     const specsFromDB = await Challenge.findById(req.body.problemId, {
       attributes: ['specs']
     })
-    console.log('SPECS', specsFromDB.specs)
     const { data } = await axios.post(
       // 'http://localhost:8081/',
       'https://space-explorers-api.herokuapp.com/',
