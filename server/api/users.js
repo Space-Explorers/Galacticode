@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { User, Challenge } = require('../db/models')
+const { User } = require('../db/models')
 const Op = require('sequelize').Op;
 module.exports = router
 

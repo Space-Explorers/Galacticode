@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getResults, getChallengeData } from '../store'
+import { getResults, getChallengeData, getUserChallengesData } from '../store'
 import { connect } from 'react-redux'
 import Editor from './editor'
 
@@ -14,6 +14,7 @@ class Challenge extends Component {
 
   componentDidMount() {
     this.props.fetchInitialData(this.props.match.params.challengeId)
+    this.props.fetchUserChallenges(this.props.user.id)
   }
 
   handleSubmit() {
@@ -99,7 +100,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   fetchResults: (code, challengeId, userId, points, userProgress) =>
     dispatch(getResults(code, challengeId, userId, points, userProgress)),
-  fetchInitialData: challengeId => dispatch(getChallengeData(challengeId))
+  fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
+  fetchUserChallenges: userId => dispatch(getUserChallengesData(userId))
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
