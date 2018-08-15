@@ -37,9 +37,10 @@ class Challenge extends Component {
     return (
       <div>
         {init()}
+      <div className="editor-wrapper">
         <h1>{name}</h1>
-        <div>
-          <div>
+        <div className="content-wrapper">
+          <div className="prompt">
             <p>{prompt}</p>
             <h3>Examples: </h3>
             {examples && (
@@ -52,7 +53,7 @@ class Challenge extends Component {
                 ))}
               </div>
             )}
-            <div id="results">
+            <div className="results">
               {results && (
                 <div>
                   <p>Tests Run: {results.stats.tests}</p>
@@ -62,11 +63,11 @@ class Challenge extends Component {
               )}
             </div>
           </div>
-          <div>
+          <div className="editor">
             <Editor onChange={this.onChange} value={this.state.value} />
           </div>
         </div>
-        <div>
+        <div className="submit-button">
           <button type="submit" onClick={this.handleSubmit}>
             SUBMIT
           </button>
@@ -86,7 +87,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   fetchResults: (code, challengeId, userId) =>
     dispatch(getResults(code, challengeId, userId)),
-  fetchInitialData: (challengeId) => dispatch(getChallengeData(challengeId))
+  fetchInitialData: challengeId => dispatch(getChallengeData(challengeId))
 })
 
 export default connect(mapState, mapDispatch)(Challenge)

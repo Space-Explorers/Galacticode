@@ -13,6 +13,9 @@ const Challenge = db.define('challenge', {
 	solution: {
 		type: Sequelize.STRING
 	},
+	specs: {
+		type: Sequelize.BLOB
+	}
 })
 
 module.exports = Challenge
