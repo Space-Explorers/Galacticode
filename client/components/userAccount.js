@@ -6,7 +6,15 @@ const UserAccount = props => {
   if (user.id) {
     return (
       <div className="main-wrapper">
-        <h2>User: {user.email}</h2>
+        <div>
+          <h2>User: {user.email}</h2>
+          <button
+            className="btn btn-close"
+            onClick={() => props.history.goBack()}
+          >
+            Back
+          </button>
+        </div>
         <h3>Progress: </h3>
         <h3>Current Planet: Gallifrey</h3>
       </div>
