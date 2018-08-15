@@ -11,10 +11,16 @@ const Challenge = db.define('challenge', {
 		type: Sequelize.TEXT
 	},
 	solution: {
-		type: Sequelize.STRING
+		type: Sequelize.TEXT
 	},
 	specs: {
 		type: Sequelize.BLOB
+	},
+	points: {
+		type: Sequelize.INTEGER
+	},
+	skillLevel: {
+		type: Sequelize.ENUM('Easy', 'Medium', 'Hard')
 	}
 })
 
