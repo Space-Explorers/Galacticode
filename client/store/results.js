@@ -13,17 +13,26 @@ const gotResults = results => ({
 
 // THUNK CREATORS
 
-export const getResults = (code, problemId, userId) => async dispatch => {
+export const getResults = (code, problemId, userId, points, userProgress) => async dispatch => {
   try {
-    console.log('THUNK', code)
-    // console.log()
-    const { data } = await axios.post('/api/docker', {
+    console.log('PROGRESS', userProgress)
+    const resultsData = await axios.post('/api/docker', {
       code,
       problemId,
       userId
     })
-    console.log('THUNK DATA', data)
-    dispatch(gotResults(data))
+    if (resultsData.data.stats.passPercent === 100) {
+      resultsData.data.success = true;
+      const { data } = await axios.put(`/api/users/${userId}`, {
+        userProgress,
+        points,
+        problemId
+      })
+      console.log('data', data)
+      dispatch(gotResults(resultsData.data))
+    }
+    console.log('THUNK DATA', resultsData.data)
+    dispatch(gotResults(resultsData.data))
   } catch (err) {
     console.error(err)
   }

@@ -17,12 +17,16 @@ class Challenge extends Component {
   }
 
   handleSubmit() {
-    console.log('CURRENT STATE', this.state)
+    console.log('CURRENT STATE', this.props)
+    // if (this.props.user.solvedProblems.includes(problemId)){
+    //   <Display "You've already solved this!">
+    // }
     this.props.fetchResults(
       this.state.value,
       this.props.match.params.challengeId,
       this.props.user.id,
-      this.props.skillLevel
+      this.props.points,
+      this.props.user.progress
     )
   }
 
@@ -35,7 +39,7 @@ class Challenge extends Component {
 
   render() {
     const { name, prompt, examples, results, skillLevel, points } = this.props
-    // console.log('SKILL LEVEL', skillLevel, 'POINTS', points, 'CHALLENGE', challenge)
+    console.log('USER', this.props.user)
     return (
       <div className="editor-wrapper">
         <h1>{name}</h1>
@@ -85,12 +89,12 @@ const mapState = state => ({
   prompt: state.challenge.prompt,
   skillLevel: state.challenge.skillLevel,
   points: state.challenge.points,
-  examples: state.challenge.examples
+  examples: state.challenge.examples,
 })
 
 const mapDispatch = dispatch => ({
-  fetchResults: (code, challengeId, userId) =>
-    dispatch(getResults(code, challengeId, userId)),
+  fetchResults: (code, challengeId, userId, points, userProgress) =>
+    dispatch(getResults(code, challengeId, userId, points, userProgress)),
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId))
 })
 
