@@ -20,27 +20,32 @@ form div {
   display: inline-block;
 }
 
-#main-container {
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.editor-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  margin: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255, 0.3);
 }
 
-#prompt {
+.content-wrapper {
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: row;
 }
 
-#prompt a {
-  display: inline-block;
-}
-
-table, td {
-  border: 1px solid black;
-}
-
-
-#inputResults {
+.prompt {
   display: flex;
-  justify-content: space-between
+  flex-direction: column;
 }
-
