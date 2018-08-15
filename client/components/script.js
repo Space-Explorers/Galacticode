@@ -1,27 +1,30 @@
 // Create an empty scene
 import * as THREE from 'three'
 
-export default function init() {
+export default function planetBackground() {
+
+
   // Create an empty scene
   const scene = new THREE.Scene()
+  scene.background = new THREE.Color( 0x0E2255 );
 
   // Create a basic perspective camera
   const camera = new THREE.PerspectiveCamera(
-    75,
+    20,
     window.innerWidth / window.innerHeight,
-    0.1,
+    1,
     1000
   )
-  camera.position.x = 0
-  camera.position.y = 1
-  camera.position.z = 2
+  camera.position.x = 70
+  camera.position.y = 0
+  camera.position.z = 1
   camera.lookAt(scene.position)
 
   // Create a renderer with Antialiasing
   const renderer = new THREE.WebGLRenderer({antialias: true})
 
-  // Configure renderer clear color
-  renderer.setClearColor(0x312c8b)
+  // Configure renderer set clear color
+  renderer.setClearColor(0x000000, 0)
 
   // Configure renderer size
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -33,37 +36,58 @@ export default function init() {
   // FUN STARTS HERE
   // ------------------------------------------------
 
-  // Create a Cube Mesh with basic material
-  const geometry = new THREE.SphereGeometry(10,1)
-  const material = new THREE.MeshPhongMaterial({
-    color: 0x4c00b4,
-		shading: THREE.FlatShading
-  })
+  const drawStars = function() {
+    let canvas, ctx, i, j, sizeRandom;
+    canvas = document.createElement('canvas');
+    canvas.setAttribute('width', window.innerWidth);
+    canvas.setAttribute('height', window.innerHeight);
+    canvas.setAttribute('id', "stars");
+    ctx = canvas.getContext('2d');
+    ctx.fillStyle = "#ffffff";
+    for (i = j = 0; j <= 200; i = ++j) {
+      ctx.beginPath();
+      sizeRandom = Math.random() * 2;
+      ctx.arc(Math.random() * window.innerWidth, Math.random() * window.innerHeight, sizeRandom, 0, 2 * Math.PI, 0);
+      ctx.fill();
+    }
+    return document.body.appendChild(canvas);
+  };
+
+  // Create Main Planet
+  const mesh = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(10,1),
+    new THREE.MeshPhongMaterial({
+      color: 0x156289,
+      emissive: 0x072534,
+      side: THREE.DoubleSide,
+      flatShading: true,
+    }),
+  )
+  mesh.receiveShadow = true
+  mesh.position.set(20, -12, 0)
+  scene.add(mesh)
 
 
-  const sphere = new THREE.Mesh(geometry, material)
+  drawStars()
 
-   //create particles
-  //  const particles
+
 
    //lighting
-   const ambientLight = new THREE.AmbientLight()
+   const ambientLight = new THREE.AmbientLight(0x808080, 1.5)
    scene.add(ambientLight)
 
   const light = new THREE.DirectionalLight()
-  light.position.set(200, 100, 200)
-  light.castShadow = true
-  light.shadow.camera.left = -100
-  light.shadow.camera.right = 100
-  light.shadow.camera.top = 100
-  light.shadow.camera.bottom = -100
+  light.position.set(75, 20, 20)
   scene.add(light)
 
-  const helper = new THREE.CameraHelper(light.shadow.camera)
-  scene.add(helper)
+//shows in which direction the lighting is coming from
+  // const helper = new THREE.CameraHelper(light.shadow.camera)
+  // scene.add(helper)
 
-  // Add sphere to Scene
-  scene.add(sphere)
+  // Add mesh to Scene
+  scene.add(mesh)
+
+
 
   // Render Loop
   function render(){
@@ -73,8 +97,8 @@ export default function init() {
   function animate(){
     requestAnimationFrame(animate)
     render()
-    // sphere.rotation.x += 0.001
-    sphere.rotation.y += 0.02
+    // mesh.rotation.x += 0.01
+    mesh.rotation.y += 0.003
   }
 
   animate()
