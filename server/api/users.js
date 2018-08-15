@@ -24,14 +24,17 @@ router.put('/:userId', async (req, res, next) => {
     const progress = Number(req.body.points) + Number(req.body.userProgress)
 
     const [numberOfAffectedRows, affectedRows] = await User.update({
-      progress,
-      // solvedChallenges
+      progress
     }, {
         where: { id: +req.params.userId },
         returning: true,
         plain: true
       })
-    console.log('NUM AFFECTED ROWS', numberOfAffectedRows, 'AFFECTED ROWS', affectedRows.progress)
+
+    console.log('NUM AFFECTED ROWS', numberOfAffectedRows, 'AFFECTED ROWS', affectedRows)
+
+    await affectedRows.addChallenge(req.body.problemId)
+    res.status(200).send("Success")
   } catch (err) {
     next(err)
   }
