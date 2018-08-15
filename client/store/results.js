@@ -16,6 +16,7 @@ const gotResults = results => ({
 export const getResults = (code, problemId, userId) => async dispatch => {
   try {
     console.log('THUNK', code)
+    // console.log()
     const { data } = await axios.post('/api/docker', {
       code,
       problemId,

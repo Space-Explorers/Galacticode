@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {getResults, getChallengeData} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { getResults, getChallengeData } from '../store'
+import { connect } from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
   constructor() {
     super()
-    this.state = {value: ''}
+    this.state = { value: '' }
 
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,10 +17,12 @@ class Challenge extends Component {
   }
 
   handleSubmit() {
+    console.log('CURRENT STATE', this.state)
     this.props.fetchResults(
       this.state.value,
       this.props.match.params.challengeId,
-      this.props.user.id
+      this.props.user.id,
+      this.props.skillLevel
     )
   }
 
@@ -32,13 +34,16 @@ class Challenge extends Component {
   }
 
   render() {
-    const {name, prompt, examples, results} = this.props
+    const { name, prompt, examples, results, skillLevel, points } = this.props
+    // console.log('SKILL LEVEL', skillLevel, 'POINTS', points, 'CHALLENGE', challenge)
     return (
       <div className="editor-wrapper">
         <h1>{name}</h1>
         <div className="content-wrapper">
           <div className="prompt">
             <p>{prompt}</p>
+            <h3>Skill Level: </h3><span>{skillLevel}</span>
+            <h3>Available Points: </h3><span>{points}</span>
             <h3>Examples: </h3>
             {examples && (
               <div>
@@ -78,6 +83,8 @@ const mapState = state => ({
   results: state.results,
   name: state.challenge.name,
   prompt: state.challenge.prompt,
+  skillLevel: state.challenge.skillLevel,
+  points: state.challenge.points,
   examples: state.challenge.examples
 })
 
