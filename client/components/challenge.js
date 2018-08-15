@@ -73,6 +73,7 @@ class Challenge extends Component {
           </button>
         </div>
       </div>
+     </div>
     )
   }
 }

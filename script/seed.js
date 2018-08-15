@@ -5,7 +5,7 @@ const fs = require('fs')
 const {User, Challenge, Example} = require('../server/db/models')
 
 const askPolitelySpecs = fs.readFileSync(
-  '/Users/amydegenaro/grace-hopper/senior-phase/capstone/capstone/script/specs/askPolitely.spec.js',
+  '/Users/katherinepangtay/Desktop/GraceHopper/SR/capstone/script/specs/askPolitely.spec.js',
   (err, specData) => {
     if (err) throw err
     console.log('read file success!')
@@ -13,7 +13,7 @@ const askPolitelySpecs = fs.readFileSync(
   }
 )
 const lastDigitSpecs = fs.readFileSync(
-  '/Users/amydegenaro/grace-hopper/senior-phase/capstone/capstone/script/specs/lastDigit.spec.js',
+  '/Users/katherinepangtay/Desktop/GraceHopper/SR/capstone/script/specs/lastDigit.spec.js',
   (err, specData) => {
     if (err) throw err
     console.log('read file success!')
