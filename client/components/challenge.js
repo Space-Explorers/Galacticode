@@ -30,16 +30,21 @@ class Challenge extends Component {
     this.setState({
       value: newValue
     })
-    // console.log(this.state.value)
   }
 
   render() {
     const {name, prompt, examples, results} = this.props
     return (
-      <div>
-        {planetBackground()}
-      <div className="editor-wrapper">
-        <h1>{name}</h1>
+      <div className="main-wrapper">
+        <div className="challenge-header">
+          <h1>{name}</h1>
+          <button
+            className="btn btn-close"
+            onClick={() => this.props.history.push('/play')}
+          >
+            Close
+          </button>
+        </div>
         <div className="content-wrapper">
           <div className="prompt">
             <p>{prompt}</p>
@@ -74,7 +79,6 @@ class Challenge extends Component {
           </button>
         </div>
       </div>
-     </div>
     )
   }
 }

@@ -11,7 +11,7 @@ const Challenge = db.define('challenge', {
 		type: Sequelize.TEXT
 	},
 	solution: {
-		type: Sequelize.STRING
+		type: Sequelize.TEXT
 	},
 	specs: {
 		type: Sequelize.BLOB
