@@ -4,12 +4,12 @@ const db = require('../server/db')
 const fs = require('fs')
 const { User, Challenge, Example } = require('../server/db/models')
 
-const askPolitelySpecs = fs.readFileSync('/Users/darylconcha/Desktop/codeHome/capstone/script/specs/askPolitely.spec.js', (err, specData) => {
+const askPolitelySpecs = fs.readFileSync('./specs/askPolitely.spec.js', (err, specData) => {
   if (err) throw err
   console.log('read file success!')
   return specData
 })
-const lastDigitSpecs = fs.readFileSync('/Users/darylconcha/Desktop/codeHome/capstone/script/specs/lastDigit.spec.js', (err, specData) => {
+const lastDigitSpecs = fs.readFileSync('./specs/lastDigit.spec.js', (err, specData) => {
   if (err) throw err
   console.log('read file success!')
   return specData
