@@ -38,7 +38,7 @@ class Challenge extends Component {
           <h1>{name}</h1>
           <button
             className="btn btn-close"
-            onClick={() => this.props.history.goBack()}
+            onClick={() => this.props.history.push('/play')}
           >
             Close
           </button>
