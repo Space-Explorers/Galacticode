@@ -23,9 +23,6 @@ form div {
 canvas {
   position: absolute;
   overflow: hidden;
-  background: #3E4777;
-  background-image:
-    radial-gradient(center, rgba(white,0.1), transparent 75%);
   top: 0;
   left: 0;
   z-index: 1;

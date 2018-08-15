@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {getResults, getChallengeData} from '../store'
 import {connect} from 'react-redux'
 import Editor from './editor'
+import init from './script'
 
 class Challenge extends Component {
   constructor() {
@@ -35,6 +36,7 @@ class Challenge extends Component {
     const {name, prompt, examples, results} = this.props
     return (
       <div>
+        {init()}
         <h1>{name}</h1>
         <div>
           <div>

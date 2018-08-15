@@ -21,7 +21,7 @@ export default function init() {
   const renderer = new THREE.WebGLRenderer({antialias: true})
 
   // Configure renderer clear color
-  renderer.setClearColor(0x0E2255)
+  renderer.setClearColor(0x312c8b)
 
   // Configure renderer size
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -34,15 +34,13 @@ export default function init() {
   // ------------------------------------------------
 
   // Create a Cube Mesh with basic material
-  const geometry = new THREE.SphereBufferGeometry(1, 10, 10)
+  const geometry = new THREE.SphereGeometry(10,1)
   const material = new THREE.MeshPhongMaterial({
-    color      :  new THREE.Color("rgb(38,175,191)"),
-    emissive   :  new THREE.Color("rgb(63,63,191)"),
-    specular   :  new THREE.Color("rgb(9,112,112)"),
-    shading    :  THREE.FlatShading,
-    transparent: 1,
-    opacity    : 1
+    color: 0x4c00b4,
+		shading: THREE.FlatShading
   })
+
+
   const sphere = new THREE.Mesh(geometry, material)
 
    //create particles
@@ -75,8 +73,8 @@ export default function init() {
   function animate(){
     requestAnimationFrame(animate)
     render()
-    sphere.rotation.x += 0.001
-    sphere.rotation.y += 0.001
+    // sphere.rotation.x += 0.001
+    sphere.rotation.y += 0.02
   }
 
   animate()
