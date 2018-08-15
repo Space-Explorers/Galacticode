@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {FuelBar} from './index'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
@@ -12,7 +13,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/">SPACE EXPLORERS: CODE HOME</Link>
         </li>
         <li>
-          <p>**Fuel progress bar**</p>
+          <FuelBar />
         </li>
         <li className="dropdown">
           <Link to="/account">Account</Link>

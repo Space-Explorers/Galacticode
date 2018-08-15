@@ -15,6 +15,8 @@ label {
 #navbar {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
 }
 
 nav a {
@@ -24,7 +26,6 @@ nav a {
 
 nav li {
   display: block;
-  transition-duration: 0.5s;
 }
 
 .dropdown {
@@ -35,13 +36,13 @@ nav li {
 .dropdown-content {
   display: none;
   position: absolute;
+  padding: 0;
   z-index: 101;
 }
 
 .dropdown-content a {
   text-decoration: none;
   display: block;
-  /* margin: 5; */
 }
 
 .dropdown:hover .dropdown-content {
@@ -62,15 +63,18 @@ canvas {
   z-index: 1;
 }
 
+/* START OVERLAY COMPONENTS */
+
 .main-wrapper {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   left: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;
-  margin: 100px;
+  margin: 50px auto;
   padding: 10px;
+  max-width: 1000px;
   border-radius: 5px;
   background-color: rgb(255, 255, 255, 0.3);
 }
@@ -84,3 +88,39 @@ canvas {
   display: flex;
   flex-direction: column;
 }
+
+/* END OVERLAY COMPONENTS */
+
+/* START FUEL BAR */
+
+progress {
+  appearance: none;
+  border: none;
+  background-color: whitesmoke;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
+  width: 300px;
+  height: 30px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: whiteSmoke;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
+}
+
+progress::-webkit-progress-value {
+  /* Gradient background with Stripes */
+  background-image: -webkit-linear-gradient(
+      135deg,
+      transparent,
+      transparent 33%,
+      rgba(0, 0, 0, 0.1) 33%,
+      rgba(0, 0, 0, 0.1) 66%,
+      transparent 66%
+    ),
+    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
+    -webkit-linear-gradient(left, #f44, #f1a165);
+}
+
+/* END FUEL BAR */

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Main = () => {
   return (
-    <div className="editor-wrapper">
+    <div className="main-wrapper">
       <h1>Code Home</h1>
       <div>
         <img
