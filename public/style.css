@@ -10,10 +10,46 @@ label {
   display: block;
 }
 
+/* START NAVBAR */
+
+#navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
 }
+
+nav li {
+  display: block;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  padding: 0;
+  z-index: 101;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* END NAVBAR */
 
 form div {
   margin: 1em;
@@ -27,15 +63,40 @@ canvas {
   z-index: 1;
 }
 
-.editor-wrapper {
-  position: absolute;
+.btn {
+  width: 60px;
+  height: 3em;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px 0px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  outline: none;
+  position: relative;
+}
+
+.btn-close {
+  background: #cb4e4e;
+  color: #fff;
+  box-shadow: 0 6px #ab3c3c;
+  transition: none;
+  border-radius: 20px;
+}
+
+/* START OVERLAY COMPONENTS */
+
+.main-wrapper {
+  /* position: absolute; */
   top: 0;
   left: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;
-  margin: 100px;
+  margin: 50px auto;
   padding: 10px;
+  max-width: 1000px;
   border-radius: 5px;
   background-color: rgb(255, 255, 255, 0.3);
 }
@@ -49,3 +110,46 @@ canvas {
   display: flex;
   flex-direction: column;
 }
+
+.challenge-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* END OVERLAY COMPONENTS */
+
+/* START FUEL BAR */
+
+progress {
+  appearance: none;
+  border: none;
+  background-color: whitesmoke;
+  border-radius: 30px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
+  width: 300px;
+  height: 30px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: whiteSmoke;
+  border-radius: 30px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
+}
+
+progress::-webkit-progress-value {
+  /* Gradient background with Stripes */
+  border-radius: 30px;
+  background-image: -webkit-linear-gradient(
+      135deg,
+      transparent,
+      transparent 33%,
+      rgba(0, 0, 0, 0.1) 33%,
+      rgba(0, 0, 0, 0.1) 66%,
+      transparent 66%
+    ),
+    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
+    -webkit-linear-gradient(left, #f44, #f1a165);
+}
+
+/* END FUEL BAR */
