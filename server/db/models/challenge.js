@@ -15,6 +15,12 @@ const Challenge = db.define('challenge', {
 	},
 	specs: {
 		type: Sequelize.BLOB
+	},
+	points: {
+		type: Sequelize.INTEGER
+	},
+	skillLevel: {
+		type: Sequelize.ENUM('Easy', 'Medium', 'Hard')
 	}
 })
 
