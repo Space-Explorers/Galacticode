@@ -18,14 +18,18 @@ const lastDigitSpecs = fs.readFileSync('./specs/lastDigit.spec.js', (err, specDa
 const challenges = [
   {
     name: 'Ask Politely',
-    prompt: 'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?". If a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
-    solution: 'function askPolitely(sentence) {if (sentence.slice(-1) === "?") {if (sentence.slice(-7) === "please?") { return sentence } else { return sentence.slice(0, -1) + " please?"} } else { return sentence } }',
+    prompt:
+      'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?". If a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
+    solution:
+      'function askPolitely(sentence) {if (sentence.slice(-1) === "?") {if (sentence.slice(-7) === "please?") { return sentence } else { return sentence.slice(0, -1) + " please?"} } else { return sentence } }',
     specs: askPolitelySpecs
   },
   {
     name: 'Last Digit',
-    prompt: 'Create the function lastDigit that accepts two non-negative integer values and returns true if they have the same last digit, such as 27 and 57. The function accepts two non-negative integer arguments and returns true or false if they have the same last digit.',
-    solution: 'function lastDigit(num1, num2) {num1 = num1.toString(); num2 = num2.toString(); if (num1[num1.length - 1] === num2[num2.length - 1]) {return true;} else { return false;}}',
+    prompt:
+      'Create the function lastDigit that accepts two non-negative integer values and returns true if they have the same last digit, such as 27 and 57. The function accepts two non-negative integer arguments and returns true or false if they have the same last digit.',
+    solution:
+      'function lastDigit(num1, num2) {num1 = num1.toString(); num2 = num2.toString(); if (num1[num1.length - 1] === num2[num2.length - 1]) {return true;} else { return false;}}',
     specs: lastDigitSpecs
   }
 ]
@@ -75,7 +79,6 @@ async function seed() {
     User.create({ email: 'cody@email.com', password: '123' }),
     User.create({ email: 'murphy@email.com', password: '123' })
   ])
-
 
   // console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
