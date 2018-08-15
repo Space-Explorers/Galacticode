@@ -60,6 +60,9 @@ class Challenge extends Component {
               </div>
             )}
             <div className="results">
+              {/* {results.stats.passPercent === 100 && (
+                <p>Congratulations! All tests passed!</p>
+              )} */}
               {results && (
                 <div>
                   <p>Tests Run: {results.stats.tests}</p>
@@ -73,6 +76,7 @@ class Challenge extends Component {
             <Editor onChange={this.onChange} value={this.state.value} />
           </div>
         </div>
+
         <div className="submit-button">
           <button type="submit" onClick={this.handleSubmit}>
             SUBMIT

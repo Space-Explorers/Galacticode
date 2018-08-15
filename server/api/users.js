@@ -10,6 +10,7 @@ router.get('/', async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       attributes: ['id', 'email', 'progress'],
+
     })
     res.json(users)
   } catch (err) {
@@ -17,12 +18,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:userId/challenges', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const challenges = await user.getChallenges({
+      attributes: ['id']
+    })
+    res.json(challenges)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/:userId', async (req, res, next) => {
   try {
-    // const userInfo = await User.findById
-    console.log('REQ.BODY', req.body)
     const progress = Number(req.body.points) + Number(req.body.userProgress)
-
     const [numberOfAffectedRows, affectedRows] = await User.update({
       progress
     }, {
@@ -30,9 +40,6 @@ router.put('/:userId', async (req, res, next) => {
         returning: true,
         plain: true
       })
-
-    console.log('NUM AFFECTED ROWS', numberOfAffectedRows, 'AFFECTED ROWS', affectedRows)
-
     await affectedRows.addChallenge(req.body.problemId)
     res.status(200).send("Success")
   } catch (err) {

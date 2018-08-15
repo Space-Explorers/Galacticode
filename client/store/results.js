@@ -15,23 +15,19 @@ const gotResults = results => ({
 
 export const getResults = (code, problemId, userId, points, userProgress) => async dispatch => {
   try {
-    console.log('PROGRESS', userProgress)
     const resultsData = await axios.post('/api/docker', {
       code,
       problemId,
       userId
     })
     if (resultsData.data.stats.passPercent === 100) {
-      resultsData.data.success = true;
-      const { data } = await axios.put(`/api/users/${userId}`, {
+      await axios.put(`/api/users/${userId}`, {
         userProgress,
         points,
         problemId
       })
-      console.log('data', data)
       dispatch(gotResults(resultsData.data))
     }
-    console.log('THUNK DATA', resultsData.data)
     dispatch(gotResults(resultsData.data))
   } catch (err) {
     console.error(err)
