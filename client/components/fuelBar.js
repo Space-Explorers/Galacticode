@@ -1,16 +1,30 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {getProgressData} from '../store'
 
-const FuelBar = props => {
-  return (
-    <div>
-      <progress value={props.progress || 70} max="100" />
-    </div>
-  )
+class FuelBar extends Component{
+  componentDidMount(){
+    this.props.fetchProgress(this.props.userId)
+  }
+
+  render(){
+    return (
+      <div>
+        <progress value={this.props.progress} max="100" />
+      </div>
+    )
+  }
+
 }
 
 const mapState = state => ({
-  progress: state.progress
+  progress: state.progress,
+  userId: state.user.id
 })
 
-export default connect(mapState, null)(FuelBar)
+const mapDispatch = dispatch => ({
+  fetchProgress: (userId) => dispatch(getProgressData(userId))
+}
+)
+
+export default connect(mapState, mapDispatch)(FuelBar)
