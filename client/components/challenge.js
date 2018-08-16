@@ -7,17 +7,16 @@ class Challenge extends Component {
   constructor() {
     super()
     this.state = {
-      value: '',
-      // challengeCompleted: false
+      value: ''
     }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
+    console.log('COMPONENT MOUNTED')
     this.props.fetchInitialData(this.props.match.params.challengeId)
     this.props.fetchIsChallengeSolved(this.props.user.id, this.props.match.params.challengeId)
-    // this.props.solvedChallenges.includes(this.props.match.params.challengeId) ? this.setState()
   }
 
   handleSubmit() {
@@ -26,7 +25,7 @@ class Challenge extends Component {
       this.props.match.params.challengeId,
       this.props.user.id,
       this.props.points,
-      this.props.user.progress
+      this.props.isChallengeSolved
     )
   }
 

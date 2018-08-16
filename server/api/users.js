@@ -9,7 +9,7 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email', 'progress'],
+      attributes: ['id', 'email'],
 
     })
     res.json(users)
@@ -18,10 +18,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.put('/:userId', async (req, res, next) => {
+router.put('/:userId/progress', async (req, res, next) => {
   try {
-    //
-    const progress = Number(req.body.points) + Number(req.body.userProgress)
+    console.log('INSIDE PROGRESS')
+    const user = await User.findById(req.params.userId, {
+      attributes: ['progress']
+    })
+    console.log('currentProgress', user)
+    const progress = Number(req.body.points) + user.progress
+
     const [numberOfAffectedRows, affectedRows] = await User.update({
       progress
     }, {
