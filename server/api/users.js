@@ -18,18 +18,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:userId/challenges', async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.userId);
-    const challenges = await user.getChallenges({
-      attributes: ['id']
-    })
-    res.json(challenges)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.put('/:userId', async (req, res, next) => {
   try {
     //
@@ -47,3 +35,30 @@ router.put('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:userId/challenges', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const challenges = await user.getChallenges({
+      attributes: ['id']
+    })
+    res.json(challenges)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/challenges/:challengeId', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const currentChallenge = await user.getChallenges({
+      where: {
+        id: req.params.challengeId
+      }
+    })
+    currentChallenge[0] ? res.json(true) : res.json(false)
+  } catch (err) {
+    next(err)
+  }
+})
+
