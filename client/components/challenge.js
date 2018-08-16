@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {getResults, getChallengeData} from '../store'
 import {connect} from 'react-redux'
 import Editor from './editor'
-import init from './script'
 import planetBackground from './script';
 
 class Challenge extends Component {
@@ -16,6 +15,14 @@ class Challenge extends Component {
 
   componentDidMount() {
     this.props.fetchInitialData(this.props.match.params.challengeId)
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextState.value !== this.state.value){
+      return false
+    }else{
+      return true
+    }
   }
 
   handleSubmit() {
@@ -35,6 +42,8 @@ class Challenge extends Component {
   render() {
     const {name, prompt, examples, results} = this.props
     return (
+      <div>
+        {planetBackground()}
       <div className="main-wrapper">
         <div className="challenge-header">
           <h1>{name}</h1>
@@ -79,6 +88,7 @@ class Challenge extends Component {
           </button>
         </div>
       </div>
+    </div>
     )
   }
 }
