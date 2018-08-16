@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const { User } = require('../db/models')
 const Op = require('sequelize').Op
 module.exports = router
 
@@ -17,6 +17,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+
+router.get('/:userId/progress', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId, {
+      attributes: ['progress']
+    })
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/:userId/progress', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId, {
@@ -29,7 +41,7 @@ router.put('/:userId/progress', async (req, res, next) => {
         progress
       },
       {
-        where: {id: +req.params.userId},
+        where: { id: +req.params.userId },
         returning: true,
         plain: true
       }

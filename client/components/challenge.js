@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {getResults, getChallengeData, getIsChallengeSolved} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { getResults, getChallengeData, getIsChallengeSolved } from '../store'
+import { connect } from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
@@ -50,8 +50,16 @@ class Challenge extends Component {
     console.log('USER', this.props)
     console.log('CURRENT STATE', this.state)
     return (
-      <div className="editor-wrapper">
-        <h1>{name}</h1>
+      <div className="main-wrapper">
+        <div className="challenge-header">
+          <h1>{name}</h1>
+          <button
+            className="btn btn-close"
+            onClick={() => this.props.history.push('/play')}
+          >
+            Close
+          </button>
+        </div>
         {isChallengeSolved && <h3>You've Already Solved This Problem!</h3>}
         <div className="content-wrapper">
           <div className="prompt">

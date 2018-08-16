@@ -7,6 +7,9 @@ const { User, Challenge, Example } = require('../server/db/models')
 
 const askPolitelyFilePath = path.join(__dirname, '/specs/askPolitely.spec.js')
 const lastDigitFilePath = path.join(__dirname, '/specs/lastDigit.spec.js')
+const nicknameGeneratorFilePath = path.join(__dirname, '/specs/nicknameGenerator.spec.js')
+const myJoinFilePath = path.join(__dirname, '/specs/myJoin.spec.js')
+const isPalindromeFilePath = path.join(__dirname, '/specs/isPalindrome.spec.js')
 
 const askPolitelySpecs = fs.readFileSync(askPolitelyFilePath, (err, specData) => {
   if (err) throw err
@@ -19,8 +22,27 @@ const lastDigitSpecs = fs.readFileSync(lastDigitFilePath, (err, specData) => {
   return specData
 })
 
+const nicknameGeneratorSpecs = fs.readFileSync(nicknameGeneratorFilePath, (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+
+const myJoinSpecs = fs.readFileSync(myJoinFilePath, (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+
+const isPalindromeSpecs = fs.readFileSync(isPalindromeFilePath, (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+
 const challenges = [
   {
+    id: 1,
     name: 'Ask Politely',
     prompt:
       'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?". If a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
@@ -31,6 +53,7 @@ const challenges = [
     skillLevel: 'Easy'
   },
   {
+    id: 2,
     name: 'Last Digit',
     prompt:
       'Create the function lastDigit that accepts two non-negative integer values and returns true if they have the same last digit, such as 27 and 57. The function accepts two non-negative integer arguments and returns true or false if they have the same last digit.',
@@ -39,6 +62,42 @@ const challenges = [
     specs: lastDigitSpecs,
     points: 3,
     skillLevel: 'Easy'
+  },
+  {
+    id: 3,
+    name: 'Nickname Generator',
+    prompt:
+      `Write a function, nicknameGenerator that takes a string name as an argument and returns the first 3 or 4 letters as that name's nickname! If the 3rd letter is a vowel, return the first 4 letters.`,
+    solution:
+      'function nicknameGenerator(name) {var nickname = ""; var vowels = "aeiou"; if (vowels.indexOf(name[2]) >= 0) {nickname = name.slice(0,4);} else {nickname = name.slice(0,3);}return nickname;}',
+    specs: nicknameGeneratorSpecs,
+    points: 6,
+    skillLevel: 'Medium'
+  },
+  {
+    id: 4,
+    name: 'My Join',
+    prompt:
+      `Write the function myJoin that mirrors the behavior of JavaScript's .join() array method.
+      However, myJoin will accept the array to operate on as its first parameter, rather than being invoked as a method on that array. Try and mirror the behavior of the native .join() method exactly. If there is no delimiter argument, use a ',' character.
+      Note: Do not use the native .join() method in your own implementation! Ignore the values undefined, null, and empty arrays.`,
+    solution:
+      `function myJoin(arr, delimiter) {if (delimiter === undefined) {delimiter = ",";}var newString = ""; for (var i = 0; i < arr.length; i++) {if (i === arr.length-1) {newString += arr[i];} else {newString += arr[i] + delimiter;}}return newString;}`,
+    specs: myJoinSpecs,
+    points: 6,
+    skillLevel: 'Medium'
+  },
+  {
+    id: 5,
+    name: 'Is Palindrome',
+    prompt:
+      `A palindrome is a word that is spelled the same forward and backward. For example, "LEVEL", "RACECAR", and "KAYAK" are all palindromes, while "MOTOR", "RUDDER", and "DOGGED" are not palidromes.
+      Write a recursive function, isPalindrome, to check if a string is a palindrome or not.`,
+    solution:
+      'function isPalindrome(string) {if (string.length <= 1) {return true;} else if (string[0].toLowerCase() === string[string.length-1].toLowerCase()) {return isPalindrome(string.slice(1, string.length-1));} else {return false;}}',
+    specs: isPalindromeSpecs,
+    points: 10,
+    skillLevel: 'Hard'
   }
 ]
 
@@ -72,6 +131,36 @@ const examples = [
     input: 'lastDigit(33,3);',
     output: 'true',
     challengeId: 2
+  },
+  {
+    input: `nicknameGenerator('Daniel')`,
+    output: 'Dan',
+    challengeId: 3
+  },
+  {
+    input: `nicknameGenerator('Beowulf')`,
+    output: 'Beow',
+    challengeId: 3
+  },
+  {
+    input: `myJoin(['hello','world'], ' ');`,
+    output: 'hello world',
+    challengeId: 4
+  },
+  {
+    input: `myJoin([2, "be", false]);`,
+    output: '2,be,false',
+    challengeId: 4
+  },
+  {
+    input: `isPalindrome('Kayak');`,
+    output: 'true',
+    challengeId: 5
+  },
+  {
+    input: `isPalindrome('SELFLESS');`,
+    output: 'false',
+    challengeId: 5
   }
 ]
 
@@ -84,8 +173,8 @@ async function seed() {
   await Promise.all(examples.map(example => Example.create(example)))
 
   const users = await Promise.all([
-    User.create({ email: 'cody@email.com', password: '123', progress: 5 }),
-    User.create({ email: 'murphy@email.com', password: '123', progress: 3 })
+    User.create({ email: 'cody@email.com', password: '123', progress: 60 }),
+    User.create({ email: 'murphy@email.com', password: '123', progress: 95 })
   ])
 
   // console.log(`seeded ${users.length} users`)
