@@ -18,7 +18,6 @@ router.post('/', async (req, res, next) => {
         specs: specsFromDB.specs
       }
     )
-    // if passed all tests, update user database
     const responseInfo = JSON.parse(Buffer.from(data))
     const results = {
       stats: responseInfo.stats,

@@ -13,7 +13,7 @@ const gotChallenge = challenge => ({
 export const getChallengeData = (challengeId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/challenges/${challengeId}`)
+      const { data } = await axios.get(`/api/challenges/${challengeId}`)
       dispatch(gotChallenge(data))
     } catch (err) {
       console.error(err)
@@ -22,7 +22,7 @@ export const getChallengeData = (challengeId) => {
 }
 
 // REDUCER
-export default function(state = {}, action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case GOT_CHALLENGE: {
       return action.challenge
