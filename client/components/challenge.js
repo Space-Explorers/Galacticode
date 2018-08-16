@@ -1,26 +1,33 @@
-import React, {Component} from 'react'
-import {getResults, getChallengeData} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { getResults, getChallengeData, getIsChallengeSolved } from '../store'
+import { connect } from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
   constructor() {
     super()
-    this.state = {value: ''}
-
+    this.state = {
+      value: ''
+    }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
+    console.log('COMPONENT MOUNTED')
     this.props.fetchInitialData(this.props.match.params.challengeId)
+    this.props.fetchIsChallengeSolved(
+      this.props.user.id,
+      this.props.match.params.challengeId
+    )
   }
 
   handleSubmit() {
     this.props.fetchResults(
       this.state.value,
       this.props.match.params.challengeId,
-      this.props.user.id
+      this.props.user.id,
+      this.props.points
     )
   }
 
@@ -31,7 +38,17 @@ class Challenge extends Component {
   }
 
   render() {
-    const {name, prompt, examples, results} = this.props
+    const {
+      name,
+      prompt,
+      examples,
+      results,
+      skillLevel,
+      points,
+      isChallengeSolved
+    } = this.props
+    console.log('USER', this.props)
+    console.log('CURRENT STATE', this.state)
     return (
       <div className="main-wrapper">
         <div className="challenge-header">
@@ -43,9 +60,14 @@ class Challenge extends Component {
             Close
           </button>
         </div>
+        {isChallengeSolved && <h3>You've Already Solved This Problem!</h3>}
         <div className="content-wrapper">
           <div className="prompt">
             <p>{prompt}</p>
+            <h3>Skill Level: </h3>
+            <span>{skillLevel}</span>
+            <h3>Available Points: </h3>
+            <span>{points}</span>
             <h3>Examples: </h3>
             {examples && (
               <div>
@@ -58,6 +80,9 @@ class Challenge extends Component {
               </div>
             )}
             <div className="results">
+              {/* {results.stats.passPercent === 100 && (
+                  <p>Congratulations! All tests passed!</p>
+                )} */}
               {results && (
                 <div>
                   <p>Tests Run: {results.stats.tests}</p>
@@ -71,6 +96,7 @@ class Challenge extends Component {
             <Editor onChange={this.onChange} value={this.state.value} />
           </div>
         </div>
+
         <div className="submit-button">
           <button type="submit" onClick={this.handleSubmit}>
             SUBMIT
@@ -82,16 +108,21 @@ class Challenge extends Component {
 }
 const mapState = state => ({
   user: state.user,
-  results: state.results,
+  results: state.results.results,
   name: state.challenge.name,
   prompt: state.challenge.prompt,
-  examples: state.challenge.examples
+  skillLevel: state.challenge.skillLevel,
+  points: state.challenge.points,
+  examples: state.challenge.examples,
+  isChallengeSolved: state.results.challengeStatus
 })
 
 const mapDispatch = dispatch => ({
-  fetchResults: (code, challengeId, userId) =>
-    dispatch(getResults(code, challengeId, userId)),
-  fetchInitialData: challengeId => dispatch(getChallengeData(challengeId))
+  fetchResults: (code, challengeId, userId, points, userProgress) =>
+    dispatch(getResults(code, challengeId, userId, points, userProgress)),
+  fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
+  fetchIsChallengeSolved: (userId, challengeId) =>
+    dispatch(getIsChallengeSolved(userId, challengeId))
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
