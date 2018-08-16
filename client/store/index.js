@@ -5,8 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import results from './results'
 import challenge from './challenge'
+import progress from './progress'
 
-const reducer = combineReducers({user, results, challenge})
+const reducer = combineReducers({user, results, challenge, progress})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -16,3 +17,4 @@ export default store
 export * from './user'
 export * from './results'
 export * from './challenge'
+export * from './progress'
