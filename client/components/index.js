@@ -1,5 +1,5 @@
 export {default as Navbar} from './navbar'
-// export {Login, Signup} from './auth-form'
+export {Login, Signup} from './auth-form'
 export {default as Main} from './main'
 export {default as Home} from './home'
 export {default as FuelBar} from './fuelBar'
