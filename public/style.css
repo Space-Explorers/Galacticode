@@ -58,6 +58,7 @@ form div {
 
 canvas {
   position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
   z-index: 1;
@@ -88,7 +89,7 @@ canvas {
 /* START OVERLAY COMPONENTS */
 
 .main-wrapper {
-  /* position: absolute; */
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 100;
