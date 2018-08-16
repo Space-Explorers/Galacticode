@@ -3,15 +3,9 @@ import axios from 'axios'
 // ACTION TYPES
 const GET_USER_CHALLENGES = 'GET_USER_CHALLENGES'
 
-// ACTION CREATORS
-// const gotChallenge = challenge => ({
-//   type: GOT_CHALLENGE,
-//   challenge
-// })
-
-const getUserChallenges = user => ({
+const getUserChallenges = completedChallenges => ({
 	type: GET_USER_CHALLENGES,
-	user
+	completedChallenges
 })
 
 // THUNK CREATORS
@@ -27,10 +21,10 @@ export const getUserChallengesData = (userId) => {
 }
 
 // REDUCER
-export default function (state = {}, action) {
+export default function (state = [], action) {
 	switch (action.type) {
 		case GET_USER_CHALLENGES: {
-			return action.user
+			return action.completedChallenges
 		}
 		default:
 			return state

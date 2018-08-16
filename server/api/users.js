@@ -32,6 +32,7 @@ router.get('/:userId/challenges', async (req, res, next) => {
 
 router.put('/:userId', async (req, res, next) => {
   try {
+    //
     const progress = Number(req.body.points) + Number(req.body.userProgress)
     const [numberOfAffectedRows, affectedRows] = await User.update({
       progress

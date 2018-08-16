@@ -6,8 +6,10 @@ import Editor from './editor'
 class Challenge extends Component {
   constructor() {
     super()
-    this.state = { value: '' }
-
+    this.state = {
+      value: '',
+      challengeCompleted: false
+    }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -15,13 +17,10 @@ class Challenge extends Component {
   componentDidMount() {
     this.props.fetchInitialData(this.props.match.params.challengeId)
     this.props.fetchUserChallenges(this.props.user.id)
+    // this.props.solvedChallenges.includes(this.props.match.params.challengeId) ? this.setState()
   }
 
   handleSubmit() {
-    console.log('CURRENT STATE', this.props)
-    // if (this.props.user.solvedProblems.includes(problemId)){
-    //   <Display "You've already solved this!">
-    // }
     this.props.fetchResults(
       this.state.value,
       this.props.match.params.challengeId,
@@ -35,12 +34,12 @@ class Challenge extends Component {
     this.setState({
       value: newValue
     })
-    // console.log(this.state.value)
   }
 
   render() {
     const { name, prompt, examples, results, skillLevel, points } = this.props
-    console.log('USER', this.props.user)
+    console.log('USER', this.props)
+    console.log('CURRENT STATE', this.state)
     return (
       <div className="editor-wrapper">
         <h1>{name}</h1>
@@ -95,13 +94,14 @@ const mapState = state => ({
   skillLevel: state.challenge.skillLevel,
   points: state.challenge.points,
   examples: state.challenge.examples,
+  completedChallenges: state.solvedChallenges
 })
 
 const mapDispatch = dispatch => ({
   fetchResults: (code, challengeId, userId, points, userProgress) =>
     dispatch(getResults(code, challengeId, userId, points, userProgress)),
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
-  fetchUserChallenges: userId => dispatch(getUserChallengesData(userId))
+  fetchUserChallenges: (userId) => dispatch(getUserChallengesData(userId))
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
