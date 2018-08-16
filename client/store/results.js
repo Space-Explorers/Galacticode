@@ -6,28 +6,36 @@ const GOT_RESULTS = 'GOT_RESULTS'
 
 // ACTION CREATORS
 
-const gotResults = results => ({
+const gotResults = (results, challengeStatus) => ({
   type: GOT_RESULTS,
-  results
+  results,
+  challengeStatus
 })
 
 // THUNK CREATORS
 
-export const getResults = (code, problemId, userId, points, isChallengeSolved) => async dispatch => {
+export const getResults = (
+  code,
+  problemId,
+  userId,
+  points
+) => async dispatch => {
   try {
     const resultsData = await axios.post('/api/docker', {
       code,
       problemId,
       userId
     })
-    if (resultsData.data.stats.passPercent === 100 && !isChallengeSolved) {
+    const challengeStatus = await axios.get(
+      `/api/users/${userId}/challenges/${problemId}`
+    )
+    if (resultsData.data.stats.passPercent === 100 && !challengeStatus.data) {
       await axios.put(`/api/users/${userId}/progress`, {
         points,
         problemId
       })
-      dispatch(gotResults(resultsData.data))
     }
-    dispatch(gotResults(resultsData.data))
+    dispatch(gotResults(resultsData.data, challengeStatus.data))
   } catch (err) {
     console.error(err)
   }
@@ -35,10 +43,14 @@ export const getResults = (code, problemId, userId, points, isChallengeSolved) =
 
 // REDUCER
 
-export default function (state = '', action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case GOT_RESULTS: {
-      return action.results
+      return {
+        ...state,
+        results: action.results,
+        challengeStatus: action.challengeStatus
+      }
     }
     default:
       return state
