@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { getResults, getChallengeData, getIsChallengeSolved } from '../store'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {getResults, getChallengeData, getIsChallengeSolved} from '../store'
+import {connect} from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
@@ -98,7 +98,11 @@ class Challenge extends Component {
         </div>
 
         <div className="submit-button">
-          <button type="submit" onClick={this.handleSubmit}>
+          <button
+            className="btn btn-submit"
+            type="submit"
+            onClick={this.handleSubmit}
+          >
             SUBMIT
           </button>
         </div>
