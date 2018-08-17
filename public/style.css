@@ -13,10 +13,13 @@ colors {
 }
 
 html {
-  /* background-color: #19225c; */
   background-image: url('galaxy-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
 }
 
 a {
@@ -39,7 +42,6 @@ h4 {
 }
 
 p {
-  font-family: 'Lato', sans-serif;
   font-weight: 300;
   color: #fff;
   margin-top: 0;
@@ -176,6 +178,8 @@ canvas {
 
 #intro-header {
   text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 #login-buttons {
@@ -192,8 +196,8 @@ canvas {
 
 progress {
   appearance: none;
-  border: none;
-  background-color: whitesmoke;
+  /* border: 3px solid #fff; */
+  background-color: #272822;
   border-radius: 30px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
   width: 300px;
@@ -201,7 +205,7 @@ progress {
 }
 
 progress::-webkit-progress-bar {
-  background-color: whiteSmoke;
+  background-color: #272822;
   border-radius: 30px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
 }
@@ -209,16 +213,21 @@ progress::-webkit-progress-bar {
 progress::-webkit-progress-value {
   /* Gradient background with Stripes */
   border-radius: 30px;
-  background-image: -webkit-linear-gradient(
+  /* background-image: linear-gradient(45deg, red, blue); */
+  background-image:
+  /* -webkit-linear-gradient(
       135deg,
       transparent,
       transparent 33%,
       rgba(0, 0, 0, 0.1) 33%,
       rgba(0, 0, 0, 0.1) 66%,
       transparent 66%
+    ), */ -webkit-linear-gradient(
+      top,
+      rgba(255, 255, 255, 0.25),
+      rgba(0, 0, 0, 0.2)
     ),
-    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
-    -webkit-linear-gradient(left, #995e78, #43afee);
+    -webkit-linear-gradient(left, #995e78, #f03a89);
 }
 
 /* END FUEL BAR */
