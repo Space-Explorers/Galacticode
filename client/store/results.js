@@ -6,36 +6,24 @@ const GOT_RESULTS = 'GOT_RESULTS'
 
 // ACTION CREATORS
 
-const gotResults = (results, challengeStatus) => ({
+const gotResults = (results) => ({
   type: GOT_RESULTS,
-  results,
-  challengeStatus
+  results
 })
 
 // THUNK CREATORS
 
-export const getResults = (
-  code,
-  problemId,
-  userId,
-  points
-) => async dispatch => {
+export const getResults = ( code, problemId ) =>
+async dispatch => {
   try {
-    const resultsData = await axios.post('/api/docker', {
+    const { data } = await axios.post('/api/docker', {
       code,
-      problemId,
-      userId
+      problemId
     })
-    const challengeStatus = await axios.get(
-      `/api/users/${userId}/challenges/${problemId}`
-    )
-    if (resultsData.data.stats.passPercent === 100 && !challengeStatus.data) {
-      await axios.put(`/api/users/${userId}/progress`, {
-        points,
-        problemId
-      })
-    }
-    dispatch(gotResults(resultsData.data, challengeStatus.data))
+
+    console.log('data----', data)
+
+    dispatch(gotResults(data))
   } catch (err) {
     console.error(err)
   }
@@ -48,8 +36,7 @@ export default function(state = {}, action) {
     case GOT_RESULTS: {
       return {
         ...state,
-        results: action.results,
-        challengeStatus: action.challengeStatus
+        results: action.results
       }
     }
     default:

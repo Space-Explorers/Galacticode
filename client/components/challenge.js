@@ -25,9 +25,7 @@ class Challenge extends Component {
   handleSubmit() {
     this.props.fetchResults(
       this.state.value,
-      this.props.match.params.challengeId,
-      this.props.user.id,
-      this.props.points
+      this.props.match.params.challengeId
     )
   }
 
@@ -118,8 +116,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  fetchResults: (code, challengeId, userId, points, userProgress) =>
-    dispatch(getResults(code, challengeId, userId, points, userProgress)),
+  fetchResults: (code, challengeId) =>
+    dispatch(getResults(code, challengeId)),
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId))

@@ -7,7 +7,7 @@ module.exports = router
 router.post('/', async (req, res, next) => {
   try {
 
-    const specsFromDB = await Challenge.findById(req.body.problemId, {
+    const challenge = await Challenge.findById(req.body.problemId, {
       attributes: ['specs', 'points']
     })
 
@@ -16,25 +16,33 @@ router.post('/', async (req, res, next) => {
       'https://space-explorers-api.herokuapp.com/',
       {
         code: req.body.code,
-        specs: specsFromDB.specs
+        specs: challenge.specs
       }
     )
-
     const responseInfo = JSON.parse(Buffer.from(data))
+    const error = responseInfo.suites.suites[0].tests.filter(test => Object.keys(test.err).length !== 0 && test.err.constructor === Object)
+
+    const user = await User.findById(req.user.id)
+    const currentChallenge = await user.getChallenges({
+      where: {
+        id: req.body.problemId
+      }
+    })
+    const challengeStatus = currentChallenge[0] ? true : false
+    console.log('challenge status', challengeStatus)
+
     const results = {
       stats: responseInfo.stats,
-      tests: responseInfo.suites.suites[0].tests
+      tests: responseInfo.suites.suites[0].tests,
+      error,
+      challengeStatus
     }
 
-    const challengeStatus = await axios.get(`/api/users/${req.user.id}/challenges/${req.body.problemId}`) // returns true or false
 
-    if (results.stats.passPercent === 100 && !challengeStatus.data) {
-      const points = specsFromDB.points
+
+    if (results.stats.passPercent === 100 && !challengeStatus) {
+      const points = challenge.points
       const problemId = req.body.problemId
-
-      const user = await User.findById(req.user.id, {
-        attributes: ['progress']
-      })
 
       const progress = +points + user.progress
 
@@ -49,9 +57,6 @@ router.post('/', async (req, res, next) => {
         }
       )
       await affectedRows.addChallenge(problemId)
-    } else {
-      const failing = results.tests.filter(test => test.pass === 'false')
-      const errMsgs = failing.forEach(error => {return error.err.message})
     }
 
     res.json(results)
