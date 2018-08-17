@@ -9,9 +9,7 @@ export default function planetBackground() {
   scene.background = new THREE.Color( 0x252940 );
 
   // Create a basic perspective camera
-  const camera = new THREE.PerspectiveCamera(
-    25,
-    window.innerWidth / window.innerHeight,
+  const camera = new THREE.PerspectiveCamera( 25,window.innerWidth / window.innerHeight,
     1,
     1000
   )
@@ -88,9 +86,8 @@ export default function planetBackground() {
   mesh.rotation.set(0.4,0.3,0)
   mesh.receiveShadow = true
   mesh.position.set(0, -190, 0)
-  scene.add(mesh)
 
-    // Create Secondary Planet
+  // Create Secondary Planet
     const otherPlanet = new THREE.Mesh(
       //dictate the size of the planet (10 -17)
       new THREE.IcosahedronGeometry(90,1),
@@ -104,9 +101,8 @@ export default function planetBackground() {
     otherPlanet.rotation.set(0.4,0.3,0)
     otherPlanet.receiveShadow = true
     otherPlanet.position.set(270, 190, 90)
-    scene.add(otherPlanet)
 
-       // Create Third Planet
+  // Create Third Planet
     const thirdPlanet = new THREE.Mesh(
       //dictate the size of the planet (10 -17)
       new THREE.IcosahedronGeometry(40,1),
@@ -120,7 +116,7 @@ export default function planetBackground() {
     thirdPlanet.rotation.set(0.4,0.3,0)
     thirdPlanet.receiveShadow = true
     thirdPlanet.position.set(-250, 300, 90)
-    scene.add(thirdPlanet)
+
 
   drawStars()
   drawParticles()
@@ -148,7 +144,6 @@ export default function planetBackground() {
   scene.add(thirdPlanet)
 
 
-
   // Render Loop
   function render(){
     renderer.render(scene, camera)
@@ -162,6 +157,7 @@ export default function planetBackground() {
     mesh.rotation.y += 0.003
     otherPlanet.rotation.y += 0.003
     thirdPlanet.rotation.y += 0.003
+
   }
 
   animate()
