@@ -4,22 +4,21 @@ import * as THREE from 'three'
 let particles
 
 export default function planetBackground() {
-
-
   // Create an empty scene
   const scene = new THREE.Scene()
   scene.background = new THREE.Color( 0x252940 );
 
   // Create a basic perspective camera
   const camera = new THREE.PerspectiveCamera(
-    75,
+    25,
     window.innerWidth / window.innerHeight,
     1,
     1000
   )
+  camera.position.y = 100
 
-  camera.position.z = 200
-  camera.lookAt(scene.position)
+  camera.position.z = 400
+  // camera.lookAt(scene.position)
 
   // Create a renderer with Antialiasing
   const renderer = new THREE.WebGLRenderer({antialias: true})
@@ -29,12 +28,10 @@ export default function planetBackground() {
 
   // Configure renderer size
   renderer.setSize(window.innerWidth, window.innerHeight)
-  
+
 
   // Append Renderer to DOM
   document.body.appendChild(renderer.domElement)
-
-
 
   // ------------------------------------------------
   // FUN STARTS HERE
@@ -60,7 +57,7 @@ export default function planetBackground() {
   function drawParticles() {
      particles = new THREE.Group();
     scene.add(particles);
-    const geometry = new THREE.TetrahedronGeometry(4, 0);
+    const geometry = new THREE.TetrahedronGeometry(2, 0);
 
     for (let i = 0; i < 500; i ++) {
       const material = new THREE.MeshPhongMaterial({
@@ -80,7 +77,7 @@ export default function planetBackground() {
   // Create Main Planet
   const mesh = new THREE.Mesh(
     //dictate the size of the planet (10 -17)
-    new THREE.IcosahedronGeometry(5,1),
+    new THREE.IcosahedronGeometry(30,1),
     new THREE.MeshPhongMaterial({
       color: 0x156289,
       emissive: 0x072534,
@@ -111,8 +108,8 @@ export default function planetBackground() {
 
 
 //shows in which direction the lighting is coming from
-  const helper = new THREE.CameraHelper(light.shadow.camera)
-  scene.add(helper)
+  // const helper = new THREE.CameraHelper(light.shadow.camera)
+  // scene.add(helper)
 
   // Add mesh to Scene
   scene.add(mesh)
@@ -127,7 +124,6 @@ export default function planetBackground() {
   function animate(){
     requestAnimationFrame(animate)
     render()
-    // mesh.rotation.x += 0.01
     particles.rotation.x += 0.001;
     particles.rotation.y -= 0.004;
     mesh.rotation.y += 0.003
