@@ -54,7 +54,18 @@ p {
   flex-direction: row;
   justify-content: space-around;
   padding: 0;
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  margin: auto;
+
 }
+
+/* nav{
+  position: absolute;
+  z-index: 100;
+} */
 
 nav a {
   display: inline-block;
@@ -143,10 +154,10 @@ canvas {
   top: 100px;
   left: 0;
   right: 0;
+  margin: auto;
   z-index: 100;
   display: flex;
   flex-direction: column;
-  margin: auto;
   padding: 40px;
   max-width: 1000px;
   /* border-radius: 5px; */

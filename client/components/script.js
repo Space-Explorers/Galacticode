@@ -31,9 +31,15 @@ export default function planetBackground() {
   // Append Renderer to DOM
   document.body.appendChild(renderer.domElement)
 
-  // ------------------------------------------------
-  // FUN STARTS HERE
-  // ------------------------------------------------
+  window.addEventListener(
+    'resize',
+    function() {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    },
+    false
+  );
 
   const drawStars = function() {
     let canvas, ctx, i, j, sizeRandom;
