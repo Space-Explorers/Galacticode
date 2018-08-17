@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { getResults, getChallengeData, getIsChallengeSolved } from '../store'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {getResults, getChallengeData, getIsChallengeSolved} from '../store'
+import {connect} from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
@@ -60,14 +60,15 @@ class Challenge extends Component {
             Close
           </button>
         </div>
+        <div>
+          <p>
+            {skillLevel}, {points} Fuel Points
+          </p>
+        </div>
         {isChallengeSolved && <h3>You've Already Solved This Problem!</h3>}
         <div className="content-wrapper">
           <div className="prompt">
             <p>{prompt}</p>
-            <h3>Skill Level: </h3>
-            <span>{skillLevel}</span>
-            <h3>Available Points: </h3>
-            <span>{points}</span>
             <h3>Examples: </h3>
             {examples && (
               <div>
@@ -91,16 +92,19 @@ class Challenge extends Component {
                 </div>
               )}
             </div>
+            <div className="submit-button">
+              <button
+                className="btn btn-submit"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
+                SUBMIT
+              </button>
+            </div>
           </div>
           <div className="editor">
             <Editor onChange={this.onChange} value={this.state.value} />
           </div>
-        </div>
-
-        <div className="submit-button">
-          <button type="submit" onClick={this.handleSubmit}>
-            SUBMIT
-          </button>
         </div>
       </div>
     )
