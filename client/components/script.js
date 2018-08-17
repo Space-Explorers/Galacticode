@@ -15,9 +15,9 @@ export default function planetBackground() {
     1,
     1000
   )
-  camera.position.y = 100
-
-  camera.position.z = 400
+  camera.position.x = 0
+  camera.position.y = 170
+  camera.position.z = 900
   // camera.lookAt(scene.position)
 
   // Create a renderer with Antialiasing
@@ -61,7 +61,7 @@ export default function planetBackground() {
 
     for (let i = 0; i < 500; i ++) {
       const material = new THREE.MeshPhongMaterial({
-        color: 0xA9D9E5,
+        color: 0x9CE7EA,
         shading: THREE.FlatShading
       });
       const mesh = new THREE.Mesh(geometry, material);
@@ -77,19 +77,50 @@ export default function planetBackground() {
   // Create Main Planet
   const mesh = new THREE.Mesh(
     //dictate the size of the planet (10 -17)
-    new THREE.IcosahedronGeometry(30,1),
+    new THREE.IcosahedronGeometry(300,1),
     new THREE.MeshPhongMaterial({
-      color: 0x156289,
-      emissive: 0x072534,
+      color: 0x205BF8,
+      emissive: 0x0E24F3,
       side: THREE.DoubleSide,
       flatShading: true,
     }),
   )
   mesh.rotation.set(0.4,0.3,0)
   mesh.receiveShadow = true
-  mesh.position.set(0, 40, 0)
+  mesh.position.set(0, -190, 0)
   scene.add(mesh)
 
+    // Create Secondary Planet
+    const otherPlanet = new THREE.Mesh(
+      //dictate the size of the planet (10 -17)
+      new THREE.IcosahedronGeometry(90,1),
+      new THREE.MeshPhongMaterial({
+        color: 0x2B1255,
+        emissive: 0x995E78,
+        side: THREE.DoubleSide,
+        flatShading: true,
+      }),
+    )
+    otherPlanet.rotation.set(0.4,0.3,0)
+    otherPlanet.receiveShadow = true
+    otherPlanet.position.set(270, 190, 90)
+    scene.add(otherPlanet)
+
+       // Create Third Planet
+    const thirdPlanet = new THREE.Mesh(
+      //dictate the size of the planet (10 -17)
+      new THREE.IcosahedronGeometry(40,1),
+      new THREE.MeshPhongMaterial({
+        color: 0xCD4537,
+        emissive: 0xCD4537,
+        side: THREE.DoubleSide,
+        flatShading: true,
+      }),
+    )
+    thirdPlanet.rotation.set(0.4,0.3,0)
+    thirdPlanet.receiveShadow = true
+    thirdPlanet.position.set(-250, 300, 90)
+    scene.add(thirdPlanet)
 
   drawStars()
   drawParticles()
@@ -113,6 +144,8 @@ export default function planetBackground() {
 
   // Add mesh to Scene
   scene.add(mesh)
+  scene.add(otherPlanet)
+  scene.add(thirdPlanet)
 
 
 
@@ -125,8 +158,10 @@ export default function planetBackground() {
     requestAnimationFrame(animate)
     render()
     particles.rotation.x += 0.001;
-    particles.rotation.y -= 0.004;
+    particles.rotation.y -= 0.001;
     mesh.rotation.y += 0.003
+    otherPlanet.rotation.y += 0.003
+    thirdPlanet.rotation.y += 0.003
   }
 
   animate()
