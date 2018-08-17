@@ -45,12 +45,12 @@ router.get('/:userId/challenges', async (req, res, next) => {
 router.get('/:userId/challenges/:challengeId', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId)
-    const solved = await user.getChallenges({
+    const isSolved = await user.getChallenges({
       where: {
         id: req.params.challengeId
       }
     })
-    res.json(solved)
+    isSolved[0] ? res.json(true) : res.json(false)
   } catch (err) {
     next(err)
   }
