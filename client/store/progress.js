@@ -21,7 +21,6 @@ export const getProgressData = (userId) => {
   }
 }
 
-
 //REDUCER
 export default function(state = 0, action){
   switch(action.type){
