@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 import brace from 'brace';
 import AceEditor from 'react-ace'
@@ -17,7 +17,7 @@ import 'brace/ext/language_tools'
 // `
 
 class Editor extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       mode: 'javascript',
@@ -30,8 +30,8 @@ class Editor extends Component {
       showPrintMargin: true,
       highlightActiveLine: true,
       showLineNumbers: true,
-      tabSize: 2
-
+      tabSize: 2,
+      wrapEnabled: true
     }
     // this.onChange = this.onChange.bind(this)
   }
@@ -71,6 +71,7 @@ class Editor extends Component {
         enableLiveAutocompletion={this.state.enableLiveAutocompletion}
         showLineNumbers={this.state.showLineNumbers}
         tabSize={this.state.tabSize}
+        wrapEnabled={this.state.wrapEnabled}
       />
     )
   }

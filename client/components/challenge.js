@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {getResults, getChallengeData, getIsChallengeSolved} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { getResults, getChallengeData, getIsChallengeSolved } from '../store'
+import { connect } from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
@@ -14,7 +14,7 @@ class Challenge extends Component {
   }
 
   componentDidMount() {
-    console.log('COMPONENT MOUNTED')
+    // console.log('COMPONENT MOUNTED')
     this.props.fetchInitialData(this.props.match.params.challengeId)
     this.props.fetchIsChallengeSolved(
       this.props.user.id,
@@ -22,10 +22,10 @@ class Challenge extends Component {
     )
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    if(nextState.value !== this.state.value){
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.value !== this.state.value) {
       return false
-    }else{
+    } else {
       return true
     }
   }
