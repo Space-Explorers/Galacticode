@@ -41,8 +41,8 @@ router.post('/', async (req, res, next) => {
       const points = challenge.points
       const problemId = req.body.problemId
       const progress = +points + user.progress
-      const user = await user.update({progress})
-      await user.addChallenge(problemId)
+      const updatedUser = await user.update({progress})
+      await updatedUser.addChallenge(problemId)
     }
 
     res.json(results)
