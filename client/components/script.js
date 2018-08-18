@@ -4,33 +4,26 @@ import * as THREE from 'three'
 let particles
 
 export default function planetBackground() {
-  // Create an empty scene
+  // Create an empty scene, camera
   const scene = new THREE.Scene()
   scene.background = new THREE.Color( 0x252940 );
 
-  // Create a basic perspective camera
-  const camera = new THREE.PerspectiveCamera( 25,window.innerWidth / window.innerHeight,
-    1,
-    1000
-  )
+  const camera = new THREE.PerspectiveCamera( 25,window.innerWidth / window.innerHeight, 1, 1000)
   camera.position.x = 0
   camera.position.y = 170
   camera.position.z = 900
   // camera.lookAt(scene.position)
 
-  // Create a renderer with Antialiasing
+  // Create a renderer
   const renderer = new THREE.WebGLRenderer({antialias: true})
 
-  // Configure renderer set clear color
   renderer.setClearColor(0x000000, 0)
-
-  // Configure renderer size
   renderer.setSize(window.innerWidth, window.innerHeight)
-
 
   // Append Renderer to DOM
   document.body.appendChild(renderer.domElement)
 
+  //resize window
   window.addEventListener(
     'resize',
     function() {
@@ -41,6 +34,7 @@ export default function planetBackground() {
     false
   );
 
+  // Stars in the backgrounds
   const drawStars = function() {
     let canvas, ctx, i, j, sizeRandom;
     canvas = document.createElement('canvas');
@@ -58,6 +52,7 @@ export default function planetBackground() {
     return document.body.appendChild(canvas);
   };
 
+  //flying particles
   function drawParticles() {
      particles = new THREE.Group();
     scene.add(particles);
@@ -133,11 +128,11 @@ export default function planetBackground() {
    const ambientLight = new THREE.AmbientLight(0x999999)
    scene.add(ambientLight)
 
-  const light = new THREE.DirectionalLight(0xffffff, 1.5)
+    const light = new THREE.DirectionalLight(0xffffff, 1.5)
     light.position.set(200,100,200);
     light.castShadow = true;
 
-  scene.add(light)
+    scene.add(light)
 
 
 //shows in which direction the lighting is coming from
@@ -145,9 +140,9 @@ export default function planetBackground() {
   // scene.add(helper)
 
   // Add mesh to Scene
-  scene.add(mesh)
-  scene.add(otherPlanet)
-  scene.add(thirdPlanet)
+    scene.add(mesh)
+    scene.add(otherPlanet)
+    scene.add(thirdPlanet)
 
 
   // Render Loop
