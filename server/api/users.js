@@ -29,29 +29,6 @@ router.get('/:userId/progress', async (req, res, next) => {
   }
 })
 
-router.put('/:userId/progress', async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.userId, {
-      attributes: ['progress']
-    })
-    const progress = Number(req.body.points) + user.progress
-
-    const [numberOfAffectedRows, affectedRows] = await User.update(
-      {
-        progress
-      },
-      {
-        where: { id: +req.params.userId },
-        returning: true,
-        plain: true
-      }
-    )
-    await affectedRows.addChallenge(req.body.problemId)
-    res.status(200).send('Success')
-  } catch (err) {
-    next(err)
-  }
-})
 
 router.get('/:userId/challenges', async (req, res, next) => {
   try {
@@ -68,12 +45,12 @@ router.get('/:userId/challenges', async (req, res, next) => {
 router.get('/:userId/challenges/:challengeId', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId)
-    const currentChallenge = await user.getChallenges({
+    const isSolved = await user.getChallenges({
       where: {
         id: req.params.challengeId
       }
     })
-    currentChallenge[0] ? res.json(true) : res.json(false)
+    isSolved[0] ? res.json(true) : res.json(false)
   } catch (err) {
     next(err)
   }
