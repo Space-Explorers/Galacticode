@@ -29,7 +29,6 @@ router.post('/', async (req, res, next) => {
       }
     })
     const challengeStatus = currentChallenge[0] ? true : false
-    console.log('challenge status', challengeStatus)
 
     const results = {
       stats: responseInfo.stats,
