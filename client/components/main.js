@@ -19,7 +19,7 @@ const Main = () => {
               <img src="btn_google_signin_light_normal_web.png" />
             </a>
             <br />
-            {/* <a href="/auth/github">Login with Github</a> */}
+            <a href="/auth/github">Login with Github</a>
           </div>
         </div>
       </div>
