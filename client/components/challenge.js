@@ -14,7 +14,6 @@ class Challenge extends Component {
   }
 
   componentDidMount() {
-    console.log('COMPONENT MOUNTED')
     this.props.fetchInitialData(this.props.match.params.challengeId)
     this.props.fetchIsChallengeSolved(
       this.props.user.id,
@@ -33,9 +32,7 @@ class Challenge extends Component {
   handleSubmit() {
     this.props.fetchResults(
       this.state.value,
-      this.props.match.params.challengeId,
-      this.props.user.id,
-      this.props.points
+      this.props.match.params.challengeId
     )
   }
 
@@ -55,8 +52,7 @@ class Challenge extends Component {
       points,
       isChallengeSolved
     } = this.props
-    console.log('USER', this.props)
-    console.log('CURRENT STATE', this.state)
+
     return (
       <div className="main-wrapper">
         <div className="challenge-header">
@@ -126,12 +122,12 @@ const mapState = state => ({
   skillLevel: state.challenge.skillLevel,
   points: state.challenge.points,
   examples: state.challenge.examples,
-  isChallengeSolved: state.results.challengeStatus
+  isChallengeSolved: state.solvedChallenges.challengeStatus
 })
 
 const mapDispatch = dispatch => ({
-  fetchResults: (code, challengeId, userId, points, userProgress) =>
-    dispatch(getResults(code, challengeId, userId, points, userProgress)),
+  fetchResults: (code, challengeId) =>
+    dispatch(getResults(code, challengeId)),
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId))

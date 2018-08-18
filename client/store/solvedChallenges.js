@@ -30,7 +30,6 @@ export const getIsChallengeSolved = (userId, challengeId) => {
 	return async dispatch => {
 		try {
 			const { data } = await axios.get(`/api/users/${userId}/challenges/${challengeId}`)
-			console.log('INSIDE THUNK', data)
 			dispatch(getChallengeStatus(data))
 		} catch (err) {
 			console.error(err)
