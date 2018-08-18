@@ -37,25 +37,12 @@ router.post('/', async (req, res, next) => {
       challengeStatus
     }
 
-
-
     if (results.stats.passPercent === 100 && !challengeStatus) {
       const points = challenge.points
       const problemId = req.body.problemId
-
       const progress = +points + user.progress
-
-      const [numberOfAffectedRows, affectedRows] = await User.update(
-        {
-          progress
-        },
-        {
-          where: { id: req.user.id },
-          returning: true,
-          plain: true
-        }
-      )
-      await affectedRows.addChallenge(problemId)
+      const user = await user.update({progress})
+      await user.addChallenge(problemId)
     }
 
     res.json(results)
