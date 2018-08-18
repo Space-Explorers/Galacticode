@@ -50,6 +50,7 @@
     "mochawesome": "^3.0.3",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "passport-google-oauth": "^1.0.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
@@ -64,7 +65,8 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "three": "^0.95.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.55",
