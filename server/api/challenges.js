@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const { Challenge, Example } = require('../db/models')
+const { Challenge } = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
     const challenges = await Challenge.findAll({
-      attributes: ['id', 'name', 'prompt', 'points', 'skillLevel']
+      attributes: ['id', 'name', 'prompt', 'points', 'skillLevel', 'examples']
     })
     res.json(challenges)
   } catch (err) {
@@ -16,8 +16,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:challengeId', async (req, res, next) => {
   try {
     const challenge = await Challenge.findById(req.params.challengeId, {
-      attributes: ['id', 'name', 'prompt', 'points', 'skillLevel'],
-      include: Example
+      attributes: ['id', 'name', 'prompt', 'points', 'skillLevel', 'examples']
     })
     res.json(challenge)
   } catch (err) {
