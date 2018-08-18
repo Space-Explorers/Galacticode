@@ -21,8 +21,6 @@ async dispatch => {
       problemId
     })
 
-    console.log('data----', data)
-
     dispatch(gotResults(data))
   } catch (err) {
     console.error(err)
