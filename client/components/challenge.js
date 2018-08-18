@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {getResults, getChallengeData, getIsChallengeSolved} from '../store'
 import {connect} from 'react-redux'
 import Editor from './editor'
-import planetBackground from './script';
 
 class Challenge extends Component {
   constructor() {
@@ -59,8 +58,6 @@ class Challenge extends Component {
     console.log('USER', this.props)
     console.log('CURRENT STATE', this.state)
     return (
-      <div>
-        {planetBackground()}
       <div className="main-wrapper">
         <div className="challenge-header">
           <h1>{name}</h1>
@@ -118,7 +115,6 @@ class Challenge extends Component {
           </div>
         </div>
       </div>
-    </div>
     )
   }
 }
