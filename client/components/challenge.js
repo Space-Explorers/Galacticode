@@ -14,23 +14,14 @@ class Challenge extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-<<<<<<< HEAD
-    // console.log('COMPONENT MOUNTED')
-=======
->>>>>>> master
-    this.props.fetchInitialData(this.props.match.params.challengeId)
-    this.props.fetchIsChallengeSolved(
+  async componentDidMount() {
+    await this.props.fetchInitialData(this.props.match.params.challengeId)
+    await this.props.fetchIsChallengeSolved(
       this.props.user.id,
       this.props.match.params.challengeId
     )
-    this.setState({
-      examples: this.props.examples.map(example => (
-        <div key={example.id}>
-          <p>INPUT: {example.input}</p>
-          <p>OUTPUT: {example.output}</p>
-        </div>
-      ))
+    await this.setState({
+      examples: this.props.examples
     })
   }
 
@@ -45,7 +36,9 @@ class Challenge extends Component {
   handleSubmit() {
     this.props.fetchResults(
       this.state.value,
-      this.props.match.params.challengeId
+      this.props.match.params.challengeId,
+      this.props.user.id,
+      this.props.points
     )
   }
 
@@ -65,7 +58,8 @@ class Challenge extends Component {
       points,
       isChallengeSolved
     } = this.props
-
+    console.log('USER', this.props)
+    console.log('CURRENT STATE', this.state)
     return (
       <div className="main-wrapper">
         <div className="challenge-header">
@@ -86,17 +80,17 @@ class Challenge extends Component {
         <div className="content-wrapper">
           <div className="prompt">
             <p>{prompt}</p>
-            {/* <h3>Examples: </h3>
-            {examples && (
-              <div>
-                {examples.map(example => (
-                  <div key={example.id}>
-                    <p>INPUT: {example.input}</p>
-                    <p>OUTPUT: {example.output}</p>
-                  </div>
-                ))}
-              </div>
-            )} */}
+            <h3>Examples: </h3>
+            {/* // {examples && (
+            //   <div>
+            //     {examples.map(example => (
+            //       <div key={example.id}>
+            //         <p>INPUT: {example.input}</p>
+            //         <p>OUTPUT: {example.output}</p>
+            //       </div>
+            //     ))}
+            //   </div>
+            // )} */}
             <div className="results">
               {/* {results.stats.passPercent === 100 && (
                   <p>Congratulations! All tests passed!</p>
@@ -138,12 +132,12 @@ const mapState = state => ({
   skillLevel: state.challenge.skillLevel,
   points: state.challenge.points,
   examples: state.challenge.examples,
-  isChallengeSolved: state.solvedChallenges.challengeStatus
+  isChallengeSolved: state.results.challengeStatus
 })
 
 const mapDispatch = dispatch => ({
-  fetchResults: (code, challengeId) =>
-    dispatch(getResults(code, challengeId)),
+  fetchResults: (code, challengeId, userId, points, userProgress) =>
+    dispatch(getResults(code, challengeId, userId, points, userProgress)),
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId))

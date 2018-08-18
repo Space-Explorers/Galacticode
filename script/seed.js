@@ -63,7 +63,7 @@ const challenges = [
     specs: greetingSpecs,
     points: 10,
     skillLevel: 'Easy',
-    examples: 'greeting("Kathy");\n// OUTPUT: "Hello, Kathy!";\ngreeting();\n// OUTPUT: "Hello!"',
+    examples: 'greeting("Kathy");\n// OUTPUT: "Hello, Kathy!";\n\ngreeting();\n// OUTPUT: "Hello!"',
   },
   {
     id: 2,
@@ -75,7 +75,7 @@ const challenges = [
     specs: thereminSpecs,
     points: 10,
     skillLevel: 'Easy',
-    examples: 'doYouPlayTheTheremin("Amy")\n// OUTPUT: "Amy does not play the Theremin!";\ndoYouPlayTheTheremin("Sally");\n// OUTPUT: "Sally plays the Theremin!"'
+    examples: 'doYouPlayTheTheremin("Amy")\n// OUTPUT: "Amy does not play the Theremin!";\n\ndoYouPlayTheTheremin("Sally");\n// OUTPUT: "Sally plays the Theremin!"'
   },
   {
     id: 3,
@@ -87,7 +87,7 @@ const challenges = [
     specs: repeatAStringSpecs,
     points: 15,
     skillLevel: 'Easy',
-    examples: 'repeat("yo",5);\n// OUTPUT: "yoyoyoyoyo"\nrepeat("yo",0);\n// OUTPUT:""\nrepeat("bye",3);\n// OUTPUT: "byebyebye"'
+    examples: 'repeat("yo",5);\n// OUTPUT: "yoyoyoyoyo"\n\nrepeat("yo",0);\n// OUTPUT:""\n\nrepeat("bye",3);\n// OUTPUT: "byebyebye"'
   },
   {
     id: 4,
@@ -99,7 +99,7 @@ const challenges = [
     specs: vowelCountSpecs,
     points: 15,
     skillLevel: 'Easy',
-    examples: 'vowelCount("Grace Hopper");\n// OUTPUT: 4\nvowelCount("Yellow");\n// OUTPUT: 2'
+    examples: 'vowelCount("Grace Hopper");\n// OUTPUT: 4\n\nvowelCount("Yellow");\n// OUTPUT: 2'
   },
   {
     id: 5,
@@ -111,7 +111,7 @@ const challenges = [
     specs: askPolitelySpecs,
     points: 20,
     skillLevel: 'Medium',
-    examples: '"May I ask a question please?";\naskPolitely("My name is Grace Hopper.");\n// OUTPUT: "My name is Grace Hopper."'
+    examples: 'askPolitely("May I borrow your pencil?");\n// OUTPUT: "May I borrow your pencil please?"\n\naskPolitely("May I ask a question please?");\n// OUTPUT: "May I ask a question please?";\n\naskPolitely("My name is Grace Hopper.");\n// OUTPUT: "My name is Grace Hopper."'
   },
   {
     id: 6,
@@ -123,7 +123,7 @@ const challenges = [
     specs: lastDigitSpecs,
     points: 20,
     skillLevel: 'Medium',
-    examples: 'lastDigit(22,32);\n// OUTPUT: true\nlastDigit(77, 999);\n// OUTPUT: false\nlastDigit(33,3);\n// OUTPUT: true'
+    examples: 'lastDigit(22,32);\n// OUTPUT: true\n\nlastDigit(77, 999);\n// OUTPUT: false\n\nlastDigit(33,3);\n// OUTPUT: true'
   },
   {
     id: 7,
@@ -135,7 +135,7 @@ const challenges = [
     specs: nicknameGeneratorSpecs,
     points: 30,
     skillLevel: 'Medium',
-    examples: 'nicknameGenerator("Daniel")\n// OUTPUT: "Dan"\nnicknameGenerator("Beowulf")\n// OUTPUT: "Beow"'
+    examples: 'nicknameGenerator("Daniel")\n// OUTPUT: "Dan"\n\nnicknameGenerator("Beowulf")\n// OUTPUT: "Beow"'
   },
   {
     id: 8,
@@ -149,7 +149,7 @@ const challenges = [
     specs: myJoinSpecs,
     points: 40,
     skillLevel: 'Medium',
-    examples: 'myJoin(["hello","world"], " ");\n// OUTPUT:  "hello world"\nmyJoin([2, "be", false]);\n// OUTPUT: 2,be,false'
+    examples: 'myJoin(["hello","world"], " ");\n// OUTPUT:  "hello world"\n\nmyJoin([2, "be", false]);\n// OUTPUT: 2,be,false'
   },
   {
     id: 9,
@@ -162,7 +162,7 @@ const challenges = [
     specs: isPalindromeSpecs,
     points: 50,
     skillLevel: 'Hard',
-    examples: 'isPalindrome("Kayak");\n// OUTPUT:  true\nisPalindrome("SELFLESS");\n// OUTPUT: false'
+    examples: 'isPalindrome("Kayak");\n// OUTPUT:  true\n\nisPalindrome("SELFLESS");\n// OUTPUT: false'
   }
 ]
 
