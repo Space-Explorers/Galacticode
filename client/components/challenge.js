@@ -7,7 +7,8 @@ class Challenge extends Component {
   constructor() {
     super()
     this.state = {
-      value: ''
+      value: '',
+      examples: ''
     }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,6 +21,14 @@ class Challenge extends Component {
       this.props.user.id,
       this.props.match.params.challengeId
     )
+    this.setState({
+      examples: this.props.examples.map(example => (
+        <div key={example.id}>
+          <p>INPUT: {example.input}</p>
+          <p>OUTPUT: {example.output}</p>
+        </div>
+      ))
+    })
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -41,7 +50,7 @@ class Challenge extends Component {
 
   onChange(newValue) {
     this.setState({
-      value: newValue
+      value: newValue,
     })
   }
 
@@ -77,7 +86,7 @@ class Challenge extends Component {
         <div className="content-wrapper">
           <div className="prompt">
             <p>{prompt}</p>
-            <h3>Examples: </h3>
+            {/* <h3>Examples: </h3>
             {examples && (
               <div>
                 {examples.map(example => (
@@ -87,7 +96,7 @@ class Challenge extends Component {
                   </div>
                 ))}
               </div>
-            )}
+            )} */}
             <div className="results">
               {/* {results.stats.passPercent === 100 && (
                   <p>Congratulations! All tests passed!</p>
@@ -100,6 +109,9 @@ class Challenge extends Component {
                 </div>
               )}
             </div>
+            <div className="examples-editor">
+              <Editor value={this.state.examples} readOnly={true} maxLines={10} showLineNumbers={false} />
+            </div>
             <div className="submit-button">
               <button
                 className="btn btn-submit"
@@ -111,7 +123,7 @@ class Challenge extends Component {
             </div>
           </div>
           <div className="editor">
-            <Editor onChange={this.onChange} value={this.state.value} />
+            <Editor onChange={this.onChange} value={this.state.value} readOnly={false} showLineNumbers={true} />
           </div>
         </div>
       </div>

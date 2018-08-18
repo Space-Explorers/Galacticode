@@ -62,7 +62,8 @@ const challenges = [
       'function greeting(name) { if (name) { return "Hello, " + name + "!"; } else { return "Hello!"; } }',
     specs: greetingSpecs,
     points: 10,
-    skillLevel: 'Easy'
+    skillLevel: 'Easy',
+    examples: 'greeting("Kathy");\n// OUTPUT: "Hello, Kathy!";\ngreeting();\n// OUTPUT: "Hello!"',
   },
   {
     id: 2,
@@ -73,7 +74,8 @@ const challenges = [
       'function doYouPlayTheTheremin(name) {if (name[0].toLowerCase() === "s") {return name + " plays the Theremin!";} else {return name + " does not play the Theremin!";}}',
     specs: thereminSpecs,
     points: 10,
-    skillLevel: 'Easy'
+    skillLevel: 'Easy',
+    examples: 'doYouPlayTheTheremin("Amy")\n// OUTPUT: "Amy does not play the Theremin!";\ndoYouPlayTheTheremin("Sally");\n// OUTPUT: "Sally plays the Theremin!"'
   },
   {
     id: 3,
@@ -84,7 +86,8 @@ const challenges = [
       'function repeat(str, num) {var finalStr = "";for (num; num > 0; num--) { finalStr += str; } return finalStr; }',
     specs: repeatAStringSpecs,
     points: 15,
-    skillLevel: 'Easy'
+    skillLevel: 'Easy',
+    examples: 'repeat("yo",5);\n// OUTPUT: "yoyoyoyoyo"\nrepeat("yo",0);\n// OUTPUT:""\nrepeat("bye",3);\n// OUTPUT: "byebyebye"'
   },
   {
     id: 4,
@@ -95,7 +98,8 @@ const challenges = [
       'function vowelCount(string) {var vowels = "aeiou", string = string.toLowerCase(), count = 0; for (var i = 0; i < string.length; i++) { if (vowels.indexOf(string[i]) >= 0) { count++; }}return count;}',
     specs: vowelCountSpecs,
     points: 15,
-    skillLevel: 'Easy'
+    skillLevel: 'Easy',
+    examples: 'vowelCount("Grace Hopper");\n// OUTPUT: 4\nvowelCount("Yellow");\n// OUTPUT: 2'
   },
   {
     id: 5,
@@ -106,7 +110,8 @@ const challenges = [
       'function askPolitely(sentence) {if (sentence.slice(-1) === "?") {if (sentence.slice(-7) === "please?") { return sentence } else { return sentence.slice(0, -1) + " please?"} } else { return sentence } }',
     specs: askPolitelySpecs,
     points: 20,
-    skillLevel: 'Medium'
+    skillLevel: 'Medium',
+    examples: '"May I ask a question please?";\naskPolitely("My name is Grace Hopper.");\n// OUTPUT: "My name is Grace Hopper."'
   },
   {
     id: 6,
@@ -117,7 +122,8 @@ const challenges = [
       'function lastDigit(num1, num2) {num1 = num1.toString(); num2 = num2.toString(); if (num1[num1.length - 1] === num2[num2.length - 1]) {return true;} else { return false;}}',
     specs: lastDigitSpecs,
     points: 20,
-    skillLevel: 'Medium'
+    skillLevel: 'Medium',
+    examples: 'lastDigit(22,32);\n// OUTPUT: true\nlastDigit(77, 999);\n// OUTPUT: false\nlastDigit(33,3);\n// OUTPUT: true'
   },
   {
     id: 7,
@@ -128,7 +134,8 @@ const challenges = [
       'function nicknameGenerator(name) {var nickname = ""; var vowels = "aeiou"; if (vowels.indexOf(name[2]) >= 0) {nickname = name.slice(0,4);} else {nickname = name.slice(0,3);}return nickname;}',
     specs: nicknameGeneratorSpecs,
     points: 30,
-    skillLevel: 'Medium'
+    skillLevel: 'Medium',
+    examples: 'nicknameGenerator("Daniel")\n// OUTPUT: "Dan"\nnicknameGenerator("Beowulf")\n// OUTPUT: "Beow"'
   },
   {
     id: 8,
@@ -141,7 +148,8 @@ const challenges = [
       `function myJoin(arr, delimiter) {if (delimiter === undefined) {delimiter = ",";}var newString = ""; for (var i = 0; i < arr.length; i++) {if (i === arr.length-1) {newString += arr[i];} else {newString += arr[i] + delimiter;}}return newString;}`,
     specs: myJoinSpecs,
     points: 40,
-    skillLevel: 'Medium'
+    skillLevel: 'Medium',
+    examples: 'myJoin(["hello","world"], " ");\n// OUTPUT:  "hello world"\nmyJoin([2, "be", false]);\n// OUTPUT: 2,be,false'
   },
   {
     id: 9,
@@ -153,116 +161,8 @@ const challenges = [
       'function isPalindrome(string) {if (string.length <= 1) {return true;} else if (string[0].toLowerCase() === string[string.length-1].toLowerCase()) {return isPalindrome(string.slice(1, string.length-1));} else {return false;}}',
     specs: isPalindromeSpecs,
     points: 50,
-    skillLevel: 'Hard'
-  }
-]
-
-const examples = [
-  {
-    input: 'greeting("Kathy");',
-    output: '"Hello, Kathy!";',
-    challengeId: 1
-  },
-  {
-    input: 'greeting();',
-    output: '"Hello!"',
-    challengeId: 1
-  },
-  {
-    input: 'doYouPlayTheTheremin("Amy")',
-    output: '"Amy does not play the Theremin!";',
-    challengeId: 2
-  },
-  {
-    input: 'doYouPlayTheTheremin("Sally");',
-    output: '"Sally plays the Theremin!"',
-    challengeId: 2
-  },
-  {
-    input: 'repeat("yo",5);',
-    output: '"yoyoyoyoyo"',
-    challengeId: 3
-  },
-  {
-    input: 'repeat("yo",0);',
-    output: '""',
-    challengeId: 3
-  },
-  {
-    input: 'repeat("bye",3);',
-    output: '"byebyebye"',
-    challengeId: 3
-  },
-  {
-    input: 'vowelCount("Grace Hopper");',
-    output: '4',
-    challengeId: 3
-  },
-  {
-    input: 'vowelCount("Yellow");',
-    output: '2',
-    challengeId: 3
-  },
-
-  {
-    input: 'askPolitely("May I borrow your pencil?");',
-    output: 'May I borrow your pencil please?',
-    challengeId: 5
-  },
-  {
-    input: 'askPolitely("May I ask a question please?");',
-    output: 'May I ask a question please?',
-    challengeId: 5
-  },
-  {
-    input: 'askPolitely("My name is Grace Hopper.");',
-    output: 'My name is Grace Hopper.',
-    challengeId: 5
-  },
-  {
-    input: 'lastDigit(22,32);',
-    output: 'true',
-    challengeId: 6
-  },
-  {
-    input: 'lastDigit(77, 999);',
-    output: 'false',
-    challengeId: 6
-  },
-  {
-    input: 'lastDigit(33,3);',
-    output: 'true',
-    challengeId: 6
-  },
-  {
-    input: `nicknameGenerator('Daniel')`,
-    output: 'Dan',
-    challengeId: 7
-  },
-  {
-    input: `nicknameGenerator('Beowulf')`,
-    output: 'Beow',
-    challengeId: 7
-  },
-  {
-    input: `myJoin(['hello','world'], ' ');`,
-    output: 'hello world',
-    challengeId: 8
-  },
-  {
-    input: `myJoin([2, "be", false]);`,
-    output: '2,be,false',
-    challengeId: 8
-  },
-  {
-    input: `isPalindrome('Kayak');`,
-    output: 'true',
-    challengeId: 9
-  },
-  {
-    input: `isPalindrome('SELFLESS');`,
-    output: 'false',
-    challengeId: 9
+    skillLevel: 'Hard',
+    examples: 'isPalindrome("Kayak");\n// OUTPUT:  true\nisPalindrome("SELFLESS");\n// OUTPUT: false'
   }
 ]
 
@@ -271,8 +171,6 @@ async function seed() {
   console.log('db synced!')
 
   await Promise.all(challenges.map(challenge => Challenge.create(challenge)))
-
-  await Promise.all(examples.map(example => Example.create(example)))
 
   const users = await Promise.all([
     User.create({ email: 'cody@email.com', password: '123', progress: 60 }),

@@ -169,6 +169,9 @@ canvas {
   flex-direction: row;
 }
 
+.examples-editor {
+  height: 200px
+}
 .prompt {
   display: flex;
   flex-direction: column;
