@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 import brace from 'brace';
 import AceEditor from 'react-ace'
@@ -10,14 +10,8 @@ import 'brace/snippets/javascript'
 import 'brace/theme/monokai'
 import 'brace/ext/language_tools'
 
-// const defaultValue = `
-//   function onLoad(editor) {
-//   console.log("i've loaded")
-//   }
-// `
-
 class Editor extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       mode: 'javascript',
@@ -29,30 +23,10 @@ class Editor extends Component {
       showGutter: true,
       showPrintMargin: true,
       highlightActiveLine: true,
-      showLineNumbers: true,
-      tabSize: 2
-
+      tabSize: 2,
+      wrapEnabled: true
     }
-    // this.onChange = this.onChange.bind(this)
   }
-
-  // onChange(newValue) {
-  //   this.setState({
-  //     value: newValue
-  //   })
-  //   console.log(this.state.value)
-  // }
-
-  onSelectionChange(newValue, event) {
-    // console.log('select-change', newValue);
-    // console.log('select-change-event', event);
-  }
-
-  onCursorChange(newValue, event) {
-    // console.log('cursor-change', newValue);
-    // console.log('cursor-change-event', event);
-  }
-
   render() {
     return (
       <AceEditor
@@ -69,8 +43,14 @@ class Editor extends Component {
         value={this.props.value}
         enableBasicAutocompletion={this.state.enableBasicAutocompletion}
         enableLiveAutocompletion={this.state.enableLiveAutocompletion}
-        showLineNumbers={this.state.showLineNumbers}
+
         tabSize={this.state.tabSize}
+        wrapEnabled={this.state.wrapEnabled}
+        readOnly={this.props.readOnly}
+        maxLines={this.props.maxLines}
+        setOptions={{
+          showLineNumbers: this.props.showLineNumbers
+        }}
       />
     )
   }

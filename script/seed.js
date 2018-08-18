@@ -5,77 +5,140 @@ const fs = require('fs')
 var path = require('path');
 const { User, Challenge, Example } = require('../server/db/models')
 
-const askPolitelyFilePath = path.join(__dirname, '/specs/askPolitely.spec.js')
-const lastDigitFilePath = path.join(__dirname, '/specs/lastDigit.spec.js')
-const nicknameGeneratorFilePath = path.join(__dirname, '/specs/nicknameGenerator.spec.js')
-const myJoinFilePath = path.join(__dirname, '/specs/myJoin.spec.js')
-const isPalindromeFilePath = path.join(__dirname, '/specs/isPalindrome.spec.js')
+const greetingSpecs = fs.readFileSync(path.join(__dirname, '/specs/greeting.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const thereminSpecs = fs.readFileSync(path.join(__dirname, '/specs/theremin.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const repeatAStringSpecs = fs.readFileSync(path.join(__dirname, '/specs/repeatString.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const vowelCountSpecs = fs.readFileSync(path.join(__dirname, '/specs/vowelCount.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const askPolitelySpecs = fs.readFileSync(path.join(__dirname, '/specs/askPolitely.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const lastDigitSpecs = fs.readFileSync(path.join(__dirname, '/specs/lastDigit.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const nicknameGeneratorSpecs = fs.readFileSync(path.join(__dirname, '/specs/nicknameGenerator.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const myJoinSpecs = fs.readFileSync(path.join(__dirname, '/specs/myJoin.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
+const isPalindromeSpecs = fs.readFileSync(path.join(__dirname, '/specs/isPalindrome.spec.js'), (err, specData) => {
+  if (err) throw err
+  console.log('read file success!')
+  return specData
+})
 
-const askPolitelySpecs = fs.readFileSync(askPolitelyFilePath, (err, specData) => {
-  if (err) throw err
-  console.log('read file success!')
-  return specData
-})
-const lastDigitSpecs = fs.readFileSync(lastDigitFilePath, (err, specData) => {
-  if (err) throw err
-  console.log('read file success!')
-  return specData
-})
-
-const nicknameGeneratorSpecs = fs.readFileSync(nicknameGeneratorFilePath, (err, specData) => {
-  if (err) throw err
-  console.log('read file success!')
-  return specData
-})
-
-const myJoinSpecs = fs.readFileSync(myJoinFilePath, (err, specData) => {
-  if (err) throw err
-  console.log('read file success!')
-  return specData
-})
-
-const isPalindromeSpecs = fs.readFileSync(isPalindromeFilePath, (err, specData) => {
-  if (err) throw err
-  console.log('read file success!')
-  return specData
-})
 
 const challenges = [
   {
     id: 1,
+    name: 'Greeting',
+    prompt:
+      'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?". If a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
+    solution:
+      'function greeting(name) { if (name) { return "Hello, " + name + "!"; } else { return "Hello!"; } }',
+    specs: greetingSpecs,
+    points: 10,
+    skillLevel: 'Easy',
+    examples: 'greeting("Kathy");\n// OUTPUT: "Hello, Kathy!";\n\ngreeting();\n// OUTPUT: "Hello!"',
+  },
+  {
+    id: 2,
+    name: 'Do You Play The Theremin?',
+    prompt:
+      'Create the function "doYouPlayTheTheremin". If your name starts with the letter "S" or "s", you are playing the Theremin!',
+    solution:
+      'function doYouPlayTheTheremin(name) {if (name[0].toLowerCase() === "s") {return name + " plays the Theremin!";} else {return name + " does not play the Theremin!";}}',
+    specs: thereminSpecs,
+    points: 10,
+    skillLevel: 'Easy',
+    examples: 'doYouPlayTheTheremin("Amy")\n// OUTPUT: "Amy does not play the Theremin!";\n\ndoYouPlayTheTheremin("Sally");\n// OUTPUT: "Sally plays the Theremin!"'
+  },
+  {
+    id: 3,
+    name: 'Repeat A String',
+    prompt:
+      'Create a function "repeat" that accepts two arguments, the string to repeat and the a number that represtents how many times to repeat the string argument.  Return a string that concatenates all the times the string is repeated. *NOTE: Do NOT use the Array.prototype.repeat*',
+    solution:
+      'function repeat(str, num) {var finalStr = "";for (num; num > 0; num--) { finalStr += str; } return finalStr; }',
+    specs: repeatAStringSpecs,
+    points: 15,
+    skillLevel: 'Easy',
+    examples: 'repeat("yo",5);\n// OUTPUT: "yoyoyoyoyo"\n\nrepeat("yo",0);\n// OUTPUT:""\n\nrepeat("bye",3);\n// OUTPUT: "byebyebye"'
+  },
+  {
+    id: 4,
+    name: 'Vowel Count',
+    prompt:
+      'Create the function **vowelCount(str)** that takes a **str** parameter and returns the number of vowels the string contains (ie. "Fullstack Academy" would return 5).<br>Do not count "y" as a vowel for this challenge.',
+    solution:
+      'function vowelCount(string) {var vowels = "aeiou", string = string.toLowerCase(), count = 0; for (var i = 0; i < string.length; i++) { if (vowels.indexOf(string[i]) >= 0) { count++; }}return count;}',
+    specs: vowelCountSpecs,
+    points: 15,
+    skillLevel: 'Easy',
+    examples: 'vowelCount("Grace Hopper");\n// OUTPUT: 4\n\nvowelCount("Yellow");\n// OUTPUT: 2'
+  },
+  {
+    id: 5,
     name: 'Ask Politely',
     prompt:
       'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?". If a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
     solution:
       'function askPolitely(sentence) {if (sentence.slice(-1) === "?") {if (sentence.slice(-7) === "please?") { return sentence } else { return sentence.slice(0, -1) + " please?"} } else { return sentence } }',
     specs: askPolitelySpecs,
-    points: 3,
-    skillLevel: 'Easy'
+    points: 20,
+    skillLevel: 'Medium',
+    examples: 'askPolitely("May I borrow your pencil?");\n// OUTPUT: "May I borrow your pencil please?"\n\naskPolitely("May I ask a question please?");\n// OUTPUT: "May I ask a question please?";\n\naskPolitely("My name is Grace Hopper.");\n// OUTPUT: "My name is Grace Hopper."'
   },
   {
-    id: 2,
+    id: 6,
     name: 'Last Digit',
     prompt:
       'Create the function lastDigit that accepts two non-negative integer values and returns true if they have the same last digit, such as 27 and 57. The function accepts two non-negative integer arguments and returns true or false if they have the same last digit.',
     solution:
       'function lastDigit(num1, num2) {num1 = num1.toString(); num2 = num2.toString(); if (num1[num1.length - 1] === num2[num2.length - 1]) {return true;} else { return false;}}',
     specs: lastDigitSpecs,
-    points: 3,
-    skillLevel: 'Easy'
+    points: 20,
+    skillLevel: 'Medium',
+    examples: 'lastDigit(22,32);\n// OUTPUT: true\n\nlastDigit(77, 999);\n// OUTPUT: false\n\nlastDigit(33,3);\n// OUTPUT: true'
   },
   {
-    id: 3,
+    id: 7,
     name: 'Nickname Generator',
     prompt:
       `Write a function, nicknameGenerator that takes a string name as an argument and returns the first 3 or 4 letters as that name's nickname! If the 3rd letter is a vowel, return the first 4 letters.`,
     solution:
       'function nicknameGenerator(name) {var nickname = ""; var vowels = "aeiou"; if (vowels.indexOf(name[2]) >= 0) {nickname = name.slice(0,4);} else {nickname = name.slice(0,3);}return nickname;}',
     specs: nicknameGeneratorSpecs,
-    points: 6,
-    skillLevel: 'Medium'
+    points: 30,
+    skillLevel: 'Medium',
+    examples: 'nicknameGenerator("Daniel")\n// OUTPUT: "Dan"\n\nnicknameGenerator("Beowulf")\n// OUTPUT: "Beow"'
   },
   {
-    id: 4,
+    id: 8,
     name: 'My Join',
     prompt:
       `Write the function myJoin that mirrors the behavior of JavaScript's .join() array method.
@@ -84,11 +147,12 @@ const challenges = [
     solution:
       `function myJoin(arr, delimiter) {if (delimiter === undefined) {delimiter = ",";}var newString = ""; for (var i = 0; i < arr.length; i++) {if (i === arr.length-1) {newString += arr[i];} else {newString += arr[i] + delimiter;}}return newString;}`,
     specs: myJoinSpecs,
-    points: 6,
-    skillLevel: 'Medium'
+    points: 40,
+    skillLevel: 'Medium',
+    examples: 'myJoin(["hello","world"], " ");\n// OUTPUT:  "hello world"\n\nmyJoin([2, "be", false]);\n// OUTPUT: 2,be,false'
   },
   {
-    id: 5,
+    id: 9,
     name: 'Is Palindrome',
     prompt:
       `A palindrome is a word that is spelled the same forward and backward. For example, "LEVEL", "RACECAR", and "KAYAK" are all palindromes, while "MOTOR", "RUDDER", and "DOGGED" are not palidromes.
@@ -96,71 +160,9 @@ const challenges = [
     solution:
       'function isPalindrome(string) {if (string.length <= 1) {return true;} else if (string[0].toLowerCase() === string[string.length-1].toLowerCase()) {return isPalindrome(string.slice(1, string.length-1));} else {return false;}}',
     specs: isPalindromeSpecs,
-    points: 10,
-    skillLevel: 'Hard'
-  }
-]
-
-const examples = [
-  {
-    input: 'askPolitely("May I borrow your pencil?");',
-    output: 'May I borrow your pencil please?',
-    challengeId: 1
-  },
-  {
-    input: 'askPolitely("May I ask a question please?");',
-    output: 'May I ask a question please?',
-    challengeId: 1
-  },
-  {
-    input: 'askPolitely("My name is Grace Hopper.");',
-    output: 'My name is Grace Hopper.',
-    challengeId: 1
-  },
-  {
-    input: 'lastDigit(22,32);',
-    output: 'true',
-    challengeId: 2
-  },
-  {
-    input: 'lastDigit(77, 999);',
-    output: 'false',
-    challengeId: 2
-  },
-  {
-    input: 'lastDigit(33,3);',
-    output: 'true',
-    challengeId: 2
-  },
-  {
-    input: `nicknameGenerator('Daniel')`,
-    output: 'Dan',
-    challengeId: 3
-  },
-  {
-    input: `nicknameGenerator('Beowulf')`,
-    output: 'Beow',
-    challengeId: 3
-  },
-  {
-    input: `myJoin(['hello','world'], ' ');`,
-    output: 'hello world',
-    challengeId: 4
-  },
-  {
-    input: `myJoin([2, "be", false]);`,
-    output: '2,be,false',
-    challengeId: 4
-  },
-  {
-    input: `isPalindrome('Kayak');`,
-    output: 'true',
-    challengeId: 5
-  },
-  {
-    input: `isPalindrome('SELFLESS');`,
-    output: 'false',
-    challengeId: 5
+    points: 50,
+    skillLevel: 'Hard',
+    examples: 'isPalindrome("Kayak");\n// OUTPUT:  true\n\nisPalindrome("SELFLESS");\n// OUTPUT: false'
   }
 ]
 
@@ -169,8 +171,6 @@ async function seed() {
   console.log('db synced!')
 
   await Promise.all(challenges.map(challenge => Challenge.create(challenge)))
-
-  await Promise.all(examples.map(example => Example.create(example)))
 
   const users = await Promise.all([
     User.create({ email: 'cody@email.com', password: '123', progress: 60 }),
