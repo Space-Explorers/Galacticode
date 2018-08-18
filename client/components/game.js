@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+
 const Game = () => (
   <div className="main-wrapper">
     <p>** Gameplay goes here **</p>

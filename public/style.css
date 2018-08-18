@@ -12,11 +12,11 @@ colors {
   color: #3d3ca7;
 }
 
-html {
+/* html {
   background-image: url('galaxy-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-}
+} */
 
 body {
   font-family: 'Lato', sans-serif;
@@ -54,7 +54,18 @@ p {
   flex-direction: row;
   justify-content: space-around;
   padding: 0;
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  margin: auto;
+
 }
+
+/* nav{
+  position: absolute;
+  z-index: 100;
+} */
 
 nav a {
   display: inline-block;
@@ -95,6 +106,7 @@ form div {
 
 canvas {
   position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
   z-index: 1;
@@ -142,10 +154,10 @@ canvas {
   top: 100px;
   left: 0;
   right: 0;
+  margin: auto;
   z-index: 100;
   display: flex;
   flex-direction: column;
-  margin: auto;
   padding: 40px;
   max-width: 1000px;
   /* border-radius: 5px; */
