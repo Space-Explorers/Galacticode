@@ -52,7 +52,7 @@ class Challenge extends Component {
       points,
       isChallengeSolved
     } = this.props
-    console.log('WHAT IS THIS.PROPS?????', this.props)
+
     return (
       <div className="main-wrapper">
         <div className="challenge-header">
