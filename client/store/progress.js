@@ -10,21 +10,21 @@ const gotProgress = progress => ({
 })
 
 //THUNK CREATORS
-export const getProgressData = (userId) => {
+export const getProgressData = userId => {
   return async dispatch => {
-    try{
+    try {
       const {data} = await axios.get(`/api/users/${userId}/progress`)
       dispatch(gotProgress(data.progress))
-    }catch (err){
+    } catch (err) {
       console.error(err)
     }
   }
 }
 
 //REDUCER
-export default function(state = 0, action){
-  switch(action.type){
-    case GOT_PROGRESS:{
+export default function(state = 0, action) {
+  switch (action.type) {
+    case GOT_PROGRESS: {
       return action.progress
     }
     default:
