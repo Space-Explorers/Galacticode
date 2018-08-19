@@ -1,4 +1,3 @@
-
 function askPolitely(sentence) {
   if (sentence.slice(-1) === '?') {
     if (sentence.slice(-7) === 'please?') {

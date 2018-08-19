@@ -1,33 +1,30 @@
-import React, {Component} from 'react'
-import {getResults, getChallengeData, getIsChallengeSolved} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { getResults, getChallengeData, getIsChallengeSolved } from '../store'
+import { connect } from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
   constructor() {
     super()
     this.state = {
-      value: ''
+      value: '',
+      examples: ''
     }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    console.log('COMPONENT MOUNTED')
-    this.props.fetchInitialData(this.props.match.params.challengeId)
-    this.props.fetchIsChallengeSolved(
+  async componentDidMount() {
+    await this.props.fetchInitialData(this.props.match.params.challengeId)
+    await this.props.fetchIsChallengeSolved(
       this.props.user.id,
       this.props.match.params.challengeId
     )
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    if(nextState.value !== this.state.value){
-      return false
-    }else{
-      return true
-    }
+    console.log('STARTING TEXT', this.props.startingText)
+    await this.setState({
+      value: this.props.startingText,
+      examples: this.props.examples
+    })
   }
 
   handleSubmit() {
@@ -41,7 +38,7 @@ class Challenge extends Component {
 
   onChange(newValue) {
     this.setState({
-      value: newValue
+      value: newValue,
     })
   }
 
@@ -49,14 +46,11 @@ class Challenge extends Component {
     const {
       name,
       prompt,
-      examples,
       results,
       skillLevel,
       points,
       isChallengeSolved
     } = this.props
-    console.log('USER', this.props)
-    console.log('CURRENT STATE', this.state)
     return (
       <div className="main-wrapper">
         <div className="challenge-header">
@@ -78,16 +72,6 @@ class Challenge extends Component {
           <div className="prompt">
             <p>{prompt}</p>
             <h3>Examples: </h3>
-            {examples && (
-              <div>
-                {examples.map(example => (
-                  <div key={example.id}>
-                    <p>INPUT: {example.input}</p>
-                    <p>OUTPUT: {example.output}</p>
-                  </div>
-                ))}
-              </div>
-            )}
             <div className="results">
               {/* {results.stats.passPercent === 100 && (
                   <p>Congratulations! All tests passed!</p>
@@ -100,6 +84,9 @@ class Challenge extends Component {
                 </div>
               )}
             </div>
+            <div className="examples-editor">
+              <Editor value={this.state.examples} readOnly={true} maxLines={10} showLineNumbers={false} />
+            </div>
             <div className="submit-button">
               <button
                 className="btn btn-submit"
@@ -111,7 +98,7 @@ class Challenge extends Component {
             </div>
           </div>
           <div className="editor">
-            <Editor onChange={this.onChange} value={this.state.value} />
+            <Editor onChange={this.onChange} value={this.state.value} readOnly={false} showLineNumbers={true} />
           </div>
         </div>
       </div>
@@ -126,7 +113,8 @@ const mapState = state => ({
   skillLevel: state.challenge.skillLevel,
   points: state.challenge.points,
   examples: state.challenge.examples,
-  isChallengeSolved: state.results.challengeStatus
+  startingText: state.challenge.startingText,
+  isChallengeSolved: state.results.challengeStatus,
 })
 
 const mapDispatch = dispatch => ({

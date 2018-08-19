@@ -21,6 +21,12 @@ const Challenge = db.define('challenge', {
 	},
 	skillLevel: {
 		type: Sequelize.ENUM('Easy', 'Medium', 'Hard')
+	},
+	examples: {
+		type: Sequelize.TEXT
+	},
+	startingText: {
+		type: Sequelize.TEXT
 	}
 })
 
