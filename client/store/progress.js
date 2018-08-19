@@ -14,7 +14,6 @@ export const getProgressData = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/users/${userId}/progress`)
-      console.log('PROGRESS AFTER THUNK', data)
       dispatch(gotProgress(data.progress))
     } catch (err) {
       console.error(err)

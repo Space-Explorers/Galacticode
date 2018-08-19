@@ -25,19 +25,18 @@ class Challenge extends Component {
       this.props.user.id,
       this.props.match.params.challengeId
     )
-    console.log('STARTING TEXT', this.props.startingText)
     await this.setState({
       value: this.props.startingText,
       examples: this.props.examples
     })
   }
 
-  handleSubmit() {
-    this.props.fetchResults(
+  async handleSubmit() {
+    await this.props.fetchResults(
       this.state.value,
       this.props.match.params.challengeId
     )
-    // await this.props.fetchProgress(this.props.user.id)
+    await this.props.fetchProgress(this.props.user.id)
   }
 
   onChange(newValue) {
@@ -128,15 +127,15 @@ const mapState = state => ({
   points: state.challenge.points,
   examples: state.challenge.examples,
   startingText: state.challenge.startingText,
-  isChallengeSolved: state.results.challengeStatus,
+  isChallengeSolved: state.results.challengeStatus
 })
 
 const mapDispatch = dispatch => ({
   fetchResults: (code, challengeId) => dispatch(getResults(code, challengeId)),
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
   fetchIsChallengeSolved: (userId, challengeId) =>
-    dispatch(getIsChallengeSolved(userId, challengeId))
-  // fetchProgress: userId => dispatch(getProgressData(userId))
+    dispatch(getIsChallengeSolved(userId, challengeId)),
+  fetchProgress: userId => dispatch(getProgressData(userId))
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
