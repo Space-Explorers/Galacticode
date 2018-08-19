@@ -10,8 +10,8 @@ class FuelBar extends Component {
   render() {
     return (
       <div>
-        <progress value={this.props.progress} max="100" />
-        <p>{this.props.progress}/100</p>
+        <progress value={this.props.progress || 0} max="100" />
+        <p>{this.props.progress || 0}/100</p>
       </div>
     )
   }
