@@ -14,6 +14,7 @@ export const getChallengeData = (challengeId) => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/challenges/${challengeId}`)
+      console.log('DATA IN THUNK', data)
       dispatch(gotChallenge(data))
     } catch (err) {
       console.error(err)
