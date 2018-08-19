@@ -1,34 +1,32 @@
-describe('doYouPlayTheTheremin', function () {
-	it('doYouPlayTheTheremin is a function', function () {
-		var functionType = typeof doYouPlayTheTheremin;
+const {expect} = require('chai')
 
-		expect(functionType).toEqual('function');
-	});
+describe('doYouPlayTheTheremin', function() {
+  it('doYouPlayTheTheremin is a function', function() {
+    expect(doYouPlayTheTheremin).to.be.a('function')
+  })
 
-	it('doYouPlayTheTheremin returns a string value', function () {
-		var returnValue = doYouPlayTheTheremin('Zeke'),
-			stringType = typeof returnValue;
+  it('doYouPlayTheTheremin returns a string value', function() {
+    const returnValue = doYouPlayTheTheremin('Zeke'),
+      typeOf = typeof returnValue
 
-		expect(stringType).toEqual('string');
-	});
+    expect(typeOf).to.be.a('string')
+  })
 
-	it('if the arguments first character is an uppercase "S" return the string "argument(name) + plays the Theremin!"', function () {
-		// return value
-		var upperCase = doYouPlayTheTheremin('Scott');
+  it('if the arguments first character is an uppercase "S" return the string "argument(name) + plays the Theremin!"', function() {
+    const upperCase = doYouPlayTheTheremin('Scott')
 
-		expect(upperCase).toEqual('Scott plays the Theremin!');
-	});
+    expect(upperCase).to.equal('Scott plays the Theremin!')
+  })
 
-	it('if the arguments first character is a lowercase "s" return the string "argument(name) + plays the Theremin!', function () {
-		// return value
-		var lowerCase = doYouPlayTheTheremin('stan');
+  it('if the arguments first character is a lowercase "s" return the string "argument(name) + plays the Theremin!', function() {
+    const lowerCase = doYouPlayTheTheremin('stan')
 
-		expect(lowerCase).toEqual("stan plays the Theremin!");
-	});
+    expect(lowerCase).to.equal('stan plays the Theremin!')
+  })
 
-	it('if the arguments first character is not an uppercase or lowercase "s" return the string "argument(name) + does not play the Theremin!', function () {
-		var returnValue = doYouPlayTheTheremin("Omri");
+  it('if the arguments first character is not an uppercase or lowercase "s" return the string "argument(name) + does not play the Theremin!', function() {
+    const returnValue = doYouPlayTheTheremin('Omri')
 
-		expect(returnValue).toEqual("Omri does not play the Theremin!");
-	});
-});
+    expect(returnValue).to.equal('Omri does not play the Theremin!')
+  })
+})

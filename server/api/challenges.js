@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:challengeId', async (req, res, next) => {
   try {
     const challenge = await Challenge.findById(req.params.challengeId, {
-      attributes: ['id', 'name', 'prompt', 'points', 'skillLevel', 'examples']
+      attributes: ['id', 'name', 'prompt', 'points', 'skillLevel', 'examples', 'startingText']
     })
     res.json(challenge)
   } catch (err) {

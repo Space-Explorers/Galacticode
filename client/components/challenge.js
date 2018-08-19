@@ -25,17 +25,11 @@ class Challenge extends Component {
       this.props.user.id,
       this.props.match.params.challengeId
     )
+    console.log('STARTING TEXT', this.props.startingText)
     await this.setState({
+      value: this.props.startingText,
       examples: this.props.examples
     })
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.value !== this.state.value) {
-      return false
-    } else {
-      return true
-    }
   }
 
   handleSubmit() {
@@ -56,7 +50,6 @@ class Challenge extends Component {
     const {
       name,
       prompt,
-      examples,
       results,
       skillLevel,
       points,
@@ -83,16 +76,6 @@ class Challenge extends Component {
           <div className="prompt">
             <p>{prompt}</p>
             <h3>Examples: </h3>
-            {/* // {examples && (
-            //   <div>
-            //     {examples.map(example => (
-            //       <div key={example.id}>
-            //         <p>INPUT: {example.input}</p>
-            //         <p>OUTPUT: {example.output}</p>
-            //       </div>
-            //     ))}
-            //   </div>
-            // )} */}
             <div className="results">
               {/* {results.stats.passPercent === 100 && (
                   <p>Congratulations! All tests passed!</p>
@@ -144,7 +127,8 @@ const mapState = state => ({
   skillLevel: state.challenge.skillLevel,
   points: state.challenge.points,
   examples: state.challenge.examples,
-  isChallengeSolved: state.results.challengeStatus
+  startingText: state.challenge.startingText,
+  isChallengeSolved: state.results.challengeStatus,
 })
 
 const mapDispatch = dispatch => ({

@@ -1,27 +1,26 @@
-describe('greeting', function () {
+const {expect} = require('chai')
 
-	it('greeting is a function', function () {
-		var functionType = typeof greeting;
-		expect(functionType).toEqual('function');
-	})
+describe('greeting', function() {
+  it('greeting is a function', function() {
+    expect(greeting).to.be.a('function')
+  })
 
-	it('returns a string value', function () {
-		var returnValue = greeting(),
-			stringType = typeof returnValue;
+  it('returns a string value', function() {
+    const returnValue = greeting(),
+      typeOf = typeof returnValue
 
-		expect(stringType).toEqual('string');
-	})
+    expect(typeOf).to.be.a('string')
+  })
 
-	it('returns the string "Hello!" when an argument is NOT passed', function () {
-		var returnValue = greeting();
+  it('returns the string "Hello!" when an argument is NOT passed', function() {
+    const returnValue = greeting()
 
-		expect(returnValue).toEqual("Hello!");
-	})
+    expect(returnValue).to.equal('Hello!')
+  })
 
-	it('returns the string "Hello, Joe!" when an argument IS passed', function () {
-		var returnValue = greeting('Joe');
+  it('returns the string "Hello, Joe!" when an argument IS passed', function() {
+    const returnValue = greeting('Joe')
 
-		expect(returnValue).toEqual('Hello, Joe!');
-	})
-
+    expect(returnValue).to.equal('Hello, Joe!')
+  })
 })
