@@ -4,6 +4,7 @@ import * as THREE from 'three'
 let particles
 
 export default function planetBackground() {
+
   // Create an empty scene, camera
   const scene = new THREE.Scene()
   scene.background = new THREE.Color( 0x252940 );
