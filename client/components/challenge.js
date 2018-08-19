@@ -1,6 +1,11 @@
-import React, { Component } from 'react'
-import { getResults, getChallengeData, getIsChallengeSolved } from '../store'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {
+  getResults,
+  getChallengeData,
+  getIsChallengeSolved,
+  getProgressData
+} from '../store'
+import {connect} from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
@@ -36,15 +41,14 @@ class Challenge extends Component {
   handleSubmit() {
     this.props.fetchResults(
       this.state.value,
-      this.props.match.params.challengeId,
-      this.props.user.id,
-      this.props.points
+      this.props.match.params.challengeId
     )
+    // await this.props.fetchProgress(this.props.user.id)
   }
 
   onChange(newValue) {
     this.setState({
-      value: newValue,
+      value: newValue
     })
   }
 
@@ -58,8 +62,6 @@ class Challenge extends Component {
       points,
       isChallengeSolved
     } = this.props
-    console.log('USER', this.props)
-    console.log('CURRENT STATE', this.state)
     return (
       <div className="main-wrapper">
         <div className="challenge-header">
@@ -104,7 +106,12 @@ class Challenge extends Component {
               )}
             </div>
             <div className="examples-editor">
-              <Editor value={this.state.examples} readOnly={true} maxLines={10} showLineNumbers={false} />
+              <Editor
+                value={this.state.examples}
+                readOnly={true}
+                maxLines={10}
+                showLineNumbers={false}
+              />
             </div>
             <div className="submit-button">
               <button
@@ -117,7 +124,12 @@ class Challenge extends Component {
             </div>
           </div>
           <div className="editor">
-            <Editor onChange={this.onChange} value={this.state.value} readOnly={false} showLineNumbers={true} />
+            <Editor
+              onChange={this.onChange}
+              value={this.state.value}
+              readOnly={false}
+              showLineNumbers={true}
+            />
           </div>
         </div>
       </div>
@@ -136,11 +148,11 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  fetchResults: (code, challengeId, userId, points, userProgress) =>
-    dispatch(getResults(code, challengeId, userId, points, userProgress)),
+  fetchResults: (code, challengeId) => dispatch(getResults(code, challengeId)),
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId))
+  // fetchProgress: userId => dispatch(getProgressData(userId))
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
