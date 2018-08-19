@@ -209,6 +209,16 @@ canvas {
   color: #ffc1dc;
 }
 
+#results-stats {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+}
+
+#results-stats p {
+  margin-right: 15px;
+}
+
 #intro {
   width: 75%;
   margin: auto;

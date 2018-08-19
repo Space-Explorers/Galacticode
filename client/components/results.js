@@ -12,7 +12,7 @@ const Results = props => {
       {results &&
         !loading && (
           <div>
-            <div>
+            <div id="results-stats">
               <p>Time: {results.stats.duration}ms </p>
               <p>Passed: {results.stats.passes}</p>
               <p>Failed: {results.stats.failures}</p>
