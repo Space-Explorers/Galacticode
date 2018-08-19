@@ -68,9 +68,9 @@ export default function gamePlayEnvironment() {
       const particles = new THREE.Geometry()
       for(let i = 0; i < particleCount; i++){
         const vertex = new THREE.Vector3()
-        particles.vertices.push( vertex)
+        particles.vertices.push( vertex )
       }
-      var pMaterial = new THREE.ParticleBasicMaterial({
+      let pMaterial = new THREE.ParticleBasicMaterial({
         color: 0xfffafa,
         size: 0.2
       })
@@ -90,7 +90,19 @@ export default function gamePlayEnvironment() {
       }
     }
 
+    function
 
+    //Render Loop
+    function render(){
+      renderer.render(scene, camera)
+    }
+
+    function animate(){
+      requestAnimationFrame(animate)
+      render()
+    }
+
+    animate()
 //END
   }
 
