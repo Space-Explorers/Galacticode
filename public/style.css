@@ -41,6 +41,10 @@ h4 {
   margin-top: 0;
 }
 
+h1 {
+  margin-bottom: 0;
+}
+
 p {
   font-weight: 300;
   color: #fff;
@@ -59,7 +63,6 @@ p {
   left: 0;
   right: 0;
   margin: auto;
-
 }
 
 /* nav{
@@ -112,6 +115,8 @@ canvas {
   z-index: 1;
 }
 
+/* START BUTTONS */
+
 .btn {
   width: 60px;
   height: 3em;
@@ -141,6 +146,8 @@ canvas {
   transition: none;
   border-radius: 20px;
 }
+
+/* END BUTTONS */
 
 /* START OVERLAY COMPONENTS */
 
@@ -173,6 +180,7 @@ canvas {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+  min-width: 500px;
   text-align: justify;
 }
 
@@ -180,6 +188,25 @@ canvas {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#prompt-toggle {
+  display: flex;
+  flex-direction: row;
+}
+
+.toggle-item {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.active-toggle {
+  color: #ffc1dc;
 }
 
 #intro {
