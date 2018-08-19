@@ -27,14 +27,6 @@ class Challenge extends Component {
     })
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (nextState.value !== this.state.value) {
-  //     return false
-  //   } else {
-  //     return true
-  //   }
-  // }
-
   handleSubmit() {
     this.props.fetchResults(
       this.state.value,
