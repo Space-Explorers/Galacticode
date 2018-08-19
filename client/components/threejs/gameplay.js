@@ -1,108 +1,166 @@
 import * as THREE from 'three'
 
-let rollingSpeed = 0.008
-let worldRadius = 26
-let heroRadius = 0.2
-let heroBaseY = 1.8
-let bounceValue = 0.1
-let gravity = 0.005
-let leftLane = -1
-let rightLane = 1
-let middleLane = 0
-
-let challengeReleaseInterval = 0.5
-let lastChallengeReleaseTime = 0
-
-let particleCount = 20
-let explosionPower = 1.06
-
-
 export default function gamePlayEnvironment() {
-  init()
-  function init(){
-    createScene()
-    update()
+  let particles
+
+     // Create an empty scene, camera
+  const scene = new THREE.Scene()
+  scene.background = new THREE.Color( 0x252940 );
+
+  const camera = new THREE.PerspectiveCamera( 25,window.innerWidth / window.innerHeight, 1, 1000)
+  camera.position.x = 0
+  camera.position.y = 170
+  camera.position.z = 900
+  // camera.lookAt(scene.position)
+
+  // Create a renderer
+  const renderer = new THREE.WebGLRenderer({antialias: true})
+
+  renderer.setClearColor(0x000000, 0)
+  renderer.setSize(window.innerWidth, window.innerHeight)
+
+  // Append Renderer to DOM
+  document.body.appendChild(renderer.domElement)
+
+  //resize window
+  window.addEventListener(
+    'resize',
+    function() {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    },
+    false
+  );
+
+  // Stars in the backgrounds
+  const drawStars = function() {
+    let canvas, ctx, i, j, sizeRandom;
+    canvas = document.createElement('canvas');
+    canvas.setAttribute('width', window.innerWidth);
+    canvas.setAttribute('height', window.innerHeight);
+    canvas.setAttribute('id', "stars");
+    ctx = canvas.getContext('2d');
+    ctx.fillStyle = "#A9D9E5";
+    for (i = j = 0; j <= 200; i = ++j) {
+      ctx.beginPath();
+      sizeRandom = Math.random() * 2;
+      ctx.arc(Math.random() * window.innerWidth, Math.random() * window.innerHeight, sizeRandom, 0, 2 * Math.PI, 0);
+      ctx.fill();
+    }
+    return document.body.appendChild(canvas);
+  };
+
+  //flying particles
+  function drawParticles() {
+     particles = new THREE.Group();
+    scene.add(particles);
+    const geometry = new THREE.TetrahedronGeometry(2, 0);
+
+    for (let i = 0; i < 500; i ++) {
+      const material = new THREE.MeshPhongMaterial({
+        color: 0x9CE7EA,
+        shading: THREE.FlatShading
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.set((Math.random() - 0.5) * 1000,
+          (Math.random() - 0.5) * 1000,
+          (Math.random() - 0.5) * 1000);
+          mesh.updateMatrix();
+          mesh.matrixAutoUpdate = false;
+      particles.add(mesh);
+    }
   }
 
-  function createScene(){
-    const hasCollided = false
-    const score = 0
-    const challengesOnPlanet = []
-    const challengePool = []
-    const clock = new THREE.Clock()
-    clock.start()
+  // Create Main Planet
+  const mesh = new THREE.Mesh(
+    //dictate the size of the planet (10 -17)
+    new THREE.IcosahedronGeometry(300,1),
+    new THREE.MeshPhongMaterial({
+      color: 0x205BF8,
+      emissive: 0x0E24F3,
+      side: THREE.DoubleSide,
+      flatShading: true,
+    }),
+  )
+  mesh.rotation.set(0.4,0.3,0)
+  mesh.receiveShadow = true
+  mesh.position.set(0, -190, 0)
 
-    const heroRollingSpeed = (rollingSpeed*worldRadius/heroRadius)/5
+  // Create Secondary Planet
+    const otherPlanet = new THREE.Mesh(
+      //dictate the size of the planet (10 -17)
+      new THREE.IcosahedronGeometry(90,1),
+      new THREE.MeshPhongMaterial({
+        color: 0x2B1255,
+        emissive: 0x995E78,
+        side: THREE.DoubleSide,
+        flatShading: true,
+      }),
+    )
+    otherPlanet.rotation.set(0.4,0.3,0)
+    otherPlanet.receiveShadow = true
+    otherPlanet.position.set(270, 190, 90)
 
-    const sphericalHelper = new THREE.Spherical()
-    const pathAngleValues = [1.52, 1.57, 1.62]
+  // Create Third Planet
+    const thirdPlanet = new THREE.Mesh(
+      //dictate the size of the planet (10 -17)
+      new THREE.IcosahedronGeometry(40,1),
+      new THREE.MeshPhongMaterial({
+        color: 0xCD4537,
+        emissive: 0xCD4537,
+        side: THREE.DoubleSide,
+        flatShading: true,
+      }),
+    )
+    thirdPlanet.rotation.set(0.4,0.3,0)
+    thirdPlanet.receiveShadow = true
+    thirdPlanet.position.set(-250, 300, 90)
 
-    //create and empty scene and camera
-    const scene = new THREE.Scene()
-    scene.background = new THREE.Color(0x252940)
 
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000)
-    camera.position.z = 6.5;
-    camera.position.y = 2.5;
+  drawStars()
+  drawParticles()
 
-    //create a renderer
-    const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true})
-    renderer.setClearColor(0x000000, 0)
-    renderer.shadowMap.enabled = true
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap
-    renderer.setSize(window.innerWidth, window.innerheight)
 
-    //append renderer to DOM
-    document.body.appendChild(renderer.domElement)
 
-    //Add items to scene
-    createChallengesPool();
-    addWorld();
-    addHero();
-    addLight();
-    addExplosion();
+   //lighting
+   const ambientLight = new THREE.AmbientLight(0x999999)
+   scene.add(ambientLight)
 
-    document.onkeydown = handleKeyDown;
+    const light = new THREE.DirectionalLight(0xffffff, 1.5)
+    light.position.set(200,100,200);
+    light.castShadow = true;
 
-    function addExplosion(){
-      const particles = new THREE.Geometry()
-      for(let i = 0; i < particleCount; i++){
-        const vertex = new THREE.Vector3()
-        particles.vertices.push( vertex )
-      }
-      let pMaterial = new THREE.ParticleBasicMaterial({
-        color: 0xfffafa,
-        size: 0.2
-      })
+    scene.add(light)
 
-      const parti = new THREE.Points(particles, pMaterial)
-      scene.add(parti)
-      parti.visible = false
-    }
 
-    function createChallengesPool(){
-      const maxChallengesInPool = 5
-      const newChallenge
-      const createChallenge
-      for(let i = 0; i < maxChallengesInPool; i++){
-        newChallenge = createChallenge()
-        challengePool.push(newChallenge)
-      }
-    }
+//shows in which direction the lighting is coming from
+  // const helper = new THREE.CameraHelper(light.shadow.camera)
+  // scene.add(helper)
 
-    function
+  // Add mesh to Scene
+    scene.add(mesh)
+    scene.add(otherPlanet)
+    scene.add(thirdPlanet)
 
-    //Render Loop
-    function render(){
-      renderer.render(scene, camera)
-    }
 
-    function animate(){
-      requestAnimationFrame(animate)
-      render()
-    }
+  // Render Loop
+  function render(){
+    renderer.render(scene, camera)
+  }
 
-    animate()
+  function animate(){
+    requestAnimationFrame(animate)
+    render()
+    particles.rotation.x += 0.001;
+    particles.rotation.y -= 0.001;
+    mesh.rotation.y += 0.003
+    otherPlanet.rotation.y += 0.003
+    thirdPlanet.rotation.y += 0.003
+
+  }
+
+  animate()
 //END
   }
 
@@ -110,4 +168,3 @@ export default function gamePlayEnvironment() {
 
 
 
-}

@@ -1,7 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import gamePlayEnvironment from './threejs/gameplay';
 
 const Game = () => (
+  <div>
+      {gamePlayEnvironment()}
   <div className="main-wrapper">
     <p>** Gameplay goes here **</p>
     <Link to="/challenge/1">Challenge #1 - Greeting</Link>
@@ -15,6 +18,7 @@ const Game = () => (
     <Link to="/challenge/9">Challenge #9 - Is Palindrome</Link>
     <br />
     <Link to="/">Back to Planet Select</Link>
+  </div>
   </div>
 )
 

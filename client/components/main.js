@@ -1,11 +1,11 @@
 import React from 'react'
 // import planetBackground from './script'
-import testingCannon from '../components/threejs/threeCannon'
+// import testingCannon from '../components/threejs/threeCannon'
+
 
 const Main = () => {
   return (
-    <div>
-      {testingCannon()}
+
     <div className="outer-flex">
       <div className="main-wrapper">
         <h1 id="intro-header">Space Explorers: Code Home</h1>
@@ -24,7 +24,6 @@ const Main = () => {
           </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }
