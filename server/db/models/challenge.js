@@ -24,6 +24,9 @@ const Challenge = db.define('challenge', {
 	},
 	examples: {
 		type: Sequelize.TEXT
+	},
+	startingText: {
+		type: Sequelize.TEXT
 	}
 })
 

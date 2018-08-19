@@ -57,13 +57,14 @@ const challenges = [
     id: 1,
     name: 'Greeting',
     prompt:
-      'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?". If a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
+      'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?".\nIf a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
     solution:
       'function greeting(name) { if (name) { return "Hello, " + name + "!"; } else { return "Hello!"; } }',
     specs: greetingSpecs,
     points: 10,
     skillLevel: 'Easy',
     examples: 'greeting("Kathy");\n// OUTPUT: "Hello, Kathy!";\n\ngreeting();\n// OUTPUT: "Hello!"',
+    startingText: 'function greeting(name) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 2,
@@ -75,7 +76,8 @@ const challenges = [
     specs: thereminSpecs,
     points: 10,
     skillLevel: 'Easy',
-    examples: 'doYouPlayTheTheremin("Amy")\n// OUTPUT: "Amy does not play the Theremin!";\n\ndoYouPlayTheTheremin("Sally");\n// OUTPUT: "Sally plays the Theremin!"'
+    examples: 'doYouPlayTheTheremin("Amy")\n// OUTPUT: "Amy does not play the Theremin!";\n\ndoYouPlayTheTheremin("Sally");\n// OUTPUT: "Sally plays the Theremin!"',
+    startingText: 'function doYouPlayTheTheremin(name) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 3,
@@ -87,7 +89,8 @@ const challenges = [
     specs: repeatAStringSpecs,
     points: 15,
     skillLevel: 'Easy',
-    examples: 'repeat("yo",5);\n// OUTPUT: "yoyoyoyoyo"\n\nrepeat("yo",0);\n// OUTPUT:""\n\nrepeat("bye",3);\n// OUTPUT: "byebyebye"'
+    examples: 'repeat("yo",5);\n// OUTPUT: "yoyoyoyoyo"\n\nrepeat("yo",0);\n// OUTPUT:""\n\nrepeat("bye",3);\n// OUTPUT: "byebyebye"',
+    startingText: 'function repeat(str, num) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 4,
@@ -99,7 +102,8 @@ const challenges = [
     specs: vowelCountSpecs,
     points: 15,
     skillLevel: 'Easy',
-    examples: 'vowelCount("Grace Hopper");\n// OUTPUT: 4\n\nvowelCount("Yellow");\n// OUTPUT: 2'
+    examples: 'vowelCount("Grace Hopper");\n// OUTPUT: 4\n\nvowelCount("Yellow");\n// OUTPUT: 2',
+    startingText: 'function vowelCount(string) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 5,
@@ -111,7 +115,8 @@ const challenges = [
     specs: askPolitelySpecs,
     points: 20,
     skillLevel: 'Medium',
-    examples: 'askPolitely("May I borrow your pencil?");\n// OUTPUT: "May I borrow your pencil please?"\n\naskPolitely("May I ask a question please?");\n// OUTPUT: "May I ask a question please?";\n\naskPolitely("My name is Grace Hopper.");\n// OUTPUT: "My name is Grace Hopper."'
+    examples: 'askPolitely("May I borrow your pencil?");\n// OUTPUT: "May I borrow your pencil please?"\n\naskPolitely("May I ask a question please?");\n// OUTPUT: "May I ask a question please?";\n\naskPolitely("My name is Grace Hopper.");\n// OUTPUT: "My name is Grace Hopper."',
+    startingText: 'function askPolitely(sentence) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 6,
@@ -123,7 +128,8 @@ const challenges = [
     specs: lastDigitSpecs,
     points: 20,
     skillLevel: 'Medium',
-    examples: 'lastDigit(22,32);\n// OUTPUT: true\n\nlastDigit(77, 999);\n// OUTPUT: false\n\nlastDigit(33,3);\n// OUTPUT: true'
+    examples: 'lastDigit(22,32);\n// OUTPUT: true\n\nlastDigit(77, 999);\n// OUTPUT: false\n\nlastDigit(33,3);\n// OUTPUT: true',
+    startingText: 'function lastDigit(num1, num2) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 7,
@@ -135,7 +141,8 @@ const challenges = [
     specs: nicknameGeneratorSpecs,
     points: 30,
     skillLevel: 'Medium',
-    examples: 'nicknameGenerator("Daniel")\n// OUTPUT: "Dan"\n\nnicknameGenerator("Beowulf")\n// OUTPUT: "Beow"'
+    examples: 'nicknameGenerator("Daniel")\n// OUTPUT: "Dan"\n\nnicknameGenerator("Beowulf")\n// OUTPUT: "Beow"',
+    startingText: 'function nicknameGenerator(name) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 8,
@@ -149,7 +156,8 @@ const challenges = [
     specs: myJoinSpecs,
     points: 40,
     skillLevel: 'Medium',
-    examples: 'myJoin(["hello","world"], " ");\n// OUTPUT:  "hello world"\n\nmyJoin([2, "be", false]);\n// OUTPUT: 2,be,false'
+    examples: 'myJoin(["hello","world"], " ");\n// OUTPUT:  "hello world"\n\nmyJoin([2, "be", false]);\n// OUTPUT: 2,be,false',
+    startingText: 'function myJoin(arr, delimiter) {\n  // YOUR CODE HERE\n}'
   },
   {
     id: 9,
@@ -162,7 +170,8 @@ const challenges = [
     specs: isPalindromeSpecs,
     points: 50,
     skillLevel: 'Hard',
-    examples: 'isPalindrome("Kayak");\n// OUTPUT:  true\n\nisPalindrome("SELFLESS");\n// OUTPUT: false'
+    examples: 'isPalindrome("Kayak");\n// OUTPUT:  true\n\nisPalindrome("SELFLESS");\n// OUTPUT: false',
+    startingText: 'function isPalindrome(string) {\n  // YOUR CODE HERE\n}'
   }
 ]
 
