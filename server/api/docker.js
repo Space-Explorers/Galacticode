@@ -38,9 +38,6 @@ router.post('/', async (req, res, next) => {
       challengeStatus
     }
 
-    console.log('ERRORS-------', results.error)
-    console.log('type of RESULTS.ERROR', typeof results.error)
-
     if (results.stats.passPercent === 100 && !challengeStatus) {
       const points = challenge.points
       const problemId = req.body.problemId
