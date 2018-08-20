@@ -5,11 +5,7 @@ import {
   getIsChallengeSolved,
   getProgressData,
   setCurrentCode,
-<<<<<<< HEAD
   getCurrentCode,
-=======
-  getCurrentCode
->>>>>>> master
   removeChallengeData,
   removeResultsData
 } from '../store'
