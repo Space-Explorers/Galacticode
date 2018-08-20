@@ -41,6 +41,10 @@ h4 {
   margin-top: 0;
 }
 
+h1 {
+  margin-bottom: 0;
+}
+
 p {
   font-weight: 300;
   color: #fff;
@@ -59,7 +63,6 @@ p {
   left: 0;
   right: 0;
   margin: auto;
-
 }
 
 /* nav{
@@ -112,6 +115,8 @@ canvas {
   z-index: 1;
 }
 
+/* START BUTTONS */
+
 .btn {
   width: 60px;
   height: 3em;
@@ -142,6 +147,8 @@ canvas {
   border-radius: 20px;
 }
 
+/* END BUTTONS */
+
 /* START OVERLAY COMPONENTS */
 
 .outer-flex {
@@ -158,28 +165,71 @@ canvas {
   z-index: 100;
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: 30px 40px;
   max-width: 1000px;
-  /* border-radius: 5px; */
+  height: 70vh;
   background-color: rgb(4, 5, 10, 0.8);
-}
-
-.content-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
-.prompt {
-  display: flex;
-  flex-direction: column;
-  margin-right: 20px;
-  text-align: justify;
 }
 
 .challenge-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex: 1 1 auto;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 4 4 auto;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+}
+
+.prompt {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 50%;
+  text-align: justify;
+}
+
+.editor {
+  flex: 1 1 50%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  text-align: justify;
+}
+
+#prompt-toggle {
+  display: flex;
+  flex-direction: row;
+}
+
+.toggle-item {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.active-toggle {
+  color: #ffc1dc;
+}
+
+#results-stats {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+}
+
+#results-stats p {
+  margin-right: 15px;
 }
 
 #intro {

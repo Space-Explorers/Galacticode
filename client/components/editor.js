@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import brace from 'brace';
+import React, {Component} from 'react'
+import {render} from 'react-dom'
+import brace from 'brace'
 import AceEditor from 'react-ace'
 
-import 'brace/mode/jsx';
+import 'brace/mode/jsx'
 import 'brace/ext/searchbox'
 import 'brace/mode/javascript'
 import 'brace/snippets/javascript'
@@ -16,7 +16,6 @@ class Editor extends Component {
     this.state = {
       mode: 'javascript',
       theme: 'monokai',
-      // value: defaultValue,
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
       fontSize: 14,
@@ -24,7 +23,9 @@ class Editor extends Component {
       showPrintMargin: true,
       highlightActiveLine: true,
       tabSize: 2,
-      wrapEnabled: true
+      wrapEnabled: true,
+      width: '100%',
+      height: '100%'
     }
   }
   render() {
@@ -38,12 +39,11 @@ class Editor extends Component {
         onCursorChange={this.onCursorChange}
         fontSize={this.state.fontSize}
         showPrintMargin={this.state.showPrintMargin}
-        showGutter={this.state.showGutter}
+        showGutter={this.props.showGutter}
         highlightActiveLine={this.state.highlightActiveLine}
         value={this.props.value}
         enableBasicAutocompletion={this.state.enableBasicAutocompletion}
         enableLiveAutocompletion={this.state.enableLiveAutocompletion}
-
         tabSize={this.state.tabSize}
         wrapEnabled={this.state.wrapEnabled}
         readOnly={this.props.readOnly}
@@ -51,6 +51,8 @@ class Editor extends Component {
         setOptions={{
           showLineNumbers: this.props.showLineNumbers
         }}
+        width={this.state.width}
+        height={this.state.height}
       />
     )
   }
