@@ -6,8 +6,8 @@ const UserAccount = props => {
   if (user.id) {
     return (
       <div className="main-wrapper">
-        <div>
-          <h2>User: {user.email}</h2>
+        <div className="challenge-header">
+          <h2>Player Name: {user.name || user.email}</h2>
           <button
             className="btn btn-close"
             onClick={() => props.history.goBack()}
