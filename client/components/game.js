@@ -5,7 +5,7 @@ import gamePlayEnvironment from './threejs/gameplay';
 const Game = () => (
   <div>
       {gamePlayEnvironment()}
-  <div className="main-wrapper">
+  {/* <div className="main-wrapper">
     <p>** Gameplay goes here **</p>
     <Link to="/challenge/1">Challenge #1 - Greeting</Link>
     <Link to="/challenge/2">Challenge #2 - Do You Play The Theremin?</Link>
@@ -18,7 +18,7 @@ const Game = () => (
     <Link to="/challenge/9">Challenge #9 - Is Palindrome</Link>
     <br />
     <Link to="/">Back to Planet Select</Link>
-  </div>
+  </div> */}
   </div>
 )
 
