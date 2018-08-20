@@ -65,10 +65,9 @@ p {
   margin: auto;
 }
 
-/* nav{
-  position: absolute;
-  z-index: 100;
-} */
+#nav-logo {
+  width: 250px;
+}
 
 nav a {
   display: inline-block;
@@ -82,13 +81,14 @@ nav li {
 .dropdown {
   position: relative;
   display: inline-block;
+  /* z-index: 200; */
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   padding: 0;
-  z-index: 101;
+  z-index: 200;
 }
 
 .dropdown-content a {
@@ -151,10 +151,44 @@ canvas {
 
 /* START OVERLAY COMPONENTS */
 
-.outer-flex {
-  position: relative;
+/* START LOGIN */
+
+#login-wrapper {
+  position: absolute;
   margin: auto;
+  z-index: 100;
+  top: 100px;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  min-width: 250px;
+  max-width: 700px;
+  background-color: rgb(4, 5, 10, 0.8);
 }
+
+#login-logo {
+  width: 75%;
+}
+
+#intro {
+  font-size: 18px;
+  line-height: 26px;
+  width: 75%;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#login-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* END LOGIN */
 
 .main-wrapper {
   position: absolute;
@@ -163,8 +197,10 @@ canvas {
   right: 0;
   margin: auto;
   z-index: 100;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 16% 66% 16%;
+  grid-template-areas: 'header header' 'main editor' 'footer footer';
   padding: 30px 40px;
   max-width: 1000px;
   height: 70vh;
@@ -172,39 +208,33 @@ canvas {
 }
 
 .challenge-header {
+  grid-area: header;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  flex: 1 1 auto;
-}
-
-.content-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex: 4 4 auto;
 }
 
 .submit-button {
+  grid-area: footer;
   display: flex;
   justify-content: flex-end;
-  flex: 1 1 auto;
 }
 
 .prompt {
+  grid-area: main;
   display: flex;
   flex-direction: column;
-  flex: 1 1 50%;
   text-align: justify;
 }
 
 .editor {
-  flex: 1 1 50%;
+  grid-area: editor;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+  height: 100%;
   text-align: justify;
 }
 
@@ -225,31 +255,10 @@ canvas {
 #results-stats {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-evenly; */
 }
 
 #results-stats p {
   margin-right: 15px;
-}
-
-#intro {
-  width: 75%;
-  margin: auto;
-  text-align: center;
-}
-
-#intro-header {
-  text-align: center;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-#login-buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  margin-top: 50px;
 }
 
 /* END OVERLAY COMPONENTS */

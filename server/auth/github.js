@@ -37,7 +37,7 @@ if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
     '/callback',
     passport.authenticate('github', {
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/'
     })
   )
 }
