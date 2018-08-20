@@ -57,7 +57,7 @@ const challenges = [
     id: 1,
     name: 'Greeting',
     prompt:
-      'Create the function askPolitely that accepts a sentence as an argument. If the last character of the sentence is a question mark, then make sure the question ends with the word "please?".\nIf a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.',
+      'Create a function greeting(name) that accepts a string argument (a name, ex: “Oliver”), and returns a personalized greeting if a name is present.\nThe function takes a name as its only argument, and returns one of the following strings:',
     solution:
       'function greeting(name) { if (name) { return "Hello, " + name + "!"; } else { return "Hello!"; } }',
     specs: greetingSpecs,

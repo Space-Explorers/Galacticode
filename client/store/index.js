@@ -7,8 +7,9 @@ import results from './results'
 import challenge from './challenge'
 import progress from './progress'
 import solvedChallenges from './solvedChallenges'
+import currChallenge from './currChallenge'
 
-const reducer = combineReducers({ user, results, challenge, progress, solvedChallenges })
+const reducer = combineReducers({ user, results, challenge, progress, solvedChallenges, currChallenge })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
@@ -20,4 +21,5 @@ export * from './results'
 export * from './challenge'
 export * from './progress'
 export * from './solvedChallenges'
+export * from './currChallenge'
 
