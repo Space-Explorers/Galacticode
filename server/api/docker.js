@@ -21,6 +21,7 @@ router.post('/', async (req, res, next) => {
     )
     const responseInfo = JSON.parse(Buffer.from(data))
     const error = responseInfo.suites.suites[0].tests.filter(test => Object.keys(test.err).length !== 0 && test.err.constructor === Object)
+    const errorMessages = error.map(err => err.err.message)
 
     const user = await User.findById(req.user.id)
     const currentChallenge = await user.getChallenges({
@@ -33,9 +34,12 @@ router.post('/', async (req, res, next) => {
     const results = {
       stats: responseInfo.stats,
       tests: responseInfo.suites.suites[0].tests,
-      error,
+      error: errorMessages.join('\n\n'),
       challengeStatus
     }
+
+    console.log('ERRORS-------', results.error)
+    console.log('type of RESULTS.ERROR', typeof results.error)
 
     if (results.stats.passPercent === 100 && !challengeStatus) {
       const points = challenge.points

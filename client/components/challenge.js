@@ -28,7 +28,10 @@ class Challenge extends Component {
   async componentDidMount() {
     const challengeId = this.props.match.params.challengeId
     await this.props.fetchInitialData(challengeId)
-    await this.props.fetchIsChallengeSolved(this.props.user.id, challengeId)
+    await this.props.fetchIsChallengeSolved(
+      this.props.user.id,
+      challengeId
+    )
     await this.props.fetchCurrCode()
 
     let value
@@ -84,8 +87,7 @@ class Challenge extends Component {
           <div>
             <h1>{name}</h1>
             <p>
-              Difficulty: {skillLevel}&nbsp;&nbsp;&nbsp; |
-              &nbsp;&nbsp;&nbsp;Fuel Points: {points}
+              <b>Difficulty: </b>{skillLevel}&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;<b>Fuel Points: </b>{points}
             </p>
           </div>
           <button
@@ -139,7 +141,9 @@ class Challenge extends Component {
                 )}
               </div>
             ) : (
-              <Results results={results} loading={this.state.loading} />
+              <div className="content">
+                <Results results={results} loading={this.state.loading} />
+              </div>
             )}
           </div>
           <div className="editor">
@@ -183,8 +187,7 @@ const mapDispatch = dispatch => ({
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId)),
   fetchProgress: userId => dispatch(getProgressData(userId)),
-  setCurrCode: (challengeId, code) =>
-    dispatch(setCurrentCode(challengeId, code)),
+  setCurrCode: (challengeId, code) => dispatch(setCurrentCode(challengeId, code)),
   fetchCurrCode: () => dispatch(getCurrentCode()),
   clearComponentData: () => dispatch(removeChallengeData()),
   clearResultsData: () => dispatch(removeResultsData())
