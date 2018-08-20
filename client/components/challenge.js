@@ -4,6 +4,8 @@ import {
   getChallengeData,
   getIsChallengeSolved,
   getProgressData,
+  setCurrentCode,
+  getCurrentCode
   removeChallengeData,
   removeResultsData
 } from '../store'
@@ -24,13 +26,22 @@ class Challenge extends Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchInitialData(this.props.match.params.challengeId)
+    const challengeId = this.props.match.params.challengeId
+    await this.props.fetchInitialData(challengeId)
     await this.props.fetchIsChallengeSolved(
       this.props.user.id,
-      this.props.match.params.challengeId
+      challengeId
     )
+    await this.props.fetchCurrCode()
+
+    let value
+    if (this.props.currentCode.challengeId === challengeId) {
+      value = this.props.currentCode.code
+    } else {
+      value = this.props.startingText
+    }
     await this.setState({
-      value: this.props.startingText,
+      value,
       examples: this.props.examples
     })
   }
@@ -57,6 +68,7 @@ class Challenge extends Component {
     this.setState({
       value: newValue
     })
+    this.props.setCurrCode(this.props.match.params.challengeId, newValue)
   }
 
   render() {
@@ -75,7 +87,7 @@ class Challenge extends Component {
           <div>
             <h1>{name}</h1>
             <p>
-              {skillLevel}, {points} Fuel Points
+              Difficulty: {skillLevel}&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Fuel Points: {points}
             </p>
           </div>
           <button
@@ -163,7 +175,8 @@ const mapState = state => ({
   points: state.challenge.points,
   examples: state.challenge.examples,
   startingText: state.challenge.startingText,
-  isChallengeSolved: state.solvedChallenges.challengeStatus
+  isChallengeSolved: state.solvedChallenges.challengeStatus,
+  currentCode: state.currChallenge
 })
 
 const mapDispatch = dispatch => ({
@@ -172,6 +185,8 @@ const mapDispatch = dispatch => ({
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId)),
   fetchProgress: userId => dispatch(getProgressData(userId)),
+  setCurrCode: (challengeId, code) => dispatch(setCurrentCode(challengeId, code)),
+  fetchCurrCode: () => dispatch(getCurrentCode()),
   clearComponentData: () => dispatch(removeChallengeData()),
   clearResultsData: () => dispatch(removeResultsData())
 })
