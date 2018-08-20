@@ -1,17 +1,15 @@
 import * as THREE from 'three'
-// import * as CANNON from 'cannon'
 
+window.game = window.game || {}
 
-
-export default function gamePlayEnvironment() {
-  // let alienRollingSpeed=(0.008 * 26 / 0.2)/5
-  let alienRollingSpeed = 0
-  let bounceValue = 0.01
-  let gravity=0.005
-  let leftLane=-1
-  let rightLane=1
-  let middleLane=0
-  let currentLane
+window.game.three = function () {
+      let alienRollingSpeed = 0
+      let bounceValue = 0.01
+      let gravity=0.005
+      let leftLane=-1
+      let rightLane=1
+      let middleLane=0
+      let currentLane
 
       const clock = new THREE.Clock()
       clock.start()
@@ -28,11 +26,6 @@ export default function gamePlayEnvironment() {
       renderer.setSize(window.innerWidth, window.innerHeight)
       document.body.appendChild(renderer.domElement)
 
-      // //initialize Cannon World
-      // const world = new CANNON.World()
-      // world.gravity.set(0,0,0)
-      // world.broadphase = new CANNON.NaiveBroadphase()
-
       //Alien
       const alienGeometry = new THREE.DodecahedronGeometry( 0.2,1)
       const alienMaterial = new THREE.MeshStandardMaterial( { color: 0x883333, shading: THREE.FlatShading } )
@@ -46,23 +39,7 @@ export default function gamePlayEnvironment() {
       alien.position.x = currentLane
       scene.add( alien )
 
-    //     // Stars in the backgrounds
-    //   const drawStars = function() {
-    //   let canvas, ctx, i, j, sizeRandom;
-    //   canvas = document.createElement('canvas');
-    //   canvas.setAttribute('width', window.innerWidth);
-    //   canvas.setAttribute('height', window.innerHeight);
-    //   canvas.setAttribute('id', "stars");
-    //   ctx = canvas.getContext('2d');
-    //   ctx.fillStyle = "#A9D9E5";
-    //   for (i = j = 0; j <= 200; i = ++j) {
-    //     ctx.beginPath();
-    //     sizeRandom = Math.random() * 2;
-    //     ctx.arc(Math.random() * window.innerWidth, Math.random() * window.innerHeight, sizeRandom, 0, 2 * Math.PI, 0);
-    //     ctx.fill();
-    //   }
-    //   return document.body.appendChild(canvas);
-    // };
+
 
       //keyboard Controls
       const keyMap = [];
@@ -114,7 +91,7 @@ export default function gamePlayEnvironment() {
       // //createPlanet
         const planetGeometry = new THREE.PlaneGeometry(5,5, 4,4)
         const planetMaterial = new THREE.MeshStandardMaterial({
-          color: 0x205BF8,
+          color: 0x5BBCF6,
           shading: THREE.FlatShading
         })
 
@@ -122,7 +99,7 @@ export default function gamePlayEnvironment() {
         planet.receiveShadow = true
         planet.castShadow =false
         planet.position.y = 0
-        // planet.rotation.x= Math.PI/2;
+        // planet.rotation.x= -0.5 * Math.PI
         planet.position.z = 4.8
         scene.add(planet)
 
@@ -138,6 +115,24 @@ export default function gamePlayEnvironment() {
     light.castShadow = true;
 
     scene.add(light)
+
+    //     // Stars in the backgrounds
+    // const drawStars = function() {
+    //   let canvas, ctx, i, j, sizeRandom;
+    //   canvas = document.createElement('canvas');
+    //   canvas.setAttribute('width', window.innerWidth);
+    //   canvas.setAttribute('height', window.innerHeight);
+    //   canvas.setAttribute('id', "stars");
+    //   ctx = canvas.getContext('2d');
+    //   ctx.fillStyle = "#A9D9E5";
+    //   for (i = j = 0; j <= 200; i = ++j) {
+    //     ctx.beginPath();
+    //     sizeRandom = Math.random() * 2;
+    //     ctx.arc(Math.random() * window.innerWidth, Math.random() * window.innerHeight, sizeRandom, 0, 2 * Math.PI, 0);
+    //     ctx.fill();
+    //   }
+    //   return document.body.appendChild(canvas);
+    // };
 
     // drawStars()
 
