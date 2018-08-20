@@ -84,8 +84,11 @@ class Challenge extends Component {
           <div>
             <h1>{name}</h1>
             <p>
-              Difficulty: {skillLevel}&nbsp;&nbsp;&nbsp; |
-              &nbsp;&nbsp;&nbsp;Fuel Points: {points}
+              <b>Difficulty: </b>
+              {skillLevel}&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;<b>
+                Fuel Points:{' '}
+              </b>
+              {points}
             </p>
           </div>
           <button
@@ -138,9 +141,39 @@ class Challenge extends Component {
               )}
             </div>
           ) : (
-            <Results results={results} loading={this.state.loading} />
+            <div className="content">
+              <Results results={results} loading={this.state.loading} />
+            </div>
           )}
         </div>
+        <div className="editor">
+          <Editor
+            onChange={this.onChange}
+            value={this.state.value}
+            readOnly={false}
+            showLineNumbers={true}
+          />
+        </div>
+        {!this.state.showOutput ? (
+          <div className="content">
+            <p>{prompt}</p>
+            <h3>Examples: </h3>
+            <div className="examples-editor">
+              <Editor
+                value={this.state.examples}
+                showGutter={false}
+                readOnly={true}
+                maxLines={10}
+                showLineNumbers={false}
+              />
+            </div>
+            <br />
+            {isChallengeSolved && <h3>You've Already Solved This Problem!</h3>}
+          </div>
+        ) : (
+          <Results results={results} loading={this.state.loading} />
+        )}
+
         <div className="editor">
           <Editor
             onChange={this.onChange}

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Editor} from './index'
 
 const Results = props => {
   const {results, loading} = props
@@ -13,19 +14,32 @@ const Results = props => {
         !loading && (
           <div>
             <div id="results-stats">
-              <p>Time: {results.stats.duration}ms </p>
-              <p>Passed: {results.stats.passes}</p>
-              <p>Failed: {results.stats.failures}</p>
+              <p>
+                <b>Time: </b>
+                {results.stats.duration}ms{' '}
+              </p>
+              <p>
+                <b>Passed: </b>
+                {results.stats.passes}
+              </p>
+              <p>
+                <b>Failed: </b>
+                {results.stats.failures}
+              </p>
             </div>
             <div>
               <h3>Results:</h3>
               {results.stats.passPercent === 100 ? (
                 <p>Congratulations! All tests passed!</p>
               ) : (
-                <div>
-                  {results.error.map((fail, idx) => (
-                    <p key={idx}>{fail.err.message}</p>
-                  ))}
+                <div className="output-editor">
+                  <Editor
+                    value={results.error}
+                    showGutter={false}
+                    readOnly={true}
+                    maxLines={10}
+                    showLineNumbers={false}
+                  />
                 </div>
               )}
             </div>
