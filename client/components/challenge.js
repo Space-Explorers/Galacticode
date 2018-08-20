@@ -111,12 +111,13 @@ class Challenge extends Component {
               </h3>
             </div>
             {!this.state.showOutput ? (
-              <div className="prompt">
+              <div className="content">
                 <p>{prompt}</p>
                 <h3>Examples: </h3>
                 <div className="examples-editor">
                   <Editor
                     value={this.state.examples}
+                    showGutter={false}
                     readOnly={true}
                     maxLines={10}
                     showLineNumbers={false}
