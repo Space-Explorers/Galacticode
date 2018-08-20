@@ -6,14 +6,16 @@ import {
   getProgressData
 } from '../store'
 import {connect} from 'react-redux'
-import Editor from './editor'
+import {Editor, Results} from './index'
 
 class Challenge extends Component {
   constructor() {
     super()
     this.state = {
       value: '',
-      examples: ''
+      examples: '',
+      showOutput: false,
+      loading: false
     }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,11 +34,16 @@ class Challenge extends Component {
   }
 
   async handleSubmit() {
+    this.setState({
+      showOutput: true,
+      loading: true
+    })
     await this.props.fetchResults(
       this.state.value,
       this.props.match.params.challengeId
     )
     await this.props.fetchProgress(this.props.user.id)
+    this.setState({loading: false})
   }
 
   onChange(newValue) {
@@ -54,10 +61,16 @@ class Challenge extends Component {
       points,
       isChallengeSolved
     } = this.props
+
     return (
       <div className="main-wrapper">
         <div className="challenge-header">
-          <h1>{name}</h1>
+          <div>
+            <h1>{name}</h1>
+            <p>
+              {skillLevel}, {points} Fuel Points
+            </p>
+          </div>
           <button
             className="btn btn-close"
             onClick={() => this.props.history.push('/play')}
@@ -65,45 +78,51 @@ class Challenge extends Component {
             Close
           </button>
         </div>
-        <div>
-          <p>
-            {skillLevel}, {points} Fuel Points
-          </p>
-        </div>
-        {isChallengeSolved && <h3>You've Already Solved This Problem!</h3>}
+
         <div className="content-wrapper">
           <div className="prompt">
-            <p>{prompt}</p>
-            <h3>Examples: </h3>
-            <div className="results">
-              {/* {results.stats.passPercent === 100 && (
-                  <p>Congratulations! All tests passed!</p>
-                )} */}
-              {results && (
-                <div>
-                  <p>Tests Run: {results.stats.tests}</p>
-                  <p>Tests Passed: {results.stats.passes}</p>
-                  <p>Tests Failed: {results.stats.failures}</p>
-                </div>
-              )}
-            </div>
-            <div className="examples-editor">
-              <Editor
-                value={this.state.examples}
-                readOnly={true}
-                maxLines={10}
-                showLineNumbers={false}
-              />
-            </div>
-            <div className="submit-button">
-              <button
-                className="btn btn-submit"
-                type="submit"
-                onClick={this.handleSubmit}
+            <div id="prompt-toggle">
+              <h3
+                onClick={() => this.setState({showOutput: false})}
+                className={
+                  this.state.showOutput
+                    ? 'toggle-item'
+                    : 'toggle-item active-toggle'
+                }
               >
-                SUBMIT
-              </button>
+                Instructions
+              </h3>
+              <h3
+                onClick={() => this.setState({showOutput: true})}
+                className={
+                  this.state.showOutput
+                    ? 'toggle-item active-toggle'
+                    : 'toggle-item'
+                }
+              >
+                Output
+              </h3>
             </div>
+            {!this.state.showOutput ? (
+              <div className="prompt">
+                <p>{prompt}</p>
+                <h3>Examples: </h3>
+                <div className="examples-editor">
+                  <Editor
+                    value={this.state.examples}
+                    readOnly={true}
+                    maxLines={10}
+                    showLineNumbers={false}
+                  />
+                </div>
+                <br />
+                {isChallengeSolved && (
+                  <h3>You've Already Solved This Problem!</h3>
+                )}
+              </div>
+            ) : (
+              <Results results={results} loading={this.state.loading} />
+            )}
           </div>
           <div className="editor">
             <Editor
@@ -113,6 +132,15 @@ class Challenge extends Component {
               showLineNumbers={true}
             />
           </div>
+        </div>
+        <div className="submit-button">
+          <button
+            className="btn btn-submit"
+            type="submit"
+            onClick={this.handleSubmit}
+          >
+            RUN
+          </button>
         </div>
       </div>
     )
@@ -127,7 +155,7 @@ const mapState = state => ({
   points: state.challenge.points,
   examples: state.challenge.examples,
   startingText: state.challenge.startingText,
-  isChallengeSolved: state.results.challengeStatus
+  isChallengeSolved: state.solvedChallenges.challengeStatus
 })
 
 const mapDispatch = dispatch => ({
