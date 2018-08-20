@@ -4,7 +4,7 @@ const Results = props => {
   const {results, loading} = props
 
   return (
-    <div className="prompt results">
+    <div className="content">
       {/* show when there are no results and we aren't loading any */}
       {!results.stats && !loading && <p>Your results will be shown here.</p>}
 

@@ -96,61 +96,60 @@ class Challenge extends Component {
           </button>
         </div>
 
-        <div className="content-wrapper">
-          <div className="prompt">
-            <div id="prompt-toggle">
-              <h3
-                onClick={() => this.setState({showOutput: false})}
-                className={
-                  this.state.showOutput
-                    ? 'toggle-item'
-                    : 'toggle-item active-toggle'
-                }
-              >
-                Instructions
-              </h3>
-              <h3
-                onClick={() => this.setState({showOutput: true})}
-                className={
-                  this.state.showOutput
-                    ? 'toggle-item active-toggle'
-                    : 'toggle-item'
-                }
-              >
-                Output
-              </h3>
-            </div>
-            {!this.state.showOutput ? (
-              <div className="content">
-                <p>{prompt}</p>
-                <h3>Examples: </h3>
-                <div className="examples-editor">
-                  <Editor
-                    value={this.state.examples}
-                    showGutter={false}
-                    readOnly={true}
-                    maxLines={10}
-                    showLineNumbers={false}
-                  />
-                </div>
-                <br />
-                {isChallengeSolved && (
-                  <h3>You've Already Solved This Problem!</h3>
-                )}
+        <div className="prompt">
+          <div id="prompt-toggle">
+            <h3
+              onClick={() => this.setState({showOutput: false})}
+              className={
+                this.state.showOutput
+                  ? 'toggle-item'
+                  : 'toggle-item active-toggle'
+              }
+            >
+              Instructions
+            </h3>
+            <h3
+              onClick={() => this.setState({showOutput: true})}
+              className={
+                this.state.showOutput
+                  ? 'toggle-item active-toggle'
+                  : 'toggle-item'
+              }
+            >
+              Output
+            </h3>
+          </div>
+          {!this.state.showOutput ? (
+            <div className="content">
+              <p>{prompt}</p>
+              <h3>Examples: </h3>
+              <div className="examples-editor">
+                <Editor
+                  value={this.state.examples}
+                  showGutter={false}
+                  readOnly={true}
+                  maxLines={10}
+                  showLineNumbers={false}
+                />
               </div>
-            ) : (
-              <Results results={results} loading={this.state.loading} />
-            )}
-          </div>
-          <div className="editor">
-            <Editor
-              onChange={this.onChange}
-              value={this.state.value}
-              readOnly={false}
-              showLineNumbers={true}
-            />
-          </div>
+              <br />
+              {isChallengeSolved && (
+                <h3>You've Already Solved This Problem!</h3>
+              )}
+            </div>
+          ) : (
+            <Results results={results} loading={this.state.loading} />
+          )}
         </div>
+        <div className="editor">
+          <Editor
+            onChange={this.onChange}
+            value={this.state.value}
+            readOnly={false}
+            showLineNumbers={true}
+          />
+        </div>
+
         <div className="submit-button">
           <button
             className="btn btn-submit"
