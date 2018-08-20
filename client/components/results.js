@@ -6,10 +6,10 @@ const Results = props => {
   return (
     <div className="prompt results">
       {/* show when there are no results and we aren't loading any */}
-      {!results && !loading && <p>Your results will be shown here.</p>}
+      {!results.stats && !loading && <p>Your results will be shown here.</p>}
 
       {/* show results once they exist and loading is false */}
-      {results &&
+      {results.stats &&
         !loading && (
           <div>
             <div id="results-stats">

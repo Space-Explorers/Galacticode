@@ -3,7 +3,9 @@ import {
   getResults,
   getChallengeData,
   getIsChallengeSolved,
-  getProgressData
+  getProgressData,
+  removeChallengeData,
+  removeResultsData
 } from '../store'
 import {connect} from 'react-redux'
 import {Editor, Results} from './index'
@@ -31,6 +33,11 @@ class Challenge extends Component {
       value: this.props.startingText,
       examples: this.props.examples
     })
+  }
+
+  componentWillUnmount() {
+    this.props.clearComponentData()
+    this.props.clearResultsData()
   }
 
   async handleSubmit() {
@@ -148,7 +155,7 @@ class Challenge extends Component {
 }
 const mapState = state => ({
   user: state.user,
-  results: state.results.results,
+  results: state.results,
   name: state.challenge.name,
   prompt: state.challenge.prompt,
   skillLevel: state.challenge.skillLevel,
@@ -163,7 +170,9 @@ const mapDispatch = dispatch => ({
   fetchInitialData: challengeId => dispatch(getChallengeData(challengeId)),
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId)),
-  fetchProgress: userId => dispatch(getProgressData(userId))
+  fetchProgress: userId => dispatch(getProgressData(userId)),
+  clearComponentData: () => dispatch(removeChallengeData()),
+  clearResultsData: () => dispatch(removeResultsData())
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
