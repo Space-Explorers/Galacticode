@@ -9,9 +9,8 @@ export const setCurrCode = (challengeId, code) => ({
   code
 })
 
-export const getCurrCode = (challengeId) => ({
-  type: GET_CURR_CODE,
-  challengeId
+export const getCurrCode = () => ({
+  type: GET_CURR_CODE
 })
 
 // THUNK CREATORS
