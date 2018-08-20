@@ -5,7 +5,7 @@ import {
   getIsChallengeSolved,
   getProgressData,
   setCurrentCode,
-  getCurrentCode
+  getCurrentCode,
   removeChallengeData,
   removeResultsData
 } from '../store'
@@ -28,10 +28,7 @@ class Challenge extends Component {
   async componentDidMount() {
     const challengeId = this.props.match.params.challengeId
     await this.props.fetchInitialData(challengeId)
-    await this.props.fetchIsChallengeSolved(
-      this.props.user.id,
-      challengeId
-    )
+    await this.props.fetchIsChallengeSolved(this.props.user.id, challengeId)
     await this.props.fetchCurrCode()
 
     let value
@@ -87,7 +84,8 @@ class Challenge extends Component {
           <div>
             <h1>{name}</h1>
             <p>
-              Difficulty: {skillLevel}&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Fuel Points: {points}
+              Difficulty: {skillLevel}&nbsp;&nbsp;&nbsp; |
+              &nbsp;&nbsp;&nbsp;Fuel Points: {points}
             </p>
           </div>
           <button
@@ -185,7 +183,8 @@ const mapDispatch = dispatch => ({
   fetchIsChallengeSolved: (userId, challengeId) =>
     dispatch(getIsChallengeSolved(userId, challengeId)),
   fetchProgress: userId => dispatch(getProgressData(userId)),
-  setCurrCode: (challengeId, code) => dispatch(setCurrentCode(challengeId, code)),
+  setCurrCode: (challengeId, code) =>
+    dispatch(setCurrentCode(challengeId, code)),
   fetchCurrCode: () => dispatch(getCurrentCode()),
   clearComponentData: () => dispatch(removeChallengeData()),
   clearResultsData: () => dispatch(removeResultsData())
