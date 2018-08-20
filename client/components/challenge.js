@@ -5,7 +5,9 @@ import {
   getIsChallengeSolved,
   getProgressData,
   setCurrentCode,
-  getCurrentCode
+  getCurrentCode,
+  removeChallengeData,
+  removeResultsData
 } from '../store'
 import {connect} from 'react-redux'
 import {Editor, Results} from './index'
@@ -42,6 +44,11 @@ class Challenge extends Component {
       value,
       examples: this.props.examples
     })
+  }
+
+  componentWillUnmount() {
+    this.props.clearComponentData()
+    this.props.clearResultsData()
   }
 
   async handleSubmit() {
@@ -116,12 +123,13 @@ class Challenge extends Component {
               </h3>
             </div>
             {!this.state.showOutput ? (
-              <div className="prompt">
+              <div className="content">
                 <p>{prompt}</p>
                 <h3>Examples: </h3>
                 <div className="examples-editor">
                   <Editor
                     value={this.state.examples}
+                    showGutter={false}
                     readOnly={true}
                     maxLines={10}
                     showLineNumbers={false}
@@ -160,7 +168,7 @@ class Challenge extends Component {
 }
 const mapState = state => ({
   user: state.user,
-  results: state.results.results,
+  results: state.results,
   name: state.challenge.name,
   prompt: state.challenge.prompt,
   skillLevel: state.challenge.skillLevel,
@@ -178,7 +186,9 @@ const mapDispatch = dispatch => ({
     dispatch(getIsChallengeSolved(userId, challengeId)),
   fetchProgress: userId => dispatch(getProgressData(userId)),
   setCurrCode: (challengeId, code) => dispatch(setCurrentCode(challengeId, code)),
-  fetchCurrCode: () => dispatch(getCurrentCode())
+  fetchCurrCode: () => dispatch(getCurrentCode()),
+  clearComponentData: () => dispatch(removeChallengeData()),
+  clearResultsData: () => dispatch(removeResultsData())
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
