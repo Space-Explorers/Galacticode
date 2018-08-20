@@ -151,10 +151,44 @@ canvas {
 
 /* START OVERLAY COMPONENTS */
 
-.outer-flex {
-  position: relative;
+/* START LOGIN */
+
+#login-wrapper {
+  position: absolute;
   margin: auto;
+  z-index: 100;
+  top: 100px;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  min-width: 250px;
+  max-width: 700px;
+  background-color: rgb(4, 5, 10, 0.8);
 }
+
+#login-logo {
+  width: 75%;
+}
+
+#intro {
+  font-size: 18px;
+  line-height: 26px;
+  width: 75%;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#login-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* END LOGIN */
 
 .main-wrapper {
   position: absolute;
@@ -225,26 +259,6 @@ canvas {
 
 #results-stats p {
   margin-right: 15px;
-}
-
-#intro {
-  width: 75%;
-  margin: auto;
-  text-align: center;
-}
-
-#intro-header {
-  text-align: center;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-#login-buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  margin-top: 50px;
 }
 
 /* END OVERLAY COMPONENTS */
