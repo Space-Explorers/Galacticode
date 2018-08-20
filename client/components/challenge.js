@@ -5,7 +5,7 @@ import {
   getIsChallengeSolved,
   getProgressData,
   setCurrentCode,
-  getCurrentCode
+  getCurrentCode,
   removeChallengeData,
   removeResultsData
 } from '../store'
