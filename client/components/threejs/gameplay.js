@@ -45,7 +45,7 @@ export default function gamePlayEnvironment() {
       alien.position.x = currentLane
       scene.add( alien )
       // //createPlanet
-        const planetGeometry = new THREE.TetrahedronBufferGeometry(500,4)
+        const planetGeometry = new THREE.TetrahedronGeometry(500,4)
         const planetMaterial = new THREE.MeshStandardMaterial({
           color: 0x205BF8,
           shading: THREE.FlatShading
