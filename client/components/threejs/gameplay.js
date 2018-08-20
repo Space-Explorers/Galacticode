@@ -4,7 +4,8 @@ import * as THREE from 'three'
 
 
 export default function gamePlayEnvironment() {
-  let alienRollingSpeed=(0.008 * 26 / 0.2)/5
+  // let alienRollingSpeed=(0.008 * 26 / 0.2)/5
+  let alienRollingSpeed = 0
   let bounceValue = 0.01
   let gravity=0.005
   let leftLane=-1
@@ -44,25 +45,67 @@ export default function gamePlayEnvironment() {
       currentLane = middleLane
       alien.position.x = currentLane
       scene.add( alien )
+
+      const keyMap = [];
+      document.addEventListener('keydown', onDocumentKeyDown, true);
+      document.addEventListener('keyup', onDocumentKeyUp, true);
+      function onDocumentKeyDown(event) {
+        const keyCode = event.keyCode;
+        keyMap[keyCode] = true;
+      }
+      function onDocumentKeyUp(event) {
+        const keyCode = event.keyCode;
+        keyMap[keyCode] = false;
+      }
+      function executeMovement() {
+        let validMove = true;
+        if (keyMap[37] === true) { //left
+          console.log('left')
+          if (currentLane == middleLane) {
+            currentLane = leftLane;
+          } else if (currentLane == rightLane) {
+            currentLane = middleLane;
+          } else {
+            validMove = false;
+          }
+        } else if (keyMap[39] === true) { //right
+          console.log('Right')
+          if (currentLane == middleLane) {
+            currentLane = rightLane;
+          } else if (currentLane == leftLane) {
+            currentLane = middleLane;
+          } else {
+            validMove = false;
+          }
+        } else {
+          if (keyMap[38] === true) { //up, jump
+            console.log('up')
+            alienRollingSpeed=(0.008 * 26 / 0.2)/5
+          }else{
+            alienRollingSpeed = 0
+          }
+          validMove = false;
+        }
+        if (validMove) {
+          bounceValue = 0.06;
+        }
+      }
+
+
       // //createPlanet
-        const planetGeometry = new THREE.TetrahedronGeometry(500,4)
+        const planetGeometry = new THREE.TetrahedronBufferGeometry(500, 4)
         const planetMaterial = new THREE.MeshStandardMaterial({
-          color: 0x205BF8,
+          color: 0xfffafa,
           shading: THREE.FlatShading
         })
+
         const planet = new THREE.Mesh(planetGeometry, planetMaterial)
         planet.receiveShadow = true
-        planet.rotation.z =- Math.PI/2
+        // planet.rotation.z =- Math.PI/2
         scene.add(planet)
-        planet.position.y =-24
+        planet.position.y =1.8
         planet.position.x=2
-
-
-
-        // const orbitControl = new THREE.OrbitControls( camera, renderer.domElement );
-        // orbitControl.addEventListener( 'change', render );
-        // orbitControl.enableZoom = false;
-
+        planet.position.z = 0
 
 
        //lighting
@@ -77,6 +120,7 @@ export default function gamePlayEnvironment() {
 
       // Render Loop
   function render(){
+    executeMovement()
     renderer.render(scene, camera)
   }
 
@@ -86,11 +130,12 @@ export default function gamePlayEnvironment() {
     if(alien.position.y <= 1.8){
       bounceValue=(Math.random()*0.04)+0.005
     }
-    alien.position.y += bounceValue
-    // alien.position.x = THREE.Math.lerp(alien.position.x, currentLane, 2*clock.getDelta())
+    // alien.position.y += bounceValue
+    alien.position.x = THREE.Math.lerp(alien.position.x, currentLane, 2*clock.getDelta())
     bounceValue -= gravity
     planet.rotation. x += 0.008
     render()
+
   }
 
   animate()
