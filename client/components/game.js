@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 const Game = () => (
   <div className="main-wrapper">
     <p>** Gameplay goes here **</p>
+    <Link to="/challenge/10">DEMO CHALLENGE</Link>
     <Link to="/challenge/1">Challenge #1 - Greeting</Link>
     <Link to="/challenge/2">Challenge #2 - Do You Play The Theremin?</Link>
     <Link to="/challenge/3">Challenge #3 - Repeat A String</Link>
