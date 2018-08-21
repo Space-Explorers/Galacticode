@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getProgressData} from '../store'
+import {Victory} from './index'
 
 class FuelBar extends Component {
   componentDidMount() {
@@ -8,10 +9,14 @@ class FuelBar extends Component {
   }
 
   render() {
+    const {progress} = this.props
     return (
       <div>
-        <progress value={this.props.progress || 0} max="100" />
-        <p>{this.props.progress || 0}/100</p>
+        <progress value={progress || 0} max="100" />
+        <p>{progress || 0}/100</p>
+        {progress === 100 && (
+          <Victory />
+        )}
       </div>
     )
   }
