@@ -3,7 +3,7 @@
 const db = require('../server/db')
 const fs = require('fs')
 var path = require('path');
-const { User, Challenge, Example } = require('../server/db/models')
+const { User, Challenge, Planet } = require('../server/db/models')
 
 const greetingSpecs = fs.readFileSync(path.join(__dirname, '/specs/greeting.spec.js'), (err, specData) => {
   if (err) throw err
@@ -64,7 +64,8 @@ const challenges = [
     points: 10,
     skillLevel: 'Easy',
     examples: 'greeting("Kathy");\n// OUTPUT: "Hello, Kathy!";\n\ngreeting();\n// OUTPUT: "Hello!"',
-    startingText: 'function greeting(name) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function greeting(name) {\n  // YOUR CODE HERE\n}',
+    planetId: 1
   },
   {
     id: 2,
@@ -77,7 +78,8 @@ const challenges = [
     points: 10,
     skillLevel: 'Easy',
     examples: 'doYouPlayTheTheremin("Amy")\n// OUTPUT: "Amy does not play the Theremin!";\n\ndoYouPlayTheTheremin("Sally");\n// OUTPUT: "Sally plays the Theremin!"',
-    startingText: 'function doYouPlayTheTheremin(name) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function doYouPlayTheTheremin(name) {\n  // YOUR CODE HERE\n}',
+    planetId: 1
   },
   {
     id: 3,
@@ -90,7 +92,8 @@ const challenges = [
     points: 15,
     skillLevel: 'Easy',
     examples: 'repeat("yo",5);\n// OUTPUT: "yoyoyoyoyo"\n\nrepeat("yo",0);\n// OUTPUT:""\n\nrepeat("bye",3);\n// OUTPUT: "byebyebye"',
-    startingText: 'function repeat(str, num) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function repeat(str, num) {\n  // YOUR CODE HERE\n}',
+    planetId: 1
   },
   {
     id: 4,
@@ -103,7 +106,8 @@ const challenges = [
     points: 15,
     skillLevel: 'Easy',
     examples: 'vowelCount("Grace Hopper");\n// OUTPUT: 4\n\nvowelCount("Yellow");\n// OUTPUT: 2',
-    startingText: 'function vowelCount(string) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function vowelCount(string) {\n  // YOUR CODE HERE\n}',
+    planetId: 1
   },
   {
     id: 5,
@@ -116,7 +120,8 @@ const challenges = [
     points: 20,
     skillLevel: 'Medium',
     examples: 'askPolitely("May I borrow your pencil?");\n// OUTPUT: "May I borrow your pencil please?"\n\naskPolitely("May I ask a question please?");\n// OUTPUT: "May I ask a question please?";\n\naskPolitely("My name is Grace Hopper.");\n// OUTPUT: "My name is Grace Hopper."',
-    startingText: 'function askPolitely(sentence) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function askPolitely(sentence) {\n  // YOUR CODE HERE\n}',
+    planetId: 2
   },
   {
     id: 6,
@@ -129,7 +134,8 @@ const challenges = [
     points: 20,
     skillLevel: 'Medium',
     examples: 'lastDigit(22,32);\n// OUTPUT: true\n\nlastDigit(77, 999);\n// OUTPUT: false\n\nlastDigit(33,3);\n// OUTPUT: true',
-    startingText: 'function lastDigit(num1, num2) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function lastDigit(num1, num2) {\n  // YOUR CODE HERE\n}',
+    planetId: 2
   },
   {
     id: 7,
@@ -142,7 +148,8 @@ const challenges = [
     points: 30,
     skillLevel: 'Medium',
     examples: 'nicknameGenerator("Daniel")\n// OUTPUT: "Dan"\n\nnicknameGenerator("Beowulf")\n// OUTPUT: "Beow"',
-    startingText: 'function nicknameGenerator(name) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function nicknameGenerator(name) {\n  // YOUR CODE HERE\n}',
+    planetId: 2
   },
   {
     id: 8,
@@ -157,7 +164,8 @@ const challenges = [
     points: 40,
     skillLevel: 'Medium',
     examples: 'myJoin(["hello","world"], " ");\n// OUTPUT:  "hello world"\n\nmyJoin([2, "be", false]);\n// OUTPUT: 2,be,false',
-    startingText: 'function myJoin(arr, delimiter) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function myJoin(arr, delimiter) {\n  // YOUR CODE HERE\n}',
+    planetId: 2
   },
   {
     id: 9,
@@ -171,14 +179,43 @@ const challenges = [
     points: 50,
     skillLevel: 'Hard',
     examples: 'isPalindrome("Kayak");\n// OUTPUT:  true\n\nisPalindrome("SELFLESS");\n// OUTPUT: false',
-    startingText: 'function isPalindrome(string) {\n  // YOUR CODE HERE\n}'
+    startingText: 'function isPalindrome(string) {\n  // YOUR CODE HERE\n}',
+    planetId: 2
   }
+]
+
+const planets = [
+  {
+    id: 1,
+    name: 'Puchayria'
+  },
+  {
+    id: 2,
+    name: 'Stoxupra'
+  },
+  {
+    id: 3,
+    name: 'Aclade'
+  },
+  {
+    id: 4,
+    name: 'Ucrion'
+  },
+  {
+    id: 5,
+    name: 'Oiyama'
+  },
+  {
+    id: 6,
+    name: 'Jastreynov'
+  },
 ]
 
 async function seed() {
   await db.sync({ force: true })
   console.log('db synced!')
 
+  await Promise.all(planets.map(planet => Planet.create(planet)))
   await Promise.all(challenges.map(challenge => Challenge.create(challenge)))
 
   const users = await Promise.all([
