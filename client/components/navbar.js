@@ -11,7 +11,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       <ul id="navbar">
         <li>
           <Link to="/">
-            <img id="nav-logo" src="./GALACTICODE-logo.png" />
+            <img id="nav-logo" src="/GALACTICODE-logo.png" />
           </Link>
         </li>
         <li>
