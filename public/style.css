@@ -78,6 +78,10 @@ nav li {
   display: block;
 }
 
+nav li:hover {
+  background-color: #272822;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -98,6 +102,7 @@ nav li {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  background-color: #272822;
 }
 
 /* END NAVBAR */
@@ -157,7 +162,6 @@ canvas {
   color: #fff;
   border-radius: 20px;
 }
-
 
 /* END BUTTONS */
 
@@ -390,7 +394,7 @@ progress::-webkit-progress-value {
 }
 
 .planet-img:hover {
-  background-color: #98d5f8
+  background-color: #98d5f8;
 }
 
 /* END PLANET SELECT */
