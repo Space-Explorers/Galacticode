@@ -118,7 +118,6 @@ canvas {
 /* START BUTTONS */
 
 .btn {
-  width: 60px;
   height: 3em;
   border: none;
   background: none;
@@ -126,24 +125,29 @@ canvas {
   display: inline-block;
   margin: 15px 0px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   outline: none;
   position: relative;
 }
 
 .btn-close {
+  width: 65px;
   background: #995e78;
   color: #fff;
-  box-shadow: 0 6px #7e4f63;
-  transition: none;
   border-radius: 20px;
 }
 
 .btn-submit {
+  width: 65px;
   background: #43afee;
   color: #fff;
-  box-shadow: 0 6px #257bad;
-  transition: none;
+  border-radius: 20px;
+}
+
+.btn-login {
+  width: 180px;
+  background: #43afee;
+  color: #fff;
   border-radius: 20px;
 }
 
@@ -183,9 +187,10 @@ canvas {
 
 #login-buttons {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  /* flex-direction: column;
+  align-items: center; */
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 /* END LOGIN */
