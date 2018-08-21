@@ -6,7 +6,7 @@ const Main = () => {
     <div>
       {planetBackground()}
       <div id="login-wrapper">
-        <img id="login-logo" src="./GALACTICODE-logo_blue.png" />
+        <img id="login-logo" src="/GALACTICODE-logo_blue.png" />
         <div>
           <p id="intro">
             Our friendly alien is lost in space and needs your help! Explore new
