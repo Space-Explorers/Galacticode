@@ -123,7 +123,6 @@ canvas {
   background: none;
   cursor: pointer;
   display: inline-block;
-  margin: 15px 0px;
   text-transform: uppercase;
   letter-spacing: 2px;
   outline: none;
@@ -139,6 +138,7 @@ canvas {
 
 .btn-submit {
   width: 65px;
+  margin: 15px 0px;
   background: #43afee;
   color: #fff;
   border-radius: 20px;
@@ -150,6 +150,14 @@ canvas {
   color: #fff;
   border-radius: 20px;
 }
+
+.btn-modal {
+  width: 110px;
+  background: #43afee;
+  color: #fff;
+  border-radius: 20px;
+}
+
 
 /* END BUTTONS */
 
@@ -313,39 +321,34 @@ progress::-webkit-progress-value {
 .modal {
   position: absolute;
   z-index: 100;
-  background: #43afee
+  background: rgb(4, 5, 10, 0.8);
+  padding: 30px;
 }
+
+.modal > .close {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .modal > .header {
+  font-size: 2em;
   width: 100%;
-  border-bottom: 1px solid gray;
-  font-size: 50px;
   text-align: center;
   padding: 5px;
 }
+
 .modal > .content {
   width: 100%;
-  padding: 10px 5px;
-  font-size: 30px;
+  padding: 5px;
+  font-size: 20px;
   text-align: center;
 }
+
 .modal > .actions {
   width: 100%;
-  padding: 10px 5px;
+  padding: 5px;
   margin: auto;
   text-align: center;
 }
-/* .modal > .close {
-  cursor: pointer;
-  position: absolute;
-  display: block;
-  padding: 2px 5px;
-  line-height: 20px;
-  right: -10px;
-  top: -10px;
-  font-size: 24px;
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #cfcece;
-} */
 
 /* END VICTORY MODAL */
