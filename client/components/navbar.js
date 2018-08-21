@@ -10,7 +10,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     {isLoggedIn && (
       <ul id="navbar">
         <li>
-          <Link to="/">SPACE EXPLORERS: CODE HOME</Link>
+          <Link to="/">
+            <img id="nav-logo" src="./GALACTICODE-logo.png" />
+          </Link>
         </li>
         <li>
           <FuelBar />

@@ -5,7 +5,7 @@ const Results = props => {
   const {results, loading} = props
 
   return (
-    <div className="promptresults">
+    <div className="content">
       {/* show when there are no results and we aren't loading any */}
       {!results.stats && !loading && <p>Your results will be shown here.</p>}
 
@@ -14,9 +14,18 @@ const Results = props => {
         !loading && (
           <div>
             <div id="results-stats">
-              <p><b>Time: </b>{results.stats.duration}ms </p>
-              <p><b>Passed: </b>{results.stats.passes}</p>
-              <p><b>Failed: </b>{results.stats.failures}</p>
+              <p>
+                <b>Time: </b>
+                {results.stats.duration}ms{' '}
+              </p>
+              <p>
+                <b>Passed: </b>
+                {results.stats.passes}
+              </p>
+              <p>
+                <b>Failed: </b>
+                {results.stats.failures}
+              </p>
             </div>
             <div>
               <h3>Results:</h3>
