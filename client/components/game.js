@@ -1,10 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import gamePlayEnvironment from './game/gameplay';
+import {gameCoreDemo} from './game/game.core.demo'
 
 const Game = () => (
   <div>
-      {gamePlayEnvironment()}
+      {window.gameInstance = window.game.core()}
+			{	window.gameInstance.init({
+					domContainer: document.querySelector("#game"),
+					rendererClearColor: window.game.static.white
+				})
+}
   {/* <div className="main-wrapper">
     <p>** Gameplay goes here **</p>
     <Link to="/challenge/1">Challenge #1 - Greeting</Link>
