@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Popup from 'reactjs-popup'
+import {Link} from 'react-router-dom'
 
 class Victory extends Component {
   constructor(props) {
@@ -31,8 +32,12 @@ class Victory extends Component {
               </p>
             </div>
             <div className="actions">
-              <button type="button"> Yes, take me away!</button>
-              <button type="button">No, I'll stay.</button>
+              <Link to="/">
+                <button type="button" onClick={this.closeModal}> Yes, take me away!</button>
+              </Link>
+              <Link to="/play">
+                <button type="button" onClick={this.closeModal}>No, I'll stay.</button>
+              </Link>
             </div>
           </div>
         </Popup>
