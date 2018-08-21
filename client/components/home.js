@@ -1,42 +1,49 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {getAllPlanets} from '../store'
+import {connect} from 'react-redux';
 
-const Home = () => (
-    <div className="planet-select">
-      <div className="planet-header">
-        <h2>SELECT A PLANET!</h2>
-      </div>
-      <div className="planet1">
-        <Link to="/play">
-          <img
-            className="planet-img"
-            src="https://cdn.iconscout.com/public/images/icon/premium/png-512/icosahedron-shapes-3060f4044e2d0bc7-512x512.png"
-            width="150"
-            height="150"
-          />
-        </Link>
-      </div>
-      <div className="planet2">
-        <Link to="/play">
-          <img
-            className="planet-img"
-            src="https://cdn.iconscout.com/public/images/icon/premium/png-512/icosahedron-shapes-3060f4044e2d0bc7-512x512.png"
-            width="150"
-            height="150"
-          />
-        </Link>
-      </div>
-      <div className="planet3">
-        <Link to="/play">
-          <img
-            className="planet-img"
-            src="https://cdn.iconscout.com/public/images/icon/premium/png-512/icosahedron-shapes-3060f4044e2d0bc7-512x512.png"
-            width="150"
-            height="150"
-          />
-        </Link>
-      </div>
-    </div>
-)
+class Home extends Component {
+  componentDidMount () {
+    this.props.fetchPlanets()
+  }
 
-export default Home
+  render () {
+    const {planets} = this.props
+    return (
+      <div className="planet-select">
+        <div className="planet-header">
+          <h2>SELECT A PLANET!</h2>
+        </div>
+        <div>
+          {planets && (
+            planets.map(planet => (
+              <div className="planet" key={planet.id}>
+                <Link to="/play">
+                  <img
+                    className="planet-img"
+                    src={planet.img}
+                    width="150"
+                    height="150"
+                  />
+                </Link>
+              </div>
+          )))}
+        </div>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => ({
+  planets: state.planets.allPlanets
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchPlanets: () => dispatch(getAllPlanets())
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)

@@ -1,17 +1,16 @@
 const router = require('express').Router()
 const axios = require('axios')
-const { Challenge, User } = require('../db/models')
+const {Challenge, User} = require('../db/models')
 
 module.exports = router
 
 router.post('/', async (req, res, next) => {
   try {
-
     const challenge = await Challenge.findById(req.body.problemId, {
       attributes: ['specs', 'points']
     })
 
-    const { data } = await axios.post(
+    const {data} = await axios.post(
       // 'http://localhost:8081/',
       'https://space-explorers-api.herokuapp.com/',
       {
@@ -20,7 +19,10 @@ router.post('/', async (req, res, next) => {
       }
     )
     const responseInfo = JSON.parse(Buffer.from(data))
-    const error = responseInfo.suites.suites[0].tests.filter(test => Object.keys(test.err).length !== 0 && test.err.constructor === Object)
+    const error = responseInfo.suites.suites[0].tests.filter(
+      test =>
+        Object.keys(test.err).length !== 0 && test.err.constructor === Object
+    )
     const errorMessages = error.map(err => err.err.message)
 
     const user = await User.findById(req.user.id)
@@ -34,8 +36,7 @@ router.post('/', async (req, res, next) => {
     const results = {
       stats: responseInfo.stats,
       tests: responseInfo.suites.suites[0].tests,
-      error: errorMessages.join('\n\n'),
-      challengeStatus
+      error: errorMessages.join('\n\n')
     }
 
     if (results.stats.passPercent === 100 && !challengeStatus) {
