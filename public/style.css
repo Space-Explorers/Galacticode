@@ -363,3 +363,61 @@ progress::-webkit-progress-value {
 }
 
 /* END VICTORY MODAL */
+
+/* START PLANET SELECT */
+
+.planet-select {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 16% 84%;
+  grid-template-areas: 'planet-header planet-header planet-header' 'planet1 planet2 planet3';
+  padding: 30px 40px;
+  max-width: 1000px;
+  height: 70vh;
+  background-color: rgb(4, 5, 10, 0.8);
+}
+
+.planet-header {
+  left: 0;
+  right: 0;
+  margin: auto;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: space-between;
+}
+
+.planet1 {
+  grid-area: planet1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px 40px;
+}
+
+.planet-img:hover {
+  background-color: #98d5f8
+}
+
+.planet2 {
+  grid-area: planet2;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px 40px;
+}
+
+.planet3 {
+  grid-area: planet3;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px 40px;
+}
+
+/* END PLANET SELECT */
