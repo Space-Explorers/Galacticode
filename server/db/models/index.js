@@ -21,6 +21,9 @@ Challenge.belongsToMany(User, { through: 'SolvedChallenges' })
 Challenge.belongsTo(Planet)
 Planet.hasMany(Challenge)
 
+User.belongsToMany(Planet, { through: 'UnlockedPlanets' })
+Planet.belongsToMany(User, { through: 'UnlockedPlanets' })
+
 module.exports = {
   User,
   Challenge,

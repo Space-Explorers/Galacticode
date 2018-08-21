@@ -10,6 +10,10 @@ const Planet = db.define('planet', {
   color: {
     type: Sequelize.STRING,
     unique: true
+  },
+  img: {
+    type: Sequelize.STRING,
+    defaultValue: '/gray-icosahedron.png'
   }
 })
 
