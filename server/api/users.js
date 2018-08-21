@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { User } = require('../db/models')
+const {User} = require('../db/models')
 const Op = require('sequelize').Op
 module.exports = router
 
@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-
 router.get('/:userId/progress', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId, {
@@ -29,14 +28,15 @@ router.get('/:userId/progress', async (req, res, next) => {
   }
 })
 
-
 router.get('/:userId/challenges', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId)
-    const challenges = await user.getChallenges({
-      attributes: ['id']
-    })
-    res.json(challenges)
+    if (req.user.id === +req.params.userId) {
+      const user = await User.findById(req.params.userId)
+      const challenges = await user.getChallenges({
+        attributes: ['id', 'name', 'skillLevel', 'solution']
+      })
+      res.json(challenges)
+    } else res.json('Not authorized')
   } catch (err) {
     next(err)
   }

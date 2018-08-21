@@ -27,6 +27,10 @@ a {
   color: #fff;
 }
 
+a:hover {
+  color: #fb8b0b;
+}
+
 label {
   display: block;
 }
@@ -157,7 +161,6 @@ canvas {
   color: #fff;
   border-radius: 20px;
 }
-
 
 /* END BUTTONS */
 

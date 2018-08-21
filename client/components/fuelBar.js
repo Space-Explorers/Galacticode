@@ -14,9 +14,7 @@ class FuelBar extends Component {
       <div>
         <progress value={progress || 0} max="100" />
         <p>{progress || 0}/100</p>
-        {progress === 100 && (
-          <Victory />
-        )}
+        {progress === 100 && <Victory />}
       </div>
     )
   }

@@ -2,23 +2,32 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSolvedData} from '../store'
+import {Editor} from './index'
 
 class UserAccount extends Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedSolution: ''
+    }
+  }
   componentDidMount() {
     this.props.fetchCompletedChallenges(this.props.user.id)
   }
 
   render() {
-    const {user, completedChallenges} = this.props
-    console.log('COMP', completedChallenges)
+    const {user, completedChallenges, progress} = this.props
     if (user.id) {
       return (
         <div className="main-wrapper">
           <div className="challenge-header">
-            <h2>Player Name: {user.name || user.email}</h2>
+            <div>
+              <h2>Player Name: {user.name || user.email}</h2>
+              <h2>Total Fuel Points: {progress}</h2>
+            </div>
             <button
               className="btn btn-close"
-              onClick={() => props.history.goBack()}
+              onClick={() => this.props.history.goBack()}
             >
               Back
             </button>
@@ -27,15 +36,30 @@ class UserAccount extends Component {
             <h3>Completed Challenges</h3>
             {completedChallenges && completedChallenges[0] ? (
               completedChallenges.map(chall => (
-                <Link key={chall.id} to={`/challenge/${chall.id}`}>
-                  {chall.id}
-                </Link>
+                <div key={chall.id}>
+                  <p>
+                    <Link to={`/challenge/${chall.id}`}>{chall.name}</Link>
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <a
+                      onClick={() =>
+                        this.setState({selectedSolution: chall.solution})
+                      }
+                    >
+                      View Solution
+                    </a>
+                  </p>
+                </div>
               ))
             ) : (
               <p>You haven't solved any challenges yet. Get coding!</p>
             )}
-            {/* <p>map solved challenges</p> */}
-            }
+            <h3>Planets Unlocked</h3>
+            <div>
+              <p>INSERT PLANET IMAGES HERE</p>
+            </div>
+          </div>
+          <div>
+            <Editor value={this.state.selectedSolution} />
           </div>
         </div>
       )
@@ -46,7 +70,8 @@ class UserAccount extends Component {
 const mapState = state => {
   return {
     user: state.user,
-    completedChallenges: state.solvedChallenges.completedChallenges
+    completedChallenges: state.solvedChallenges.completedChallenges,
+    progress: state.progress
   }
 }
 
