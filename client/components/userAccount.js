@@ -53,9 +53,9 @@ class UserAccount extends Component {
             ) : (
               <p>You haven't solved any challenges yet. Get coding!</p>
             )}
-            <h3>Planets Unlocked</h3>
+            <h3>Current Planet</h3>
             <div>
-              <p>INSERT PLANET IMAGES HERE</p>
+              <p>INSERT FURTHEST PLANET HERE</p>
             </div>
           </div>
           <div>
