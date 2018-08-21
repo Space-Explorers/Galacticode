@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { Planet, Challenge } = require('../db/models')
-
 module.exports = router
+
 router.get('/', async (req, res, next) => {
   try {
     const planets = await Planet.findAll()
