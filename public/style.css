@@ -263,6 +263,14 @@ canvas {
 
 /* END OVERLAY COMPONENTS */
 
+/* START USER ACCOUNT */
+
+#user-challenges {
+  grid-area: main;
+}
+
+/* END USER ACCOUNT */
+
 /* START FUEL BAR */
 
 progress {
