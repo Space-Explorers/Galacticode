@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import Popup from 'reactjs-popup'
 import {Link} from 'react-router-dom'
+import {resetFuelBar} from '../store'
+import {connect} from 'react-redux'
 
 class Victory extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Victory extends Component {
     this.setState({
       open: false
     })
+    this.props.resetProgressBar()
   }
 
   render() {
@@ -47,9 +50,7 @@ class Victory extends Component {
               <Link to="/">
                 <button type="button" className="btn btn-modal" onClick={this.closeModal}>Blast Off!</button>
               </Link>
-              <Link to="/play">
-                <button type="button" className="btn btn-modal" onClick={this.closeModal}>Not Yet</button>
-              </Link>
+              <button type="button" className="btn btn-modal" onClick={this.closeModal}>Not Yet</button>
             </div>
           </div>
         </Popup>
@@ -58,4 +59,11 @@ class Victory extends Component {
   }
 }
 
-export default Victory
+const mapDispatchToProps = dispatch => ({
+  resetProgressBar: () => dispatch(resetFuelBar())
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Victory)

@@ -34,7 +34,8 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   progress: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 
