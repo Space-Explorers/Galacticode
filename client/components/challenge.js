@@ -92,7 +92,7 @@ class Challenge extends Component {
             className="btn btn-close"
             onClick={() => this.props.history.goBack()}
           >
-            Close
+            Back
           </button>
         </div>
 
