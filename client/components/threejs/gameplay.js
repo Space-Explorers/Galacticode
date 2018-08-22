@@ -99,12 +99,12 @@ const clock = new THREE.Clock();
 ***************************************************************/
 
 function createFloor() {
-  var planeGeometry = new THREE.PlaneGeometry(500, 500, 1, 1);
-  var planeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+  var planeGeometry = new THREE.PlaneGeometry(400, 400, 1, 1);
+  var planeMaterial = new THREE.MeshStandardMaterial({ color: 0x243DCF })
   ground = new THREE.Mesh(planeGeometry, planeMaterial);
   // ground.receiveShadow = true;
   // ground.castShadow = false;
-  ground.rotation.x = -Math.PI / 2;
+  ground.rotation.x = -Math.PI / 2.0005;
   return ground
 }
 
@@ -127,47 +127,50 @@ function createFloor() {
 
 //Challenges
 function addChallenge(pos1, pos2, pos3) {
-  let newChallenge = new THREE.Mesh(
-    new THREE.TorusGeometry(),
-    new THREE.MeshBasicMaterial({ color: 0xF9B8B5, shading: THREE.Flatshading }, 2, 0)
-  )
+
+  var geometry = new THREE.ConeGeometry(5, 10, 5);
+  var material = new THREE.MeshBasicMaterial({ color: 0xB1BEEF });
+  var newChallenge = new THREE.Mesh(geometry, material);
+
+
+  // let newChallenge = new THREE.Mesh(
+  //   new THREE.TorusGeometry(),
+  //   new THREE.MeshBasicMaterial({ color: 0xF9B8B5, shading: THREE.Flatshading }, 2, 0)
+  // )
   newChallenge.castShadow = true
   // challenge.addEventlistener('collision', onCollision)
   newChallenge.position.set(pos1, pos2, pos3)
   return newChallenge
 }
 
-// const keyMap = [];
-//   document.addEventListener('keydown', onDocumentKeyDown, true);
-//   document.addEventListener('keyup', onDocumentKeyUp, true);
-// function onDocumentKeyDown(event) {
-//     const keyCode = event.keyCode;
-//     keyMap[keyCode] = true;
-//   }
-// function onDocumentKeyUp(event) {
-//     const keyCode = event.keyCode;
-//     keyMap[keyCode] = false;
-//   }
+// function addHero() {
+//   var sphereGeometry = new THREE.DodecahedronGeometry(heroRadius, 1);
+//   var sphereMaterial = new THREE.MeshStandardMaterial({ color: 0xe5f2f2, shading: THREE.FlatShading })
+//   jumping = false;
+//   heroSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+//   heroSphere.receiveShadow = true;
+//   heroSphere.castShadow = true;
+//   scene.add(heroSphere);
+//   heroSphere.position.y = heroBaseY;
+//   heroSphere.position.z = 4.8;
+//   currentLane = middleLane;
+//   heroSphere.position.x = currentLane;
+// }
 
-
-
-// const update = function () {
-
-//   // THREE.AnimationHandler.update(delta)
-//   // if (controls) controls.update(delta)
-//   camera.lookAt(scene.position)
-//   scene.simulate(); // run physics
-//   requestAnimationFrame(update);
-//   render()
-// };
-
+//  ALIEN
 function createAlien(alienSize, alienColor) {
-  alienSize = alienSize || 4;
-  alienColor = alienColor || 0xDADADA;
-  var alienGeometry = new THREE.BoxGeometry(alienSize, alienSize, alienSize);
-  var alienMaterial = new THREE.MeshLambertMaterial({ color: 0xF9B8B5 });
-  var alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
+  var alienGeometry = new THREE.DodecahedronGeometry(4);
+  var alienMaterial = new THREE.MeshStandardMaterial({ color: 0xED1D69, shading: THREE.FlatShading })
+  const alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
   alienFigure.position.set(0, alienSize / 2, 0);
+  alienFigure.receiveShadow = true;
+  alienFigure.castShadow = true;
+  // alienSize = alienSize || 4;
+  // // alienColor = alienColor || 0xF61A17;
+  // var alienGeometry = new THREE.BoxGeometry(alienSize, alienSize, alienSize);
+  // var alienMaterial = new THREE.MeshLambertMaterial({ color: 0xF61A17 });
+  // var alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
+  // alienFigure.position.set(0, alienSize / 2, 0);
   return alienFigure;
 }
 
@@ -197,32 +200,6 @@ function updateAlien() {
   camera.position.y = cameraOffset.y;
   camera.position.z = cameraOffset.z;
   camera.lookAt(alien.position);
-
-  // document.addEventListener("keydown", function (event) {
-  //   let key = event.keyCode
-  //   let movement = new THREE.Vector3(0, 0, 0)
-  //   switch (key) {
-  //     case 87: {
-  //       movement.z = -1 * forceAmount
-  //       console.log('UPPPPPP')
-  //     } break
-  //     case 83: {
-  //       movement.z = 1 * forceAmount
-  //       console.log('DOWN')
-  //     } break
-  //     case 65: {
-  //       movement.x = -1 * forceAmount
-  //       console.log('left')
-  //     } break
-  //     case 68: {
-  //       movement.x = 1 * forceAmount
-  //       console.log('right')
-  //     } break
-  //   }
-  // alien.applyForce(movement, new THREE.Vector3(0, 1, 0))
-
-  // })
-  // window.addEventListener('resize', onWindowResize, false)
 
 }
 
@@ -272,11 +249,24 @@ function initializeScene() {
   // $(containerID).append(renderer.domElement);
 
   // Ambient light
-  var lightAmbient = new THREE.AmbientLight(0x5a5a5a);
-  var lightSource = new THREE.PointLight(0x7a7a7a);
-  lightSource.position.set(0, 50, -100);
-  scene.add(lightAmbient);
-  scene.add(lightSource);
+  // var lightAmbient = new THREE.AmbientLight(0x5a5a5a);
+  // var lightSource = new THREE.PointLight(0x7a7a7a);
+  // lightSource.position.set(0, 50, -100);
+  // scene.add(lightAmbient);
+  // scene.add(lightSource);
+
+  var hemisphereLight = new THREE.HemisphereLight(0xfffafa, 0x000000, .9)
+  scene.add(hemisphereLight);
+  sun = new THREE.DirectionalLight(0xcdc1c5, 0.9);
+  sun.position.set(12, 6, -7);
+  sun.castShadow = true;
+  scene.add(sun);
+  //Set up shadow properties for the sun light
+  sun.shadow.mapSize.width = 256;
+  sun.shadow.mapSize.height = 256;
+  sun.shadow.camera.near = 0.5;
+  sun.shadow.camera.far = 50;
+
 
   // Starter floor grid
   var floor = createFloor();
@@ -284,17 +274,25 @@ function initializeScene() {
 
   // Add Movable Cube
   alien = createAlien();
+  alien.position.y = 2;
+  alien.position.z = 4.8;
   scene.add(alien);
 
   // Add Challenge
-  const challenge1 = addChallenge(20, 10, 1)
+  const challenge1 = addChallenge(20, 5, 1)
   scene.add(challenge1)
 
-  const challenge2 = addChallenge(-30, 10, 20)
+  const challenge2 = addChallenge(-30, 5, 20)
   scene.add(challenge2)
 
-  const challenge3 = addChallenge(-100, 10, -20)
+  const challenge3 = addChallenge(-100, 5, -20)
   scene.add(challenge3)
+
+  const challenge4 = addChallenge(50, 5, -50)
+  scene.add(challenge4)
+
+  const challenge5 = addChallenge(-200, 5, -71)
+  scene.add(challenge5)
 
 
 }
