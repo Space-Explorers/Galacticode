@@ -18,83 +18,6 @@ let forceAmount = 100,
 const clock = new THREE.Clock();
 gravity = -5
 
-// const gridColor = 0x86FBC6
-
-// const createScene = function () {
-
-//   sceneWidth = window.innerWidth;
-//   sceneHeight = window.innerHeight;
-
-//   renderer = new THREE.WebGLRenderer({ alpha: true })
-//   // renderer.shadowMap.enabled = true;//enable shadow
-//   // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-//   // renderer.setClearColor(0x000000, 0)
-//   renderer.setSize(sceneWidth, sceneHeight)
-//   document.body.appendChild(renderer.domElement)
-
-//   scene = new Physijs.Scene()
-//   scene.setGravity(new THREE.Vector3(0, -10, 0))
-//   // scene.background = new THREE.Color(0x252940);
-//   clock = new Clock();
-
-//   const frustumSize = 1000
-//   const aspect = sceneWidth / sceneHeight
-//   camera = new THREE.PerspectiveCamera(
-//     45,
-//     window.innerWidth / window.innerHeight,
-//     0.1,
-//     1000
-//   );
-//   camera.position.z = 100
-//   camera.position.y = 35
-//   controls = new REALTHREE.OrbitControls(camera)
-//   // camera.position.set(60, 50, 60);
-//   // camera.lookAt(scene.position);
-//   scene.add(camera);
-
-//   sun = new THREE.DirectionalLight(0xffffff, 0.8);
-//   sun.position.set(0, 4, 1);
-//   sun.castShadow = true;
-//   scene.add(sun);
-//   //Set up shadow properties for the sun light
-//   // sun.shadow.mapSize.width = 256;
-//   // sun.shadow.mapSize.height = 256;
-//   // sun.shadow.camera.near = 0.5;
-//   // sun.shadow.camera.far = 50;
-
-//   // Box
-//   box = new Physijs.BoxMesh(
-//     new THREE.CubeGeometry(5, 5, 5),
-//     new THREE.MeshBasicMaterial({ color: 0x888888 }),
-//     5
-//   );
-//   // scene.add(box);
-
-//   // GROUND V2
-//   var geo = new THREE.CubeGeometry(5000, 0.1, 5000);
-//   var mat = new Physijs.createMaterial(new THREE.MeshLambertMaterial({ color: '#86FBC6' }, 1, 0.3));
-//   ground = new Physijs.BoxMesh(geo, mat, 0);
-//   ground.receiveShadow = true
-//   ground.position.set(0, 0, 0)
-//   // ground.rotation.x = -Math.PI / 2;
-//   // ground.position.y = -170;
-//   scene.add(ground);
-
-//   // // -------------GROUND v3
-//   // ground = new THREE.Mesh(
-//   //   new THREE.PlaneGeometry(10000, 10000, 100, 100),
-//   //   new THREE.MeshNormalMaterial()
-//   // );
-//   // ground.rotation.x = -Math.PI / 2
-//   // ground.position.y = -170
-//   const newChallenge = addChallenge()
-//   // newChallenge.addEventlistener('collision', onCollision)
-//   // scene.add(newChallenge)
-//   addAlien(new THREE.Vector3(0, 5, 0))
-
-//   // requestAnimationFrame(render);
-// }
-
 /***************************************************************
 * Custom User Functions
 ***************************************************************/
@@ -111,22 +34,6 @@ function createFloor() {
   ground.rotation.x = -Math.PI / 2.0005;
   return ground
 }
-
-// ALIEN
-// function addAlien() {
-//   const alienMaterial = Physijs.createMaterial(
-//     new THREE.MeshPhongMaterial({ color: 0xD80E58 }), 0.8, 0.8 // low restitution
-//   );
-
-//   alien = new Physijs.SphereMesh(new THREE.SphereGeometry(5, 32, 32), alienMaterial, 5 // mass
-//   );
-//   alien.position.set(0, 4 / 2, 0);
-//   alien.receiveShadow = true
-//   alien.castShadow = true
-//   scene.add(alien);
-// }
-
-
 
 
 //Challenges
