@@ -8,7 +8,7 @@ import OrbitControls from './orbitControls'
 import { THREEx } from './keyboardState'
 var keyboard = new THREEx.KeyboardState();
 
-var sceneWidth, sceneHeight, renderer, scene, camera, sun, ground, controls, clock, alien, box;
+var sceneWidth, sceneHeight, renderer, scene, camera, sun, ground, controls, alien, box, challenge;
 
 let forceAmount = 100,
   fov = 45,
@@ -16,6 +16,8 @@ let forceAmount = 100,
   zoomY = 20,
   zoomZ = 40;
 const clock = new THREE.Clock();
+
+// const gridColor = 0x86FBC6
 
 // const createScene = function () {
 
@@ -96,21 +98,14 @@ const clock = new THREE.Clock();
 * Custom User Functions
 ***************************************************************/
 
-function basicFloorGrid(lines, steps, gridColor) {
-  lines = lines || 40;
-  steps = steps || 2;
-  gridColor = gridColor || 0xFFFFFF;
-  var floorGrid = new THREE.Geometry();
-
-  var gridLine = new THREE.LineBasicMaterial({ color: gridColor });
-
-  for (var i = -lines; i <= lines; i += steps) {
-    floorGrid.vertices.push(new THREE.Vector3(-lines, 0, i));
-    floorGrid.vertices.push(new THREE.Vector3(lines, 0, i));
-    floorGrid.vertices.push(new THREE.Vector3(i, 0, -lines));
-    floorGrid.vertices.push(new THREE.Vector3(i, 0, lines));
-  }
-  return new THREE.Line(floorGrid, gridLine, THREE.LinePieces);
+function createFloor() {
+  var planeGeometry = new THREE.PlaneGeometry(500, 500, 1, 1);
+  var planeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+  ground = new THREE.Mesh(planeGeometry, planeMaterial);
+  // ground.receiveShadow = true;
+  // ground.castShadow = false;
+  ground.rotation.x = -Math.PI / 2;
+  return ground
 }
 
 // ALIEN
@@ -127,28 +122,20 @@ function basicFloorGrid(lines, steps, gridColor) {
 //   scene.add(alien);
 // }
 
-function createAlien(alienSize, alienColor) {
-  alienSize = alienSize || 4;
-  alienColor = alienColor || 0xDADADA;
-  var alienGeometry = new THREE.BoxGeometry(alienSize, alienSize, alienSize);
-  var alienMaterial = new THREE.MeshLambertMaterial({ color: 0xcccccc });
-  var alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
-  alienFigure.position.set(0, alienSize / 2, 0);
-  return alienFigure;
-}
 
 
 
 //Challenges
-// function addChallenge() {
-//   let challenge = new Physijs.ConvexMesh(
-//     new THREE.TorusGeometry(100, 50, 8, 20),
-//     new THREE.MeshBasicMaterial({ color: 0xF9B8B5, shading: THREE.Flatshading }, 2, 0)
-//   )
-//   challenge.castShadow = true
-//   // challenge.addEventlistener('collision', onCollision)
-//   return challenge
-// }
+function addChallenge(pos1, pos2, pos3) {
+  let newChallenge = new THREE.Mesh(
+    new THREE.TorusGeometry(),
+    new THREE.MeshBasicMaterial({ color: 0xF9B8B5, shading: THREE.Flatshading }, 2, 0)
+  )
+  newChallenge.castShadow = true
+  // challenge.addEventlistener('collision', onCollision)
+  newChallenge.position.set(pos1, pos2, pos3)
+  return newChallenge
+}
 
 // const keyMap = [];
 //   document.addEventListener('keydown', onDocumentKeyDown, true);
@@ -173,6 +160,16 @@ function createAlien(alienSize, alienColor) {
 //   requestAnimationFrame(update);
 //   render()
 // };
+
+function createAlien(alienSize, alienColor) {
+  alienSize = alienSize || 4;
+  alienColor = alienColor || 0xDADADA;
+  var alienGeometry = new THREE.BoxGeometry(alienSize, alienSize, alienSize);
+  var alienMaterial = new THREE.MeshLambertMaterial({ color: 0xF9B8B5 });
+  var alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
+  alienFigure.position.set(0, alienSize / 2, 0);
+  return alienFigure;
+}
 
 function updateAlien() {
   let delta = clock.getDelta()
@@ -282,12 +279,23 @@ function initializeScene() {
   scene.add(lightSource);
 
   // Starter floor grid
-  var floor = basicFloorGrid(60, 4);
+  var floor = createFloor();
   scene.add(floor);
 
   // Add Movable Cube
   alien = createAlien();
   scene.add(alien);
+
+  // Add Challenge
+  const challenge1 = addChallenge(20, 10, 1)
+  scene.add(challenge1)
+
+  const challenge2 = addChallenge(-30, 10, 20)
+  scene.add(challenge2)
+
+  const challenge3 = addChallenge(-100, 10, -20)
+  scene.add(challenge3)
+
 
 }
 
