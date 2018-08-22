@@ -3,7 +3,7 @@
 const db = require('../server/db')
 const fs = require('fs')
 var path = require('path')
-const {User, Challenge, Planet} = require('../server/db/models')
+const {Challenge, Planet} = require('../server/db/models')
 
 const greetingSpecs = fs.readFileSync(
   path.join(__dirname, '/specs/greeting.spec.js'),
@@ -259,19 +259,19 @@ const planets = [
   {
     id: 1,
     name: 'Puchayria',
-    color: 'blue',
-    img: '/Blue_Planet.png'
+    color: 'Blue',
+    unlockedImg: '/Blue_Planet.png'
   },
   {
     id: 2,
     name: 'Stoxupra',
-    color: 'pink',
-    img: '/Pink_Planet.png'
+    color: 'Pink',
+    unlockedImg: '/Pink_Planet.png'
   },
   {
     id: 3,
     name: 'Aclade',
-    color: 'orange'
+    color: 'Orange'
   },
   {
     id: 4,

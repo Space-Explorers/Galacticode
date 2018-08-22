@@ -11,9 +11,13 @@ const Planet = db.define('planet', {
     type: Sequelize.STRING,
     unique: true
   },
-  img: {
+  lockedImg: {
     type: Sequelize.STRING,
     defaultValue: '/Gray_Planet.png'
+  },
+  unlockedImg: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 
