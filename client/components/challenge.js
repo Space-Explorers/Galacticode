@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
   getResults,
   getChallengeData,
@@ -192,3 +192,5 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
+
+

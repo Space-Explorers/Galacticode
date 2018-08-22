@@ -1,16 +1,11 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {gameCoreDemo} from './game/game.core.demo'
+import { Link } from 'react-router-dom'
+import gamePlayEnvironment from './threejs/gameplay';
 
 const Game = () => (
   <div>
-      {window.gameInstance = window.game.core()}
-			{	window.gameInstance.init({
-					domContainer: document.querySelector("#game"),
-					rendererClearColor: window.game.static.white
-				})
-}
-  {/* <div className="main-wrapper">
+    {gamePlayEnvironment()}
+    {/* <div className="main-wrapper">
     <p>** Gameplay goes here **</p>
     <Link to="/challenge/1">Challenge #1 - Greeting</Link>
     <Link to="/challenge/2">Challenge #2 - Do You Play The Theremin?</Link>
