@@ -1,9 +1,9 @@
-const NodePhysijs = require('nodejs-physijs')
-const PhysicsTHREE = NodePhysijs.THREE
+// const NodePhysijs = require('nodejs-physijs')
+// const PhysicsTHREE = NodePhysijs.THREE
 import * as THREE from 'three'
-import OrbitControls from './orbitControls'
-const Ammo = NodePhysijs.Ammo
-const Physijs = NodePhysijs.Physijs(THREE, Ammo)
+// import OrbitControls from './orbitControls'
+// const Ammo = NodePhysijs.Ammo
+// const Physijs = NodePhysijs.Physijs(THREE, Ammo)
 // import { Clock } from './clock'
 import { THREEx } from './keyboardState'
 var keyboard = new THREEx.KeyboardState();
@@ -16,7 +16,7 @@ let forceAmount = 100,
   zoomY = 20,
   zoomZ = 40;
 const clock = new THREE.Clock();
-gravity = -5
+// const cubes =[]
 
 /***************************************************************
 * Custom User Functions
@@ -41,16 +41,12 @@ function addChallenge(pos1, pos2, pos3) {
 
   var geometry = new THREE.CylinderGeometry(0,2,4, 32);
   var material = new THREE.MeshBasicMaterial({ color: 0xB1BEEF });
-  var newChallenge = new Physijs.ConeMesh(geometry, material);
-
-
-  // let newChallenge = new THREE.Mesh(
-  //   new THREE.TorusGeometry(),
-  //   new THREE.MeshBasicMaterial({ color: 0xF9B8B5, shading: THREE.Flatshading }, 2, 0)
-  // )
+  var newChallenge = new THREE.Mesh(geometry, material);
+  // var cubeGeometry = new THREE.BoxGeometry( 2, 2, 2 );
+	// var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xff2255 } );
+	// var newChallenge = new THREE.Mesh( cubeGeometry, cubeMaterial );
   newChallenge.castShadow = true
   newChallenge.receiveShadow = true
-  // challenge.addEventlistener('collision', onCollision)
   newChallenge.position.set(pos1, pos2, pos3)
   return newChallenge
 }
@@ -59,7 +55,7 @@ function addChallenge(pos1, pos2, pos3) {
 function createAlien(alienSize, alienColor) {
   var alienGeometry = new THREE.OctahedronGeometry(1.7, 1);
   var alienMaterial = new THREE.MeshStandardMaterial({ color: 0xED1D69, shading: THREE.FlatShading })
-  const alienFigure = new Physijs.ConvexMesh(alienGeometry, alienMaterial);
+  const alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
   alienFigure.position.set(0, alienSize / 2, 0);
   alienFigure.receiveShadow = true;
   alienFigure.castShadow = true;
@@ -95,11 +91,49 @@ function updateAlien() {
 
 }
 
+
+
+// function checkCollision() {
+
+// 	cubes.forEach( function ( cube ) {
+// 		cube.material.transparent = false;
+// 		cube.material.opacity = 1.0;
+
+// 	} );
+
+// 	var cube = scene.getObjectByName( 'cube' );
+// 	var originPoint = cube.position.clone()
+
+// 	for ( var vertexIndex = 0; vertexIndex < cube.geometry.vertices.length; vertexIndex ++ ) {
+
+// 		// console.log( vertexIndex );
+
+// 		var localVertex = cube.geometry.vertices[ vertexIndex ].clone();
+// 		var globalVertex = localVertex.applyMatrix4( cube.matrix );
+// 		var directionVector = globalVertex.sub( cube.position );
+
+// 		var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
+// 		var collisionResults = ray.intersectObjects( cubes );
+
+// 		if ( collisionResults.length > 0 && collisionResults[ 0 ].distance < directionVector.length() ) {
+
+// 			console.log( collisionResults[ 0 ].object.name );
+// 			collisionResults[ 0 ].object.material.transparent = true;
+// 			collisionResults[ 0 ].object.material.opacity = 0.4;
+
+// 		}
+
+// 	}
+
+// }
+
+
 /***************************************************************
 * Helper Functions Declarations
 ***************************************************************/
 
 function renderScene() {
+  // checkCollision()
   renderer.render(scene, camera);
 }
 
@@ -167,18 +201,23 @@ function initializeScene() {
   // Add Challenge
   const challenge1 = addChallenge(20, 2, 1)
   scene.add(challenge1)
+  // cubes.push(challenge1)
 
-  const challenge2 = addChallenge(-30, 2, 20)
-  scene.add(challenge2)
+  // const challenge2 = addChallenge(-30, 2, 20)
+  // scene.add(challenge2)
+  // challenges.push(challenge2)
 
-  const challenge3 = addChallenge(-100, 2, -20)
-  scene.add(challenge3)
+  // const challenge3 = addChallenge(-100, 2, -20)
+  // scene.add(challenge3)
+  // challenges.push(challenge3)
 
-  const challenge4 = addChallenge(50,2, -50)
-  scene.add(challenge4)
+  // const challenge4 = addChallenge(50,2, -50)
+  // scene.add(challenge4)
+  // challenges.push(challenge4)
 
-  const challenge5 = addChallenge(-200, 2, -71)
-  scene.add(challenge5)
+  // const challenge5 = addChallenge(-200, 2, -71)
+  // scene.add(challenge5)
+  // challenges.push(challenge5)
 
 }
 
