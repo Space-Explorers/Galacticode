@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
   getResults,
   getChallengeData,
   getIsChallengeSolved,
   getProgressData
 } from '../store'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Editor from './editor'
 
 class Challenge extends Component {
@@ -139,3 +139,5 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(Challenge)
+
+
