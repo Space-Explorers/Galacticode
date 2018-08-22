@@ -117,7 +117,7 @@ export default function planetBackground() {
     )
     thirdPlanet.rotation.set(0.4,0.3,0)
     thirdPlanet.receiveShadow = true
-    thirdPlanet.position.set(-250, 300, 90)
+    thirdPlanet.position.set(-310, 300, -20)
 
 
   drawStars()

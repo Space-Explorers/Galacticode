@@ -5,7 +5,7 @@ describe('askPolitely', function() {
     expect(askPolitely).to.be.a('function')
   })
 
-  it('lastDigit returns a string value', function() {
+  it('askPolitely returns a string value', function() {
     var returnValue = askPolitely('May I borrow your pencil please?'),
       typeOf = typeof returnValue
 

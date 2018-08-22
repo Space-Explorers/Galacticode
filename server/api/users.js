@@ -1,6 +1,5 @@
 const router = require('express').Router()
-const { User } = require('../db/models')
-const Op = require('sequelize').Op
+const {User} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -17,6 +16,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:userId/planets', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId)
+    user.addPlanet(1)
+    const unlockedPlanets = await user.getPlanets({
+      attributes: ['id', 'name', 'img']
+    })
+    res.json(unlockedPlanets)
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.get('/:userId/progress', async (req, res, next) => {
   try {
@@ -29,14 +40,15 @@ router.get('/:userId/progress', async (req, res, next) => {
   }
 })
 
-
 router.get('/:userId/challenges', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId)
-    const challenges = await user.getChallenges({
-      attributes: ['id']
-    })
-    res.json(challenges)
+    if (req.user.id === +req.params.userId) {
+      const user = await User.findById(req.params.userId)
+      const challenges = await user.getChallenges({
+        attributes: ['id', 'name', 'skillLevel', 'solution']
+      })
+      res.json(challenges)
+    } else res.json('Not authorized')
   } catch (err) {
     next(err)
   }

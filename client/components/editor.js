@@ -52,7 +52,7 @@ class Editor extends Component {
           showLineNumbers: this.props.showLineNumbers
         }}
         width={this.state.width}
-        height={this.state.height}
+        height={this.props.height || this.state.height}
       />
     )
   }

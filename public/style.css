@@ -27,6 +27,10 @@ a {
   color: #fff;
 }
 
+a:hover {
+  color: #fb8b0b;
+}
+
 label {
   display: block;
 }
@@ -65,10 +69,9 @@ p {
   margin: auto;
 }
 
-/* nav{
-  position: absolute;
-  z-index: 100;
-} */
+#nav-logo {
+  width: 250px;
+}
 
 nav a {
   display: inline-block;
@@ -84,11 +87,15 @@ nav li {
   display: inline-block;
 }
 
+li.dropdown:hover {
+  background-color: #272822;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
   padding: 0;
-  z-index: 101;
+  z-index: 200;
 }
 
 .dropdown-content a {
@@ -98,6 +105,7 @@ nav li {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  background-color: #272822;
 }
 
 /* END NAVBAR */
@@ -118,32 +126,43 @@ canvas {
 /* START BUTTONS */
 
 .btn {
-  width: 60px;
   height: 3em;
   border: none;
   background: none;
   cursor: pointer;
   display: inline-block;
-  margin: 15px 0px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   outline: none;
   position: relative;
 }
 
 .btn-close {
+  width: 65px;
   background: #995e78;
   color: #fff;
-  box-shadow: 0 6px #7e4f63;
-  transition: none;
   border-radius: 20px;
 }
 
 .btn-submit {
+  width: 65px;
+  margin: 15px 0px;
   background: #43afee;
   color: #fff;
-  box-shadow: 0 6px #257bad;
-  transition: none;
+  border-radius: 20px;
+}
+
+.btn-login {
+  width: 180px;
+  background: #43afee;
+  color: #fff;
+  border-radius: 20px;
+}
+
+.btn-modal {
+  width: 110px;
+  background: #43afee;
+  color: #fff;
   border-radius: 20px;
 }
 
@@ -151,10 +170,45 @@ canvas {
 
 /* START OVERLAY COMPONENTS */
 
-.outer-flex {
-  position: relative;
+/* START LOGIN */
+
+#login-wrapper {
+  position: absolute;
   margin: auto;
+  z-index: 100;
+  top: 100px;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  min-width: 250px;
+  max-width: 700px;
+  background-color: rgb(4, 5, 10, 0.8);
 }
+
+#login-logo {
+  width: 75%;
+}
+
+#intro {
+  font-size: 18px;
+  line-height: 26px;
+  width: 75%;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#login-buttons {
+  display: flex;
+  /* flex-direction: column;
+  align-items: center; */
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* END LOGIN */
 
 .main-wrapper {
   position: absolute;
@@ -162,9 +216,11 @@ canvas {
   left: 0;
   right: 0;
   margin: auto;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 16% 66% 16%;
+  grid-template-areas: 'header header' 'main editor' 'footer footer';
   padding: 30px 40px;
   max-width: 1000px;
   height: 70vh;
@@ -172,39 +228,33 @@ canvas {
 }
 
 .challenge-header {
+  grid-area: header;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  flex: 1 1 auto;
-}
-
-.content-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex: 4 4 auto;
 }
 
 .submit-button {
+  grid-area: footer;
   display: flex;
   justify-content: flex-end;
-  flex: 1 1 auto;
 }
 
 .prompt {
+  grid-area: main;
   display: flex;
   flex-direction: column;
-  flex: 1 1 50%;
   text-align: justify;
 }
 
 .editor {
-  flex: 1 1 50%;
+  grid-area: editor;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+  height: 100%;
   text-align: justify;
 }
 
@@ -225,34 +275,42 @@ canvas {
 #results-stats {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-evenly; */
 }
 
 #results-stats p {
   margin-right: 15px;
 }
 
-#intro {
-  width: 75%;
-  margin: auto;
-  text-align: center;
-}
-
-#intro-header {
-  text-align: center;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-#login-buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  margin-top: 50px;
-}
-
 /* END OVERLAY COMPONENTS */
+
+/* START USER ACCOUNT */
+
+.account-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 20% 40% 40%;
+  grid-template-areas: 'header header header' 'challenges editor editor' 'challenges planet planet';
+  padding: 30px 40px;
+  max-width: 1000px;
+  height: 70vh;
+  background-color: rgb(4, 5, 10, 0.8);
+}
+
+#user-challenges {
+  grid-area: challenges;
+}
+
+#user-planet {
+  grid-area: planet;
+}
+
+/* END USER ACCOUNT */
 
 /* START FUEL BAR */
 
@@ -293,3 +351,82 @@ progress::-webkit-progress-value {
 }
 
 /* END FUEL BAR */
+
+/* START VICTORY MODAL */
+
+.modal {
+  position: absolute;
+  z-index: 100;
+  background: rgb(4, 5, 10, 0.8);
+  padding: 30px;
+}
+
+.modal > .close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal > .header {
+  font-size: 2em;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+}
+
+.modal > .content {
+  width: 100%;
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.modal > .actions {
+  width: 100%;
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+}
+
+/* END VICTORY MODAL */
+
+/* START PLANET SELECT */
+
+.planet-select {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 16% 84%;
+  grid-template-areas: 'planet-header planet-header planet-header' 'planet1 planet2 planet3';
+  padding: 30px 40px;
+  max-width: 1000px;
+  height: 70vh;
+  background-color: rgb(4, 5, 10, 0.8);
+}
+
+.planet-header {
+  left: 0;
+  right: 0;
+  margin: auto;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: space-between;
+}
+
+.planet {
+  grid-area: planet1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px 40px;
+}
+
+.planet-img:hover {
+  background-color: #98d5f8;
+}
+
+/* END PLANET SELECT */

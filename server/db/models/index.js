@@ -1,5 +1,6 @@
 const User = require('./user')
 const Challenge = require('./challenge')
+const Planet = require('./planet')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -17,7 +18,14 @@ const Challenge = require('./challenge')
 User.belongsToMany(Challenge, { through: 'SolvedChallenges' })
 Challenge.belongsToMany(User, { through: 'SolvedChallenges' })
 
+Challenge.belongsTo(Planet)
+Planet.hasMany(Challenge)
+
+User.belongsToMany(Planet, { through: 'UnlockedPlanets' })
+Planet.belongsToMany(User, { through: 'UnlockedPlanets' })
+
 module.exports = {
+  User,
   Challenge,
-  User
+  Planet
 }
