@@ -210,6 +210,8 @@ canvas {
 
 /* END LOGIN */
 
+/* START CHALLENGE STYLES */
+
 .main-wrapper {
   position: absolute;
   top: 100px;
@@ -281,7 +283,52 @@ canvas {
   margin-right: 15px;
 }
 
-/* END OVERLAY COMPONENTS */
+/* END CHALLENGE STYLES */
+
+/* START CHALLENGE SELECT STYLES */
+
+.list-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: 'list-header challenge1 challenge2' 'challenge3 challenge4 challenge5';
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px 40px;
+  max-width: 1000px;
+  height: 70vh;
+  background-color: rgb(4, 5, 10, 0.8);
+}
+
+.list-hover {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+}
+
+.list-hover p {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.list-hover:hover {
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #fb8b0b;
+}
+
+/* END CHALLENGE SELECT STYLES */
 
 /* START USER ACCOUNT */
 
@@ -316,7 +363,6 @@ canvas {
 
 progress {
   appearance: none;
-  /* border: 3px solid #fff; */
   background-color: #272822;
   border-radius: 30px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
@@ -331,18 +377,8 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-  /* Gradient background with Stripes */
   border-radius: 30px;
-  /* background-image: linear-gradient(45deg, red, blue); */
-  background-image:
-  /* -webkit-linear-gradient(
-      135deg,
-      transparent,
-      transparent 33%,
-      rgba(0, 0, 0, 0.1) 33%,
-      rgba(0, 0, 0, 0.1) 66%,
-      transparent 66%
-    ), */ -webkit-linear-gradient(
+  background-image: -webkit-linear-gradient(
       top,
       rgba(255, 255, 255, 0.25),
       rgba(0, 0, 0, 0.2)
@@ -400,8 +436,11 @@ progress::-webkit-progress-value {
   z-index: 50;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 16% 84%;
-  grid-template-areas: 'planet-header planet-header planet-header' 'planet1 planet2 planet3';
+  grid-template-rows: 10% 45% 45%;
+  grid-template-areas: 'planet-header planet-header planet-header' 'planet1 planet2 planet3' 'planet4 planet5 planet6';
+  justify-items: center;
+  align-items: center;
+  text-align: center;
   padding: 30px 40px;
   max-width: 1000px;
   height: 70vh;
@@ -409,24 +448,50 @@ progress::-webkit-progress-value {
 }
 
 .planet-header {
-  left: 0;
-  right: 0;
-  margin: auto;
-  grid-column: 1 / 4;
-  display: flex;
-  justify-content: space-between;
+  grid-area: planet-header;
 }
 
-.planet {
+#planet1 {
   grid-area: planet1;
+
+}
+
+#planet2 {
+  grid-area: planet2;
+}
+
+#planet3 {
+  grid-area: planet3;
+}
+
+#planet4 {
+  grid-area: planet4;
+}
+
+#planet5 {
+  grid-area: planet5;
+}
+
+#planet6 {
+  grid-area: planet6;
+}
+
+.planet-img {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  padding: 40px 40px;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform .2s;
 }
 
 .planet-img:hover {
   background-color: #98d5f8;
+  /* font-size: 150%; */
+  transform: scale(1.1);
 }
 
 /* END PLANET SELECT */
