@@ -13,23 +13,21 @@ class Home extends Component {
     return (
       <div className="planet-select">
         <div className="planet-header">
-          <h2>SELECT A PLANET!</h2>
+          <h2>SELECT A PLANET</h2>
         </div>
-        <div>
           {planets && (
             planets.map(planet => (
-              <div className="planet" key={planet.id}>
+              <div className="planet-img" id={`planet${planet.id}`} key={planet.id}>
                 <Link to={`/planet/${planet.id}`}>
                   <img
-                    className="planet-img"
                     src={planet.img}
                     width="150"
                     height="150"
                   />
+                  <p>{planet.name}</p>
                 </Link>
               </div>
           )))}
-        </div>
       </div>
     )
   }

@@ -13,7 +13,7 @@ const Planet = db.define('planet', {
   },
   img: {
     type: Sequelize.STRING,
-    defaultValue: '/gray-icosahedron.png'
+    defaultValue: '/Gray_Planet.png'
   }
 })
 
