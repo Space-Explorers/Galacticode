@@ -27,6 +27,10 @@ a {
   color: #fff;
 }
 
+a:hover {
+  color: #fb8b0b;
+}
+
 label {
   display: block;
 }
@@ -278,6 +282,35 @@ canvas {
 }
 
 /* END OVERLAY COMPONENTS */
+
+/* START USER ACCOUNT */
+
+.account-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 20% 40% 40%;
+  grid-template-areas: 'header header header' 'challenges editor editor' 'challenges planet planet';
+  padding: 30px 40px;
+  max-width: 1000px;
+  height: 70vh;
+  background-color: rgb(4, 5, 10, 0.8);
+}
+
+#user-challenges {
+  grid-area: challenges;
+}
+
+#user-planet {
+  grid-area: planet;
+}
+
+/* END USER ACCOUNT */
 
 /* START FUEL BAR */
 
