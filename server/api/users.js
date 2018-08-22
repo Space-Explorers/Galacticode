@@ -21,7 +21,7 @@ router.get('/:userId/planets', async (req, res, next) => {
     const user = await User.findById(req.params.userId)
     user.addPlanet(1)
     const unlockedPlanets = await user.getPlanets({
-      attributes: ['id', 'name', 'img']
+      attributes: ['id', 'name', 'lockedImg', 'unlockedImg']
     })
     res.json(unlockedPlanets)
   } catch (err) {
