@@ -22,7 +22,7 @@ const gotUnlockedPlanets = unlockedPlanets => ({
 })
 
 // THUNK CREATORS
-export const getSinglePlanet = planetId => {
+export const getPlanetChallenges = planetId => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/planets/${planetId}/challenges`)
