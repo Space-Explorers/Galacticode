@@ -62,12 +62,13 @@ class UserAccount extends Component {
             showGutter={false}
             height="150px"
           />
-          <div id="user-planet">
-            <h3>Currently on Planet {currentPlanet.name}</h3>
-            <div>
-              <img width="150" height="150" src={currentPlanet.img} />
+          {currentPlanet && (
+            <div id="user-planet">
+              <div>
+                <img width="150" height="150" src={currentPlanet.img} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )
     }

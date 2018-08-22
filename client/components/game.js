@@ -4,40 +4,48 @@ import {connect} from 'react-redux'
 import {getPlanetChallenges} from '../store'
 
 class Game extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchPlanetChallenges(this.props.match.params.planetId)
   }
 
-  render () {
-    const { planet } = this.props
+  render() {
+    const {challenges} = this.props
     return (
-      <div className="main-wrapper">
-        <h2>SELECT A CHALLENGE!</h2>
+      <div className="list-wrapper">
         <div>
-          {planet && (
-            planet.challenges.map(challenge => (
-              <div key={challenge.id}>
-                <Link to={`/challenge/${challenge.id}`}>{challenge.name}</Link>
-              </div>
-          )))}
+          <h1 id="list-header">
+            SELECT A<br /> CHALLENGE
+          </h1>
+          <br />
+          <button
+            onClick={() => this.props.history.goBack()}
+            className="btn btn-close"
+          >
+            Back
+          </button>
         </div>
-        <div>
-          <Link to="/">Back to Planet Select</Link>
-        </div>
+        {challenges &&
+          challenges.map(challenge => (
+            <Link
+              to={`/challenge/${challenge.id}`}
+              key={challenge.id}
+              className="list-hover"
+            >
+              {challenge.name}
+              <p>{challenge.skillLevel}</p>
+            </Link>
+          ))}
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  planet: state.planets.planet
+  challenges: state.planets.planetChallenges
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchPlanetChallenges: planetId => dispatch(getPlanetChallenges(planetId))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Game)
+export default connect(mapStateToProps, mapDispatchToProps)(Game)
