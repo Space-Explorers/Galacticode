@@ -121,7 +121,9 @@ class Challenge extends Component {
           </div>
           {!this.state.showOutput ? (
             <div className="content">
-              <p>{prompt}</p>
+              <p>
+                {prompt && prompt.map((str, idx) => <p key={idx}>{str}</p>)}
+              </p>
               <h3>Examples: </h3>
               <div className="examples-editor">
                 <Editor
