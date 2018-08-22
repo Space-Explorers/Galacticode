@@ -100,7 +100,10 @@ const clock = new THREE.Clock();
 
 function createFloor() {
   var planeGeometry = new THREE.PlaneGeometry(400, 400, 1, 1);
-  var planeMaterial = new THREE.MeshStandardMaterial({ color: 0x243DCF })
+  var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x205BF8,
+    emissive: 0x0E24F3,
+    side: THREE.DoubleSide,
+    flatShading: true, })
   ground = new THREE.Mesh(planeGeometry, planeMaterial);
   // ground.receiveShadow = true;
   // ground.castShadow = false;
@@ -206,6 +209,7 @@ function updateAlien() {
 /***************************************************************
 * Helper Functions Declarations
 ***************************************************************/
+
 function renderScene() {
   renderer.render(scene, camera);
 }
@@ -223,7 +227,6 @@ function resizeWindow() {
   renderScene();
 }
 
-
 /***************************************************************
 * Scene Initialization
 ***************************************************************/
@@ -234,6 +237,7 @@ function initializeScene() {
   var canvasWidth = window.innerWidth;
   var canvasHeight = window.innerHeight;
   window.addEventListener('resize', resizeWindow, false);
+  scene.background = new THREE.Color( 0x252940 );
 
   // Camera and initial view
   var aspectRatio = canvasWidth / canvasHeight;
@@ -249,24 +253,17 @@ function initializeScene() {
   // $(containerID).append(renderer.domElement);
 
   // Ambient light
-  // var lightAmbient = new THREE.AmbientLight(0x5a5a5a);
-  // var lightSource = new THREE.PointLight(0x7a7a7a);
-  // lightSource.position.set(0, 50, -100);
-  // scene.add(lightAmbient);
-  // scene.add(lightSource);
+  var lightAmbient = new THREE.AmbientLight(0x5a5a5a);
+  var lightSource = new THREE.PointLight(0x7a7a7a);
+  lightSource.position.set(0, 50, -100);
+  scene.add(lightAmbient);
+  scene.add(lightSource);
 
-  var hemisphereLight = new THREE.HemisphereLight(0xfffafa, 0x000000, .9)
-  scene.add(hemisphereLight);
-  sun = new THREE.DirectionalLight(0xcdc1c5, 0.9);
-  sun.position.set(12, 6, -7);
-  sun.castShadow = true;
-  scene.add(sun);
-  //Set up shadow properties for the sun light
-  sun.shadow.mapSize.width = 256;
-  sun.shadow.mapSize.height = 256;
-  sun.shadow.camera.near = 0.5;
-  sun.shadow.camera.far = 50;
+  const light = new THREE.DirectionalLight(0xffffff, 1.5)
+    light.position.set(0,50,200);
+    light.castShadow = true;
 
+    scene.add(light)
 
   // Starter floor grid
   var floor = createFloor();
@@ -294,8 +291,8 @@ function initializeScene() {
   const challenge5 = addChallenge(-200, 5, -71)
   scene.add(challenge5)
 
-
 }
+
 
 export default function gamePlayEnvironment() {
   /***************************************************************
