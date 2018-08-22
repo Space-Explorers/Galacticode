@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {getAllPlanets} from '../store'
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'
 
 class Home extends Component {
   componentDidMount () {
@@ -19,7 +19,7 @@ class Home extends Component {
           {planets && (
             planets.map(planet => (
               <div className="planet" key={planet.id}>
-                <Link to="/play">
+                <Link to={`/planet/${planet.id}`}>
                   <img
                     className="planet-img"
                     src={planet.img}
