@@ -23,8 +23,8 @@ const challenges = []
 ***************************************************************/
 
 function createFloor() {
-  var planeGeometry = new THREE.PlaneGeometry(400, 400, 1, 1);
-  var planeMaterial = new THREE.MeshPhongMaterial({
+  let planeGeometry = new THREE.PlaneGeometry(400, 400, 1, 1);
+  let planeMaterial = new THREE.MeshStandardMaterial({
     color: 0x205BF8,
     emissive: 0x0E24F3,
     side: THREE.DoubleSide,
@@ -42,7 +42,7 @@ function createFloor() {
 function addChallenge(challengeId, pos1, pos2, pos3) {
 
   var geometry = new THREE.CylinderGeometry(0, 2, 4, 32);
-  var material = new THREE.MeshBasicMaterial({ color: 0xB1BEEF });
+  var material = new THREE.MeshBasicMaterial({ color: 0x66ee78 });
   var newChallenge = new THREE.Mesh(geometry, material);
   // var cubeGeometry = new THREE.BoxGeometry( 2, 2, 2 );
   // var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xff2255 } );
@@ -221,11 +221,11 @@ function initializeScene() {
   scene.add(challenge3)
   challenges.push(challenge3)
 
-  const challenge4 = addChallenge(4, 50, 2, -50)
+  const challenge4 = addChallenge(10, 0, 2, -20)
   scene.add(challenge4)
   challenges.push(challenge4)
 
-  const challenge5 = addChallenge(5, -200, 2, -71)
+  const challenge5 = addChallenge(5, 100, 2, -71)
   scene.add(challenge5)
   challenges.push(challenge5)
 

@@ -12,32 +12,23 @@ class Game extends Component {
   render() {
     const { challenges } = this.props
     return (
-      <div>{/* {gamePlayEnvironment()} */}</div>
-      // <div className="list-wrapper">
+      <div>{gamePlayEnvironment()}</div>
+      // <div className="main-wrapper">
+
+      //   <h2>SELECT A CHALLENGE!</h2>
       //   <div>
-      //     <h1 id="list-header">
-      //       SELECT A<br /> CHALLENGE
-      //     </h1>
-      //     <br />
-      //     <button
-      //       onClick={() => this.props.history.push('planet/1')}
-      //       className="btn btn-close"
-      //     >
-      //       Back
-      //     </button>
+      //     {planet && (
+      //       planet.challenges.map(challenge => (
+      //         <div key={challenge.id}>
+      //           <Link to={`/challenge/${challenge.id}`}>{challenge.name}</Link>
+      //         </div>
+      //       )))}
       //   </div>
-      //   {challenges &&
-      //     challenges.map(challenge => (
-      //       <Link
-      //         to={`/challenge/${challenge.id}`}
-      //         key={challenge.id}
-      //         className="list-hover"
-      //       >
-      //         {challenge.name}
-      //         <p>{challenge.skillLevel}</p>
-      //       </Link>
-      //     ))}
+      //   <div>
+      //     <Link to="/">Back to Planet Select</Link>
+      //   </div>
       // </div>
+
     )
   }
 }
