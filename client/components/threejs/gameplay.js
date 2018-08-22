@@ -16,7 +16,7 @@ let forceAmount = 100,
   zoomY = 20,
   zoomZ = 40;
 const clock = new THREE.Clock();
-const cubes = []
+const challenges = []
 
 /***************************************************************
 * Custom User Functions
@@ -39,7 +39,7 @@ function createFloor() {
 
 
 //Challenges
-function addChallenge(pos1, pos2, pos3) {
+function addChallenge(challengeId, pos1, pos2, pos3) {
 
   var geometry = new THREE.CylinderGeometry(0, 2, 4, 32);
   var material = new THREE.MeshBasicMaterial({ color: 0xB1BEEF });
@@ -50,6 +50,8 @@ function addChallenge(pos1, pos2, pos3) {
   newChallenge.castShadow = true
   newChallenge.receiveShadow = true
   newChallenge.position.set(pos1, pos2, pos3)
+  newChallenge.challengeId = challengeId
+  console.log('CHALLENGEID', challengeId)
   return newChallenge
 }
 
@@ -98,9 +100,9 @@ function updateAlien() {
 
 function checkCollision() {
 
-  cubes.forEach(function (cube) {
-    cube.material.transparent = false;
-    cube.material.opacity = 1.0;
+  challenges.forEach(function (cone) {
+    cone.material.transparent = false;
+    cone.material.opacity = 1.0;
 
   });
 
@@ -116,16 +118,18 @@ function checkCollision() {
     var directionVector = globalVertex.sub(bob.position);
 
     var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
-    var collisionResults = ray.intersectObjects(cubes);
+    var collisionResults = ray.intersectObjects(challenges);
 
     if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
       collisionResults[0].object.material.transparent = true;
       collisionResults[0].object.material.opacity = 0.4;
-      // return (console.log('hello')
+      console.log('collisionResults', collisionResults)
+      window.location.replace(`http://localhost:8080/challenge/${collisionResults[0].object.challengeId}`)
       // console.log('HELLO', collisionResults[0].object.name);
 
 
     }
+
 
   }
 
@@ -204,26 +208,26 @@ function initializeScene() {
   scene.add(alien);
 
   // Add Challenge
-  const challenge1 = addChallenge(20, 2, 1)
+  const challenge1 = addChallenge(1, 20, 2, 1)
   scene.add(challenge1)
   console.log('CHALLENGE1', challenge1)
-  cubes.push(challenge1)
+  challenges.push(challenge1)
 
-  // const challenge2 = addChallenge(-30, 2, 20)
-  // scene.add(challenge2)
-  // challenges.push(challenge2)
+  const challenge2 = addChallenge(2, -30, 2, 20)
+  scene.add(challenge2)
+  challenges.push(challenge2)
 
-  // const challenge3 = addChallenge(-100, 2, -20)
-  // scene.add(challenge3)
-  // challenges.push(challenge3)
+  const challenge3 = addChallenge(3, -100, 2, -20)
+  scene.add(challenge3)
+  challenges.push(challenge3)
 
-  // const challenge4 = addChallenge(50,2, -50)
-  // scene.add(challenge4)
-  // challenges.push(challenge4)
+  const challenge4 = addChallenge(4, 50, 2, -50)
+  scene.add(challenge4)
+  challenges.push(challenge4)
 
-  // const challenge5 = addChallenge(-200, 2, -71)
-  // scene.add(challenge5)
-  // challenges.push(challenge5)
+  const challenge5 = addChallenge(5, -200, 2, -71)
+  scene.add(challenge5)
+  challenges.push(challenge5)
 
 
 }
