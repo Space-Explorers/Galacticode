@@ -56,16 +56,16 @@ export const getUnlockedPlanets = userId => {
 }
 
 // REDUCER
-export default function (state = {}, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case GOT_PLANET: {
-      return { ...state, planet: action.planet}
+      return {...state, planetChallenges: action.planet}
     }
     case GOT_PLANETS: {
-      return { ...state, allPlanets: action.allPlanets }
+      return {...state, allPlanets: action.allPlanets}
     }
     case GOT_UNLOCKED_PLANETS: {
-      return { ...state, unlockedPlanets: action.unlockedPlanets}
+      return {...state, unlockedPlanets: action.unlockedPlanets}
     }
     default:
       return state
