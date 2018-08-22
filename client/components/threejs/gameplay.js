@@ -1,14 +1,14 @@
 const NodePhysijs = require('nodejs-physijs')
-// const THREE = NodePhysijs.THREE
+const PhysicsTHREE = NodePhysijs.THREE
 import * as THREE from 'three'
 import OrbitControls from './orbitControls'
-// const Ammo = NodePhysijs.Ammo
-// const Physijs = NodePhysijs.Physijs(THREE, Ammo)
+const Ammo = NodePhysijs.Ammo
+const Physijs = NodePhysijs.Physijs(THREE, Ammo)
 // import { Clock } from './clock'
 import { THREEx } from './keyboardState'
 var keyboard = new THREEx.KeyboardState();
 
-var sceneWidth, sceneHeight, renderer, scene, camera, sun, ground, controls, alien, box, challenge;
+var sceneWidth, sceneHeight, renderer, scene, camera, sun, ground, controls, alien, box, challenge, gravity;
 
 let forceAmount = 100,
   fov = 45,
@@ -16,6 +16,7 @@ let forceAmount = 100,
   zoomY = 20,
   zoomZ = 40;
 const clock = new THREE.Clock();
+gravity = -5
 
 // const gridColor = 0x86FBC6
 
@@ -131,9 +132,9 @@ function createFloor() {
 //Challenges
 function addChallenge(pos1, pos2, pos3) {
 
-  var geometry = new THREE.ConeGeometry(5, 10, 5);
+  var geometry = new THREE.CylinderGeometry(0,2,4, 32);
   var material = new THREE.MeshBasicMaterial({ color: 0xB1BEEF });
-  var newChallenge = new THREE.Mesh(geometry, material);
+  var newChallenge = new Physijs.ConeMesh(geometry, material);
 
 
   // let newChallenge = new THREE.Mesh(
@@ -141,39 +142,20 @@ function addChallenge(pos1, pos2, pos3) {
   //   new THREE.MeshBasicMaterial({ color: 0xF9B8B5, shading: THREE.Flatshading }, 2, 0)
   // )
   newChallenge.castShadow = true
+  newChallenge.receiveShadow = true
   // challenge.addEventlistener('collision', onCollision)
   newChallenge.position.set(pos1, pos2, pos3)
   return newChallenge
 }
 
-// function addHero() {
-//   var sphereGeometry = new THREE.DodecahedronGeometry(heroRadius, 1);
-//   var sphereMaterial = new THREE.MeshStandardMaterial({ color: 0xe5f2f2, shading: THREE.FlatShading })
-//   jumping = false;
-//   heroSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-//   heroSphere.receiveShadow = true;
-//   heroSphere.castShadow = true;
-//   scene.add(heroSphere);
-//   heroSphere.position.y = heroBaseY;
-//   heroSphere.position.z = 4.8;
-//   currentLane = middleLane;
-//   heroSphere.position.x = currentLane;
-// }
-
 //  ALIEN
 function createAlien(alienSize, alienColor) {
-  var alienGeometry = new THREE.DodecahedronGeometry(4);
+  var alienGeometry = new THREE.OctahedronGeometry(1.7, 1);
   var alienMaterial = new THREE.MeshStandardMaterial({ color: 0xED1D69, shading: THREE.FlatShading })
-  const alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
+  const alienFigure = new Physijs.ConvexMesh(alienGeometry, alienMaterial);
   alienFigure.position.set(0, alienSize / 2, 0);
   alienFigure.receiveShadow = true;
   alienFigure.castShadow = true;
-  // alienSize = alienSize || 4;
-  // // alienColor = alienColor || 0xF61A17;
-  // var alienGeometry = new THREE.BoxGeometry(alienSize, alienSize, alienSize);
-  // var alienMaterial = new THREE.MeshLambertMaterial({ color: 0xF61A17 });
-  // var alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
-  // alienFigure.position.set(0, alienSize / 2, 0);
   return alienFigure;
 }
 
@@ -276,19 +258,19 @@ function initializeScene() {
   scene.add(alien);
 
   // Add Challenge
-  const challenge1 = addChallenge(20, 5, 1)
+  const challenge1 = addChallenge(20, 2, 1)
   scene.add(challenge1)
 
-  const challenge2 = addChallenge(-30, 5, 20)
+  const challenge2 = addChallenge(-30, 2, 20)
   scene.add(challenge2)
 
-  const challenge3 = addChallenge(-100, 5, -20)
+  const challenge3 = addChallenge(-100, 2, -20)
   scene.add(challenge3)
 
-  const challenge4 = addChallenge(50, 5, -50)
+  const challenge4 = addChallenge(50,2, -50)
   scene.add(challenge4)
 
-  const challenge5 = addChallenge(-200, 5, -71)
+  const challenge5 = addChallenge(-200, 2, -71)
   scene.add(challenge5)
 
 }
