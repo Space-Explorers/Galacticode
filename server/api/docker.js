@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const axios = require('axios')
-const {Challenge, User} = require('../db/models')
+const { Challenge, User } = require('../db/models')
 
 module.exports = router
 
@@ -10,9 +10,9 @@ router.post('/', async (req, res, next) => {
       attributes: ['specs', 'points']
     })
 
-    const {data} = await axios.post(
+    const { data } = await axios.post(
       // 'http://localhost:8081/',
-      'https://space-explorers-api.herokuapp.com/',
+      'https://galacticode-api.herokuapp.com/',
       {
         code: req.body.code,
         specs: challenge.specs
@@ -43,7 +43,7 @@ router.post('/', async (req, res, next) => {
       const points = challenge.points
       const problemId = req.body.problemId
       const progress = +points + user.progress
-      const updatedUser = await user.update({progress})
+      const updatedUser = await user.update({ progress })
       await updatedUser.addChallenge(problemId)
     }
 
