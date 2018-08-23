@@ -9,7 +9,7 @@ const Main = () => {
         <img id="login-logo" src="/GALACTICODE-logo_blue.png" />
         <div>
           <p id="intro">
-            Our friendly alien is lost in space and needs your help! Explore new
+            Nova the alien is lost in space and needs your help! Explore new
             planets to unlock JavaScript challenges, earning fuel to travel to
             new planets and find your way home.
           </p>
