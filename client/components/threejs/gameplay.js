@@ -106,16 +106,14 @@ function checkCollision() {
 
   });
 
-  var bob = scene.getObjectByName('alien');
-  var originPoint = bob.position.clone()
+  var nova = scene.getObjectByName('alien');
+  var originPoint = nova.position.clone()
 
-  for (var vertexIndex = 0; vertexIndex < bob.geometry.vertices.length; vertexIndex++) {
-
+  for (var vertexIndex = 0; vertexIndex < nova.geometry.vertices.length; vertexIndex++) {
     // console.log( vertexIndex );
-
-    var localVertex = bob.geometry.vertices[vertexIndex].clone();
-    var globalVertex = localVertex.applyMatrix4(bob.matrix);
-    var directionVector = globalVertex.sub(bob.position);
+    var localVertex = nova.geometry.vertices[vertexIndex].clone();
+    var globalVertex = localVertex.applyMatrix4(nova.matrix);
+    var directionVector = globalVertex.sub(nova.position);
 
     var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
     var collisionResults = ray.intersectObjects(challenges);
@@ -126,13 +124,8 @@ function checkCollision() {
       console.log('collisionResults', collisionResults)
       window.location.replace(`http://localhost:8080/challenge/${collisionResults[0].object.challengeId}`)
       // console.log('HELLO', collisionResults[0].object.name);
-
-
     }
-
-
   }
-
 }
 
 
