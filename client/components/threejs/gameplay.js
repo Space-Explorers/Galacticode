@@ -9,40 +9,32 @@ import { THREEx } from './keyboardState'
 var keyboard = new THREEx.KeyboardState();
 
 var sceneWidth, sceneHeight, renderer, scene, camera, sun, ground, controls, alien, box, challenge, gravity;
-
+let completedColor = 0x8C04FF;
+let notCompleted = 0x07FEFF;
 let forceAmount = 100,
   fov = 45,
   zoomX = 0,
   zoomY = 20,
   zoomZ = 40;
 const clock = new THREE.Clock();
-const challenges = []
+const challenges = [];
+var loader = new THREE.TextureLoader();
+const randomNumberInRange = (min, max) => Math.random() * (max - min) + min
 
 /***************************************************************
 * Custom User Functions
 ***************************************************************/
+// Stars in the backgrounds
+// function drawStars() {
 
-function createFloor() {
-  let planeGeometry = new THREE.PlaneGeometry(400, 400, 1, 1);
-  let planeMaterial = new THREE.MeshStandardMaterial({
-    color: 0x205BF8,
-    emissive: 0x0E24F3,
-    side: THREE.DoubleSide,
-    flatShading: true,
-  })
-  ground = new THREE.Mesh(planeGeometry, planeMaterial);
-  // ground.receiveShadow = true;
-  // ground.castShadow = false;
-  ground.rotation.x = -Math.PI / 2.0005;
-  return ground
-}
+// }
 
 
 //Challenges
-function addChallenge(challengeId, pos1, pos2, pos3) {
+function addChallenge(challengeId, pos1, pos2, pos3, color) {
 
-  var geometry = new THREE.CylinderGeometry(0, 2, 4, 32);
-  var material = new THREE.MeshBasicMaterial({ color: 0x66ee78 });
+  var geometry = new THREE.ConeGeometry(5, 10, 10);
+  var material = new THREE.MeshStandardMaterial({ color: notCompleted, flatShading: THREE.FlatShading });
   var newChallenge = new THREE.Mesh(geometry, material);
   // var cubeGeometry = new THREE.BoxGeometry( 2, 2, 2 );
   // var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xff2255 } );
@@ -51,14 +43,14 @@ function addChallenge(challengeId, pos1, pos2, pos3) {
   newChallenge.receiveShadow = true
   newChallenge.position.set(pos1, pos2, pos3)
   newChallenge.challengeId = challengeId
-  console.log('CHALLENGEID', challengeId)
+  // console.log('CHALLENGEID', challengeId)
   return newChallenge
 }
 
 //  ALIEN
 function createAlien(alienSize, alienColor) {
   var alienGeometry = new THREE.OctahedronGeometry(1.7, 1);
-  var alienMaterial = new THREE.MeshStandardMaterial({ color: 0xED1D69, shading: THREE.FlatShading })
+  var alienMaterial = new THREE.MeshStandardMaterial({ color: 0xED1D69, flatShading: THREE.FlatShading })
   const alienFigure = new THREE.Mesh(alienGeometry, alienMaterial);
   alienFigure.name = 'alien'
   alienFigure.position.set(0, alienSize / 2, 0);
@@ -90,7 +82,7 @@ function updateAlien() {
   var relativeCameraOffset = new THREE.Vector3(zoomX, zoomY, zoomZ);
   var cameraOffset = relativeCameraOffset.applyMatrix4(alien.matrixWorld);
   camera.position.x = cameraOffset.x;
-  camera.position.y = cameraOffset.y;
+  camera.position.y = cameraOffset.y - 5;
   camera.position.z = cameraOffset.z;
   camera.lookAt(alien.position);
 
@@ -178,7 +170,7 @@ function initializeScene() {
   // $(containerID).append(renderer.domElement);
 
   // Ambient light
-  var lightAmbient = new THREE.AmbientLight(0x5a5a5a);
+  var lightAmbient = new THREE.AmbientLight(0x999999);
   var lightSource = new THREE.PointLight(0x7a7a7a);
   lightSource.position.set(0, 50, -100);
   scene.add(lightAmbient);
@@ -191,12 +183,30 @@ function initializeScene() {
   scene.add(light)
 
   // Starter floor grid
-  var floor = createFloor();
-  scene.add(floor);
+  // var floor = createFloor();
+
+  loader.load('/floor_texture.png', function (tex) {
+    let planeGeometry = new THREE.CircleGeometry(200, 32);
+    let planeMaterial = new THREE.MeshPhongMaterial({
+      color: 0x205BF8,
+      emissive: 0x0E24F3,
+      side: THREE.DoubleSide,
+      flatShading: true,
+      map: tex,
+      transparent: false
+    });
+
+    ground = new THREE.Mesh(planeGeometry, planeMaterial);
+    // ground.receiveShadow = true;
+    // ground.castShadow = false;
+    ground.rotation.x = -Math.PI / 2.0005;
+    // ground.opacity(0)
+    scene.add(ground);
+  });
 
   // Add Movable Cube
   alien = createAlien();
-  alien.position.y = 2;
+  alien.position.y = 1;
   alien.position.z = 4.8;
   scene.add(alien);
 
@@ -222,6 +232,40 @@ function initializeScene() {
   scene.add(challenge5)
   challenges.push(challenge5)
 
+  // const stars = drawStars()
+
+
+  const stars = new THREE.Group()
+  const geometry = new THREE.SphereGeometry(10, 3, 3)
+  const material = new THREE.MeshBasicMaterial({
+    color: 0xA9D9E5,
+    wireframe: false,
+  })
+
+  const radius = 2500
+  const separation = 3
+
+  for (let i = 0 + separation; i <= 180 - separation; i += separation) {
+    const radian1 = i * Math.PI / 180
+
+    for (let j = 0; j < 360; j += separation) {
+      const radian2 = j * Math.PI / 180
+
+      const cube = new THREE.Mesh(geometry, material)
+
+      cube.position.x = randomNumberInRange(.7, 2.2) * radius * Math.sin(radian1) * Math.cos(radian2)
+      cube.position.y = randomNumberInRange(.7, 2.2) * radius * Math.sin(radian1) * Math.sin(radian2)
+      cube.position.z = randomNumberInRange(.7, 2.2) * radius * Math.cos(radian1)
+
+      cube.rotation.x = Math.random()
+      cube.rotation.y = Math.random()
+      cube.rotation.z = Math.random()
+
+      stars.add(cube)
+    }
+
+  }
+  scene.add(stars)
 
 }
 
