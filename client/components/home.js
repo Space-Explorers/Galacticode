@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {getAllPlanets, getUnlockedPlanets} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { getAllPlanets, getUnlockedPlanets } from '../store'
+import { connect } from 'react-redux'
 
 const planetImg = (unlocked, planet) => {
   const found = unlocked.find(unlockedPlanet => unlockedPlanet.name === planet.name)
@@ -10,45 +10,46 @@ const planetImg = (unlocked, planet) => {
 }
 
 class Home extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchPlanets()
     this.props.fetchUnlockedPlanets(this.props.user.id)
   }
 
-  render () {
-    const {planets, unlockedPlanets} = this.props
+  render() {
+    const { planets, unlockedPlanets } = this.props
 
     return (
       <div className="planet-select">
         <div className="planet-header">
           <h2>SELECT A PLANET</h2>
         </div>
-          {planets && unlockedPlanets && (
-            planets.map(planet => {
-              const src = planetImg(unlockedPlanets, planet)
-              return (
+        {planets && unlockedPlanets && (
+          planets.map(planet => {
+            const src = planetImg(unlockedPlanets, planet)
+            return (
               <div className="planet-img" id={`planet${planet.id}`} key={planet.id}>
-              {src !== '/Gray_Planet.png' ? (
-                <Link to={`/planet/${planet.id}`}>
-                  <img
-                    src={`${src}`}
-                    width="150"
-                    height="150"
-                  />
-                  <p>{planet.name}</p>
-                </Link>
-              ) : (
-                <div>
-                  <img
-                    src={`${src}`}
-                    width="150"
-                    height="150"
-                  />
-                  <p>{planet.name}</p>
-                </div>
-              )}
+                {src !== '/Gray_Planet.png' ? (
+                  <Link to={`/planet/${planet.id}`}>
+                    <img
+                      src={`${src}`}
+                      width="150"
+                      height="150"
+                    />
+                    <p>{planet.name}</p>
+                  </Link>
+                ) : (
+                    <div>
+                      <img
+                        src={`${src}`}
+                        width="150"
+                        height="150"
+                      />
+                      <p>{planet.name}</p>
+                    </div>
+                  )}
               </div>
-          )}))}
+            )
+          }))}
       </div>
     )
   }
