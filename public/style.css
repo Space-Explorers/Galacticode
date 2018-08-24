@@ -85,6 +85,7 @@ nav li {
 .dropdown {
   position: relative;
   display: inline-block;
+  z-index: 100
 }
 
 li.dropdown:hover {
@@ -164,6 +165,24 @@ canvas {
   background: #43afee;
   color: #fff;
   border-radius: 20px;
+}
+
+.button-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
+.btn-close-challenge {
+  width: 150px;
+  background: #43afee;
+  color: #fff;
+  border-radius: 20px;
+  z-index: 100;
+  position: absolute;
+  bottom: 0;
+  margin: 20px;
 }
 
 /* END BUTTONS */
