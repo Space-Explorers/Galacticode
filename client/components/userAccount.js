@@ -66,7 +66,7 @@ class UserAccount extends Component {
             <div id="user-planet">
               <h3>Currently on Planet {currentPlanet.name}</h3>
               <div>
-                <img width="150" height="150" src={currentPlanet.img} />
+                <img width="150" height="150" src={currentPlanet.unlockedImg} />
               </div>
             </div>
           )}
