@@ -202,7 +202,6 @@ function initializeScene() {
   // Add Challenge
   const challenge1 = addChallenge(1, 20, 2, 1)
   scene.add(challenge1)
-  console.log('CHALLENGE1', challenge1)
   challenges.push(challenge1)
 
   const challenge2 = addChallenge(2, -30, 2, 20)
