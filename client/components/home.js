@@ -19,7 +19,6 @@ class Home extends Component {
 
   render() {
     const {planets, unlockedPlanets} = this.props
-    console.log('UNLOCKED', unlockedPlanets)
 
     return (
       <div className="planet-select">
