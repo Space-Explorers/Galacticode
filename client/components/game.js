@@ -14,7 +14,7 @@ class Game extends Component {
     const {challenges} = this.props
     return (
       <div>{gamePlayEnvironment()}
-        <div>
+        {/* <div>
           <ChallengeList challenges={challenges} />
         </div>
         <div className="button-wrapper">
@@ -24,7 +24,7 @@ class Game extends Component {
           >
             Challenge List
           </button>
-        </div>
+        </div> */}
       </div>
     )
   }

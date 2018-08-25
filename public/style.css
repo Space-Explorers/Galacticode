@@ -412,6 +412,11 @@ progress::-webkit-progress-value {
 .modal {
   position: absolute;
   z-index: 100;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+
   background: rgb(4, 5, 10, 0.8);
   padding: 30px;
 }
