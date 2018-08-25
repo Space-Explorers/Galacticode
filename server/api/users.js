@@ -20,7 +20,6 @@ router.get('/:userId/planets', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId)
     user.addPlanet(1)
-    user.addPlanet(2)
     const unlockedPlanets = await user.getPlanets({
       attributes: ['id', 'name', 'lockedImg', 'unlockedImg']
     })

@@ -1,65 +1,43 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getPlanetChallenges} from '../store'
 import ChallengeList from './challengeList'
 import {planetGame} from './threejs/threedGame'
 
 class Game extends Component {
-  constructor(){
+  constructor() {
     super()
     this.state = {
-      showOutput: true
+      showList: false
     }
+    this.toggleList = this.toggleList.bind(this)
   }
   componentDidMount() {
     this.props.fetchPlanetChallenges(this.props.match.params.planetId)
+  }
+
+  toggleList() {
+    const currentStatus = this.state.showList
+    this.setState({showList: !currentStatus})
   }
 
   render() {
     const {challenges} = this.props
     return (
       <div>
-        <div>
-         {planetGame()}
-        </div>
-      {!this.state.showOutput ? (
+        <div>{planetGame()}</div>
+        {this.state.showList && (
+          <ChallengeList challenges={challenges} toggleList={this.toggleList} />
+        )}
         <div className="button-wrapper">
-        <button
-          onClick={() => this.setState({showOutput: false})}
-          className="btn btn-close-challenge"
-          type="submit"
-        >
-          Challenge List
-        </button>
-      </div>) : (
-
-        <div className="list-wrapper">
-            <div>
-              <h1 id="list-header">
-                SELECT A<br /> CHALLENGE
-              </h1>
-              <br />
-              <button
-                onClick={() => this.setState({showOutput: true})}
-                className="btn btn-close"
-              >
-                Close
-              </button>
-            </div>
-            {challenges &&
-              challenges.map(challenge => (
-                <Link
-                  to={`/challenge/${challenge.id}`}
-                  key={challenge.id}
-                  className="list-hover"
-                >
-                  {challenge.name}
-                  <p>{challenge.skillLevel}</p>
-                </Link>
-              ))}
-            </div>
-      )}
+          <button
+            onClick={this.toggleList}
+            className="btn btn-close-challenge"
+            type="submit"
+          >
+            {this.state.showList ? 'Return to Game' : 'View As List'}
+          </button>
+        </div>
       </div>
     )
   }

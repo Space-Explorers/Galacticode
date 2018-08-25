@@ -85,7 +85,7 @@ nav li {
 .dropdown {
   position: relative;
   display: inline-block;
-  z-index: 100
+  z-index: 100;
 }
 
 li.dropdown:hover {
@@ -127,6 +127,7 @@ canvas {
 /* START BUTTONS */
 
 .btn {
+  color: #fff;
   height: 3em;
   border: none;
   background: none;
@@ -136,53 +137,44 @@ canvas {
   letter-spacing: 2px;
   outline: none;
   position: relative;
+  border-radius: 20px;
 }
 
 .btn-close {
   width: 65px;
   background: #995e78;
-  color: #fff;
-  border-radius: 20px;
 }
 
 .btn-submit {
   width: 65px;
   margin: 15px 0px;
   background: #43afee;
-  color: #fff;
-  border-radius: 20px;
 }
 
 .btn-login {
   width: 180px;
   background: #43afee;
-  color: #fff;
-  border-radius: 20px;
 }
 
 .btn-modal {
   width: 110px;
   background: #43afee;
-  color: #fff;
-  border-radius: 20px;
-}
-
-.button-wrapper {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
 }
 
 .btn-close-challenge {
   width: 150px;
   background: #43afee;
-  color: #fff;
-  border-radius: 20px;
   z-index: 100;
   position: absolute;
-  bottom: 0;
-  margin: 20px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+}
+
+.btn-planet-select {
+  width: 130px;
+  background: #995e78;
 }
 
 /* END BUTTONS */
@@ -283,8 +275,6 @@ canvas {
   display: flex;
   flex-direction: row;
 }
-
-
 
 .toggle-item {
   margin-right: 30px;
@@ -474,7 +464,6 @@ progress::-webkit-progress-value {
 
 #planet1 {
   grid-area: planet1;
-
 }
 
 #planet2 {
@@ -506,7 +495,7 @@ progress::-webkit-progress-value {
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 .planet-img:hover {

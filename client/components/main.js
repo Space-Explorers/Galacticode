@@ -1,5 +1,5 @@
 import React from 'react'
-import planetBackground from './script'
+import planetBackground from './threejs/planetBackground'
 
 const Main = () => {
   return (
@@ -11,18 +11,18 @@ const Main = () => {
           <p id="intro">
             Nova the alien is lost in space and needs your help! Explore new
             planets to unlock JavaScript challenges, earning fuel to travel to
-            new planets and find your way home.
+            new planets and help Nova get home.
           </p>
           <div id="login-buttons">
-            <button className="btn btn-login">
-              <a href="/auth/google">
+            <a href="/auth/google">
+              <button className="btn btn-login">
                 {/* <img src="btn_google_signin_light_normal_web.png" /> */}
                 Login with Google
-              </a>
-            </button>
-            <button className="btn btn-login">
-              <a href="/auth/github">Login with Github</a>
-            </button>
+              </button>
+            </a>
+            <a href="/auth/github">
+              <button className="btn btn-login">Login with Github</button>
+            </a>
           </div>
         </div>
       </div>
