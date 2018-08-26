@@ -25,14 +25,10 @@ function addChallenge(challengeId, pos1, pos2, pos3, color) {
   var geometry = new THREE.ConeGeometry(5, 10, 10);
   var material = new THREE.MeshStandardMaterial({ color: notCompleted, flatShading: THREE.FlatShading });
   var newChallenge = new THREE.Mesh(geometry, material);
-  // var cubeGeometry = new THREE.BoxGeometry( 2, 2, 2 );
-  // var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xff2255 } );
-  // var newChallenge = new THREE.Mesh( cubeGeometry, cubeMaterial );
   newChallenge.castShadow = true
   newChallenge.receiveShadow = true
   newChallenge.position.set(pos1, pos2, pos3)
   newChallenge.challengeId = challengeId
-  // console.log('CHALLENGEID', challengeId)
   return newChallenge
 }
 
@@ -91,7 +87,6 @@ function checkCollision() {
   var originPoint = nova.position.clone()
 
   for (var vertexIndex = 0; vertexIndex < nova.geometry.vertices.length; vertexIndex++) {
-    // console.log( vertexIndex );
     var localVertex = nova.geometry.vertices[vertexIndex].clone();
     var globalVertex = localVertex.applyMatrix4(nova.matrix);
     var directionVector = globalVertex.sub(nova.position);
@@ -104,7 +99,6 @@ function checkCollision() {
       collisionResults[0].object.material.opacity = 0.4;
       console.log('collisionResults', collisionResults)
       window.location.replace(`http://localhost:8080/challenge/${collisionResults[0].object.challengeId}`)
-      // console.log('HELLO', collisionResults[0].object.name);
     }
   }
 }
@@ -171,9 +165,7 @@ function initializeScene() {
 
   scene.add(light)
 
-  // Starter floor grid
-  // var floor = createFloor();
-
+  // Add Floor
   loader.load('/floor_texture.png', function (tex) {
     let planeGeometry = new THREE.CircleGeometry(200, 32);
     let planeMaterial = new THREE.MeshPhongMaterial({
@@ -199,7 +191,7 @@ function initializeScene() {
   alien.position.z = 4.8;
   scene.add(alien);
 
-  // Add Challenge
+  // Add Challenges
   const challenge1 = addChallenge(1, 20, 2, 1)
   scene.add(challenge1)
   challenges.push(challenge1)
@@ -219,9 +211,6 @@ function initializeScene() {
   const challenge5 = addChallenge(5, 100, 2, -71)
   scene.add(challenge5)
   challenges.push(challenge5)
-
-  // const stars = drawStars()
-
 
   const stars = new THREE.Group()
   const geometry = new THREE.SphereGeometry(10, 3, 3)
@@ -259,11 +248,6 @@ function initializeScene() {
 
 
 export default function gamePlayEnvironment() {
-  /***************************************************************
-  * Render and Animate
-  ***************************************************************/
   initializeScene();
   animateScene();
-  // createScene();
-
 }
