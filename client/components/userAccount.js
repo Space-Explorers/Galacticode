@@ -19,8 +19,6 @@ class UserAccount extends Component {
 
   render() {
     const {user, completedChallenges, progress, currentPlanet} = this.props
-    console.log('CURRENT PLANET', currentPlanet)
-
     if (user.id) {
       return (
         <div className="account-wrapper">
