@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getSolvedData, getUnlockedPlanets} from '../store'
+import {getSolvedData, getUnlockedPlanets, getProgressData} from '../store'
 import {Editor} from './index'
 
 class UserAccount extends Component {
@@ -14,6 +14,7 @@ class UserAccount extends Component {
   async componentDidMount() {
     await this.props.fetchCompletedChallenges(this.props.user.id)
     await this.props.fetchUnlockedPlanets(this.props.user.id)
+    await this.props.fetchProgress(this.props.user.id)
   }
 
   render() {
@@ -24,7 +25,7 @@ class UserAccount extends Component {
           <div className="challenge-header">
             <div>
               <h2>PLAYER: {user.name || user.email}</h2>
-              <h2>TOTAL FUEL: {progress || 0}</h2>
+              <h2>TOTAL FUEL: {progress}</h2>
             </div>
             <button
               className="btn btn-close"
@@ -81,7 +82,7 @@ const mapState = state => {
   if (state.planets.unlockedPlanets) {
     const userPlanets = state.planets.unlockedPlanets
     const planetIds = userPlanets.map(planet => planet.id)
-    const maxPlanetId = Math.max(planetIds)
+    const maxPlanetId = Math.max(...planetIds)
     furthestPlanet = userPlanets.find(planet => planet.id === maxPlanetId)
   }
 
@@ -96,7 +97,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchCompletedChallenges: id => dispatch(getSolvedData(id)),
-    fetchUnlockedPlanets: id => dispatch(getUnlockedPlanets(id))
+    fetchUnlockedPlanets: id => dispatch(getUnlockedPlanets(id)),
+    fetchProgress: userId => dispatch(getProgressData(userId))
   }
 }
 
