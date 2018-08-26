@@ -3,6 +3,6 @@
 _Read Me_
 
 
-## Team
+## Team Members
 
 Daryl Concha, Amy De Genaro, Rebecca Eom, Katherine Pangtay
