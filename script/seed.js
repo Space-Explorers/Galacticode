@@ -3,7 +3,7 @@
 const db = require('../server/db')
 const fs = require('fs')
 var path = require('path')
-const {Challenge, Planet} = require('../server/db/models')
+const { Challenge, Planet } = require('../server/db/models')
 
 const greetingSpecs = fs.readFileSync(
   path.join(__dirname, '/specs/greeting.spec.js'),
@@ -95,7 +95,7 @@ const challenges = [
       'The function takes a name as its only argument, and returns one of the following strings:'
     ],
     solution:
-      'function greeting(name) { if (name) { return "Hello, " + name + "!"; } else { return "Hello!"; } }',
+      `function greeting(name) {\n\tif (name) {\n\t\treturn "Hello, " + name + "!";\n\t} else {\n\t\treturn "Hello!";\n\t}\n}`,
     specs: greetingSpecs,
     points: 10,
     skillLevel: 'Easy',
@@ -111,7 +111,7 @@ const challenges = [
       'Create the function "doYouPlayTheTheremin." If your name starts with the letter "S" or "s", you are playing the Theremin!'
     ],
     solution:
-      'function doYouPlayTheTheremin(name) {if (name[0].toLowerCase() === "s") {return name + " plays the Theremin!";} else {return name + " does not play the Theremin!";}}',
+      'function doYouPlayTheTheremin(name) {\n\tif (name[0].toLowerCase() === "s") {\n\t\treturn name + " plays the Theremin!";\n\t} else {\n\t\treturn name + " does not play the Theremin!";\n\t}\n}',
     specs: thereminSpecs,
     points: 10,
     skillLevel: 'Easy',
@@ -129,7 +129,7 @@ const challenges = [
       'NOTE: Do NOT use the Array.prototype.repeat method'
     ],
     solution:
-      'function repeat(str, num) {var finalStr = "";for (num; num > 0; num--) { finalStr += str; } return finalStr; }',
+      'function repeat(str, num) {\n\tvar finalStr = "";\n\tfor (num; num > 0; num--) { \n\t\tfinalStr += str; \n\t} \n\treturn finalStr; \n}',
     specs: repeatAStringSpecs,
     points: 20,
     skillLevel: 'Easy',
@@ -146,7 +146,7 @@ const challenges = [
       'Do not count "y" as a vowel for this challenge.'
     ],
     solution:
-      'function vowelCount(string) {var vowels = "aeiou", string = string.toLowerCase(), count = 0; for (var i = 0; i < string.length; i++) { if (vowels.indexOf(string[i]) >= 0) { count++; }}return count;}',
+      'function vowelCount(string) {\n\tvar vowels = "aeiou",\n\tstring = string.toLowerCase(),\n\tcount = 0;\n\tfor (var i = 0; i < string.length; i++) {\n\t\tif (vowels.indexOf(string[i]) >= 0) {\n\t\t\tcount++;\n\t\t}\n\t}\n\treturn count;\n}',
     specs: vowelCountSpecs,
     points: 20,
     skillLevel: 'Easy',
@@ -163,7 +163,7 @@ const challenges = [
       'If a question is already polite(meaning it already ends with "please") or the sentence is not a question, then return the inputted string without modification.'
     ],
     solution:
-      'function askPolitely(sentence) {if (sentence.slice(-1) === "?") {if (sentence.slice(-7) === "please?") { return sentence } else { return sentence.slice(0, -1) + " please?"} } else { return sentence } }',
+      'function askPolitely(sentence) {\n\tif (sentence.slice(-1) === "?") {\n\t\tif (sentence.slice(-7) === "please?") {\n\t\t\treturn sentence\n\t\t} else {\n\t\t\treturn sentence.slice(0, -1) + " please?"\n\t\t}\n\t} else {\n\t\treturn sentence\n\t}\n}',
     specs: askPolitelySpecs,
     points: 15,
     skillLevel: 'Medium',
@@ -179,7 +179,7 @@ const challenges = [
       'Create the function "lastDigit" that accepts two non-negative integer values and returns true if they have the same last digit.'
     ],
     solution:
-      'function lastDigit(num1, num2) {num1 = num1.toString(); num2 = num2.toString(); if (num1[num1.length - 1] === num2[num2.length - 1]) {return true;} else { return false;}}',
+      'function lastDigit(num1, num2) {\n\tnum1 = num1.toString();\n\tnum2 = num2.toString();\n\tif (num1[num1.length - 1] === num2[num2.length - 1]) {\n\t\treturn true;\n\t} else {\n\t\treturn false;\t\n}\n}',
     specs: lastDigitSpecs,
     points: 15,
     skillLevel: 'Medium',
@@ -195,7 +195,7 @@ const challenges = [
       `Create a function "nicknameGenerator" that takes a string name as an argument and returns the first 3 or 4 letters as that name's nickname! If the 3rd letter is a vowel, return the first 4 letters instead.`
     ],
     solution:
-      'function nicknameGenerator(name) {var nickname = ""; var vowels = "aeiou"; if (vowels.indexOf(name[2]) >= 0) {nickname = name.slice(0,4);} else {nickname = name.slice(0,3);}return nickname;}',
+      'function nicknameGenerator(name) {\n\tvar nickname = "";\n\tvar vowels = "aeiou";\n\tif (vowels.indexOf(name[2]) >= 0) {\n\t\tnickname = name.slice(0,4);\n\t} else {\n\t\tnickname = name.slice(0,3);\n\t}\n\treturn nickname;\n}',
     specs: nicknameGeneratorSpecs,
     points: 20,
     skillLevel: 'Medium',
@@ -212,7 +212,7 @@ const challenges = [
       `myJoin will accept the array to operate on as its first parameter, rather than being invoked as a method on that array. Try and mirror the behavior of the native .join() method exactly. If there is no delimiter argument, use a ',' character.`,
       `Note: Do not use the native .join() method in your own implementation! Ignore the values undefined, null, and empty arrays.`
     ],
-    solution: `function myJoin(arr, delimiter) {if (delimiter === undefined) {delimiter = ",";}var newString = ""; for (var i = 0; i < arr.length; i++) {if (i === arr.length-1) {newString += arr[i];} else {newString += arr[i] + delimiter;}}return newString;}`,
+    solution: `function myJoin(arr, delimiter) {\n\tif (delimiter === undefined) {\n\t\tdelimiter = ",";\n\t}\n\tvar newString = "";\n\tfor (var i = 0; i < arr.length; i++) {\n\t\tif (i === arr.length-1) {\n\t\t\tnewString += arr[i];\n\t\t} else {\n\t\t\tnewString += arr[i] + delimiter;\n\t}\n\treturn newString;\n}`,
     specs: myJoinSpecs,
     points: 20,
     skillLevel: 'Medium',
@@ -229,7 +229,7 @@ const challenges = [
       Write a recursive function "isPalindrome" to check if a string is a palindrome or not.`
     ],
     solution:
-      'function isPalindrome(string) {if (string.length <= 1) {return true;} else if (string[0].toLowerCase() === string[string.length-1].toLowerCase()) {return isPalindrome(string.slice(1, string.length-1));} else {return false;}}',
+      'function isPalindrome(string) {\n\tif (string.length <= 1) {\n\t\treturn true;\n\t} else if (string[0].toLowerCase() === string[string.length-1].toLowerCase()) {\n\t\treturn isPalindrome(string.slice(1, string.length-1));\n\t} else {\n\t\treturn false;\n\t}\n}',
     specs: isPalindromeSpecs,
     points: 30,
     skillLevel: 'Hard',
@@ -244,7 +244,7 @@ const challenges = [
     prompt: [
       `Write a function "demo" that simply returns the argument passed into it.`
     ],
-    solution: 'function demo(value) {return value}',
+    solution: 'function demo(value) {\n\treturn value\n}',
     specs: demoSpecs,
     points: 40,
     skillLevel: 'Easy',
@@ -288,7 +288,7 @@ const planets = [
 ]
 
 async function seed() {
-  await db.sync({force: true})
+  await db.sync({ force: true })
   console.log('db synced!')
 
   await Promise.all(planets.map(planet => Planet.create(planet)))
