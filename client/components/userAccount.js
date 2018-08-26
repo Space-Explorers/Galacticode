@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {getSolvedData, getUnlockedPlanets, getProgressData} from '../store'
-import {Editor} from './index'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getSolvedData, getUnlockedPlanets, getProgressData } from '../store'
+import { Editor } from './index'
 
 class UserAccount extends Component {
   constructor() {
@@ -18,7 +18,7 @@ class UserAccount extends Component {
   }
 
   render() {
-    const {user, completedChallenges, progress, currentPlanet} = this.props
+    const { user, completedChallenges, progress, currentPlanet } = this.props
     if (user.id) {
       return (
         <div className="account-wrapper">
@@ -44,7 +44,7 @@ class UserAccount extends Component {
                     &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <a
                       onClick={() =>
-                        this.setState({selectedSolution: chall.solution})
+                        this.setState({ selectedSolution: chall.solution })
                       }
                     >
                       View Solution
@@ -53,15 +53,15 @@ class UserAccount extends Component {
                 </div>
               ))
             ) : (
-              <p>You haven't solved any challenges yet. Get coding!</p>
-            )}
+                <p>You haven't solved any challenges yet. Get coding!</p>
+              )}
           </div>
           <Editor
             value={this.state.selectedSolution}
             readOnly={true}
             showLineNumbers={false}
             showGutter={false}
-            height="150px"
+            height="200px"
           />
           {currentPlanet && (
             <div id="user-planet">
