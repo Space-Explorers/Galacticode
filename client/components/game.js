@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {getPlanetChallenges} from '../store'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getPlanetChallenges } from '../store'
 import ChallengeList from './challengeList'
-import {planetGame} from './threejs/threedGame'
+import gamePlayEnvironment from './threejs/gameplay';
 
 class Game extends Component {
   constructor() {
@@ -18,14 +18,21 @@ class Game extends Component {
 
   toggleList() {
     const currentStatus = this.state.showList
-    this.setState({showList: !currentStatus})
+    this.setState({ showList: !currentStatus })
   }
 
   render() {
-    const {challenges} = this.props
+
+    // Figure out how to prevent this from being created in the first place
+    const background = document.getElementById('background')
+    const stars = document.getElementById('stars')
+    if (background) document.body.removeChild(background)
+    if (stars) document.body.removeChild(stars)
+
+    const { challenges } = this.props
     return (
       <div>
-        <div>{planetGame()}</div>
+        <div>{gamePlayEnvironment()}</div>
         {this.state.showList && (
           <ChallengeList challenges={challenges} toggleList={this.toggleList} />
         )}

@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {getAllPlanets, getUnlockedPlanets} from '../store'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { getAllPlanets, getUnlockedPlanets } from '../store'
+import { connect } from 'react-redux'
 
 const planetImg = (unlocked, planet) => {
   const found = unlocked.find(
@@ -9,6 +9,14 @@ const planetImg = (unlocked, planet) => {
   )
   if (found) return planet.unlockedImg
   else return planet.lockedImg
+}
+const handleClick = () => {
+  const background = document.getElementById('background')
+  const stars = document.getElementById('stars')
+  return () => {
+    document.body.removeChild(background)
+    document.body.removeChild(stars)
+  }
 }
 
 class Home extends Component {
@@ -18,7 +26,7 @@ class Home extends Component {
   }
 
   render() {
-    const {planets, unlockedPlanets} = this.props
+    const { planets, unlockedPlanets } = this.props
 
     return (
       <div className="planet-select">
@@ -36,16 +44,16 @@ class Home extends Component {
                 key={planet.id}
               >
                 {src !== '/Gray_Planet.png' ? (
-                  <Link to={`/planet/${planet.id}`}>
+                  <Link to={`/planet/${planet.id}`} onClick={handleClick()} >
                     <img src={`${src}`} width="150" height="150" />
                     <p>{planet.name}</p>
                   </Link>
                 ) : (
-                  <div>
-                    <img src={`${src}`} width="150" height="150" />
-                    <p>{planet.name}</p>
-                  </div>
-                )}
+                    <div>
+                      <img src={`${src}`} width="150" height="150" />
+                      <p>{planet.name}</p>
+                    </div>
+                  )}
               </div>
             )
           })}

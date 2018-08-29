@@ -6,27 +6,28 @@ let particles
 export default function planetBackground() {
   // Create an empty scene, camera
   const scene = new THREE.Scene()
-  scene.background = new THREE.Color( 0x252940 );
+  scene.background = new THREE.Color(0x252940);
 
-  const camera = new THREE.PerspectiveCamera( 25,window.innerWidth / window.innerHeight, 1, 1000)
+  const camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 1000)
   camera.position.x = 0
   camera.position.y = 170
   camera.position.z = 900
   // camera.lookAt(scene.position)
 
   // Create a renderer
-  const renderer = new THREE.WebGLRenderer({antialias: true})
+  const renderer = new THREE.WebGLRenderer({ antialias: true })
 
   renderer.setClearColor(0x000000, 0)
   renderer.setSize(window.innerWidth, window.innerHeight)
-
+  const background = renderer.domElement
+  background.id = 'background'
   // Append Renderer to DOM
-  document.body.appendChild(renderer.domElement)
+  document.body.appendChild(background)
 
   //resize window
   window.addEventListener(
     'resize',
-    function() {
+    function () {
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -35,7 +36,7 @@ export default function planetBackground() {
   );
 
   // Stars in the backgrounds
-  const drawStars = function() {
+  const drawStars = function () {
     let canvas, ctx, i, j, sizeRandom;
     canvas = document.createElement('canvas');
     canvas.setAttribute('width', window.innerWidth);
@@ -54,21 +55,21 @@ export default function planetBackground() {
 
   //flying particles
   function drawParticles() {
-     particles = new THREE.Group();
+    particles = new THREE.Group();
     scene.add(particles);
     const geometry = new THREE.TetrahedronGeometry(2, 0);
 
-    for (let i = 0; i < 500; i ++) {
+    for (let i = 0; i < 500; i++) {
       const material = new THREE.MeshPhongMaterial({
         color: 0x9CE7EA,
         shading: THREE.FlatShading
       });
       const mesh = new THREE.Mesh(geometry, material);
-          mesh.position.set((Math.random() - 0.5) * 1000,
-          (Math.random() - 0.5) * 1000,
-          (Math.random() - 0.5) * 1000);
-          mesh.updateMatrix();
-          mesh.matrixAutoUpdate = false;
+      mesh.position.set((Math.random() - 0.5) * 1000,
+        (Math.random() - 0.5) * 1000,
+        (Math.random() - 0.5) * 1000);
+      mesh.updateMatrix();
+      mesh.matrixAutoUpdate = false;
       particles.add(mesh);
     }
   }
@@ -76,7 +77,7 @@ export default function planetBackground() {
   // Create Main Planet
   const mesh = new THREE.Mesh(
     //dictate the size of the planet (10 -17)
-    new THREE.IcosahedronGeometry(300,1),
+    new THREE.IcosahedronGeometry(300, 1),
     new THREE.MeshPhongMaterial({
       color: 0x205BF8,
       emissive: 0x0E24F3,
@@ -84,39 +85,39 @@ export default function planetBackground() {
       flatShading: true,
     }),
   )
-  mesh.rotation.set(0.4,0.3,0)
+  mesh.rotation.set(0.4, 0.3, 0)
   mesh.receiveShadow = true
   mesh.position.set(0, -190, 0)
 
   // Create Secondary Planet
-    const otherPlanet = new THREE.Mesh(
-      //dictate the size of the planet (10 -17)
-      new THREE.IcosahedronGeometry(90,1),
-      new THREE.MeshPhongMaterial({
-        color: 0x2B1255,
-        emissive: 0x995E78,
-        side: THREE.DoubleSide,
-        flatShading: true,
-      }),
-    )
-    otherPlanet.rotation.set(0.4,0.3,0)
-    otherPlanet.receiveShadow = true
-    otherPlanet.position.set(270, 190, 90)
+  const otherPlanet = new THREE.Mesh(
+    //dictate the size of the planet (10 -17)
+    new THREE.IcosahedronGeometry(90, 1),
+    new THREE.MeshPhongMaterial({
+      color: 0x2B1255,
+      emissive: 0x995E78,
+      side: THREE.DoubleSide,
+      flatShading: true,
+    }),
+  )
+  otherPlanet.rotation.set(0.4, 0.3, 0)
+  otherPlanet.receiveShadow = true
+  otherPlanet.position.set(270, 190, 90)
 
   // Create Third Planet
-    const thirdPlanet = new THREE.Mesh(
-      //dictate the size of the planet (10 -17)
-      new THREE.IcosahedronGeometry(40,1),
-      new THREE.MeshPhongMaterial({
-        color: 0xCD4537,
-        emissive: 0xCD4537,
-        side: THREE.DoubleSide,
-        flatShading: true,
-      }),
-    )
-    thirdPlanet.rotation.set(0.4,0.3,0)
-    thirdPlanet.receiveShadow = true
-    thirdPlanet.position.set(-310, 300, -20)
+  const thirdPlanet = new THREE.Mesh(
+    //dictate the size of the planet (10 -17)
+    new THREE.IcosahedronGeometry(40, 1),
+    new THREE.MeshPhongMaterial({
+      color: 0xCD4537,
+      emissive: 0xCD4537,
+      side: THREE.DoubleSide,
+      flatShading: true,
+    }),
+  )
+  thirdPlanet.rotation.set(0.4, 0.3, 0)
+  thirdPlanet.receiveShadow = true
+  thirdPlanet.position.set(-310, 300, -20)
 
 
   drawStars()
@@ -124,33 +125,33 @@ export default function planetBackground() {
 
 
 
-   //lighting
-   const ambientLight = new THREE.AmbientLight(0x999999)
-   scene.add(ambientLight)
+  //lighting
+  const ambientLight = new THREE.AmbientLight(0x999999)
+  scene.add(ambientLight)
 
-    const light = new THREE.DirectionalLight(0xffffff, 1.5)
-    light.position.set(200,100,200);
-    light.castShadow = true;
+  const light = new THREE.DirectionalLight(0xffffff, 1.5)
+  light.position.set(200, 100, 200);
+  light.castShadow = true;
 
-    scene.add(light)
+  scene.add(light)
 
 
-//shows in which direction the lighting is coming from
+  //shows in which direction the lighting is coming from
   // const helper = new THREE.CameraHelper(light.shadow.camera)
   // scene.add(helper)
 
   // Add mesh to Scene
-    scene.add(mesh)
-    scene.add(otherPlanet)
-    scene.add(thirdPlanet)
+  scene.add(mesh)
+  scene.add(otherPlanet)
+  scene.add(thirdPlanet)
 
 
   // Render Loop
-  function render(){
+  function render() {
     renderer.render(scene, camera)
   }
 
-  function animate(){
+  function animate() {
     requestAnimationFrame(animate)
     render()
     particles.rotation.x += 0.001;
