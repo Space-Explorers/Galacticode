@@ -1,6 +1,7 @@
 # Galacticode
 
-_Read Me_
+_Galacticode is a web application for practicing foundational JavaScript concepts that combines a 3D gaming experience with coding challenges._
+
 
 
 ## Team Members
