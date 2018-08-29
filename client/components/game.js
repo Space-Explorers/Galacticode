@@ -26,8 +26,8 @@ class Game extends Component {
     // Figure out how to prevent this from being created in the first place
     const background = document.getElementById('background')
     const stars = document.getElementById('stars')
-    document.body.removeChild(background)
-    document.body.removeChild(stars)
+    if (background) document.body.removeChild(background)
+    if (stars) document.body.removeChild(stars)
 
     const { challenges } = this.props
     return (
