@@ -2,11 +2,12 @@ import * as THREE from 'three'
 import { THREEx } from './keyboardState'
 var keyboard = new THREEx.KeyboardState();
 
-var sceneWidth, sceneHeight, renderer, scene, camera, sun, ground, controls, alien, box, challenge, gravity;
+
+
+var renderer, scene, camera, ground, alien;
 let completedColor = 0x8C04FF;
 let notCompleted = 0x07FEFF;
-let forceAmount = 100,
-  fov = 45,
+let fov = 45,
   zoomX = 0,
   zoomY = 20,
   zoomZ = 40;
@@ -99,6 +100,7 @@ function checkCollision() {
       collisionResults[0].object.material.opacity = 0.4;
       console.log('collisionResults', collisionResults)
       window.location.replace(`http://localhost:8080/challenge/${collisionResults[0].object.challengeId}`)
+      // window.location.replace(`http://galacticode.herokuapp.com/challenge/${collisionResults[0].object.challengeId}`)
     }
   }
 }
@@ -138,6 +140,7 @@ function initializeScene() {
   var canvasHeight = window.innerHeight;
   window.addEventListener('resize', resizeWindow, false);
   scene.background = new THREE.Color(0x252940);
+  // scene.setAttribute('id', "world");
 
   // Camera and initial view
   var aspectRatio = canvasWidth / canvasHeight;
@@ -149,7 +152,9 @@ function initializeScene() {
   // WebGL renderer
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(canvasWidth, canvasHeight);
-  document.body.appendChild(renderer.domElement)
+  const world = renderer.domElement
+  world.id = "world"
+  document.body.appendChild(world)
   // $(containerID).append(renderer.domElement);
 
   // Ambient light

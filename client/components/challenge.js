@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
   getResults,
   getChallengeData,
@@ -9,8 +9,8 @@ import {
   removeChallengeData,
   removeResultsData
 } from '../store'
-import {connect} from 'react-redux'
-import {Editor, Results} from './index'
+import { connect } from 'react-redux'
+import { Editor, Results } from './index'
 
 class Challenge extends Component {
   constructor() {
@@ -23,6 +23,16 @@ class Challenge extends Component {
     }
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleClick = () => {
+    const background = document.getElementById('background')
+    const stars = document.getElementById('stars')
+    return () => {
+      this.props.history.push('/planet/1')
+      document.body.removeChild(background)
+      document.body.removeChild(stars)
+    }
   }
 
   async componentDidMount() {
@@ -58,7 +68,7 @@ class Challenge extends Component {
       this.props.match.params.challengeId
     )
     await this.props.fetchProgress(this.props.user.id)
-    this.setState({loading: false})
+    this.setState({ loading: false })
   }
 
   onChange(newValue) {
@@ -90,7 +100,7 @@ class Challenge extends Component {
           </div>
           <button
             className="btn btn-close"
-            onClick={() => this.props.history.push('/planet/1')}
+            onClick={this.handleClick()}
           >
             Back
           </button>
@@ -99,7 +109,7 @@ class Challenge extends Component {
         <div className="prompt">
           <div id="prompt-toggle">
             <h3
-              onClick={() => this.setState({showOutput: false})}
+              onClick={() => this.setState({ showOutput: false })}
               className={
                 this.state.showOutput
                   ? 'toggle-item'
@@ -109,7 +119,7 @@ class Challenge extends Component {
               Instructions
             </h3>
             <h3
-              onClick={() => this.setState({showOutput: true})}
+              onClick={() => this.setState({ showOutput: true })}
               className={
                 this.state.showOutput
                   ? 'toggle-item active-toggle'
@@ -140,10 +150,10 @@ class Challenge extends Component {
               )}
             </div>
           ) : (
-            <div className="content">
-              <Results results={results} loading={this.state.loading} />
-            </div>
-          )}
+              <div className="content">
+                <Results results={results} loading={this.state.loading} />
+              </div>
+            )}
         </div>
         <div className="editor">
           <Editor
