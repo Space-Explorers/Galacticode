@@ -64,7 +64,7 @@
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
     "socket.io": "^2.1.1",
-    "three": "^0.95.0"
+    "three": "^0.125.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.55",
