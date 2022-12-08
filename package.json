@@ -40,7 +40,7 @@
     "brace": "^0.11.1",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
     "mochawesome": "^3.0.3",
